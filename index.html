@@ -1,16 +1,43 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Bootstrap 101 Template</title>
+    <title>Agora</title>
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
   </head>
   <body>
     <div class="container">
       <div class="hero-unit">
-        <h1>Oh hey, world!</h1>
-        <p></p>
-        <p>Bootstrap is pretty cool and kind of annoying, learn how to use it <a href="http://twitter.github.com/bootstrap/scaffolding.html">here</a>.</p>
+	<div id="user-identity" class="pull-right btn-group">
+		<button class="btn btn-primary" type="button"><i class="icon-user icon-white"></i> John Doe</button>
+		<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+			<span class="caret"></span>
+		</a>
+		<ul class="dropdown-menu">
+			<li><a href="#">Settings</a></li>
+			<li class="divider"></li>
+			<li><a href="#">Logout</a></li>
+		</ul>
+	</div>
+        <h1>Agora</h1>
+	<hr>
+	<div id="user-shares" class="thumbnails">
+		<a href="#" class="thumbnail span3">
+			<img data-src="holder.js/300x300" src="http://dummyimage.com/300x200" alt="">
+		</a>
+		<a href="#" class="thumbnail span3">
+			<img data-src="holder.js/300x300" src="http://dummyimage.com/300x200" alt="">
+		</a>
+		<a href="#" class="thumbnail span3">
+			<img data-src="holder.js/300x300" src="http://dummyimage.com/300x200" alt="">
+		</a>
+		<a href="#" class="thumbnail span3">
+			<img data-src="holder.js/300x300" src="http://dummyimage.com/300x200" alt="">
+		</a>
+		<a href="#" class="thumbnail span3">
+			<img data-src="holder.js/300x300" src="http://dummyimage.com/300x200" alt="">
+		</a>
+	</div>
       </div>
     </div>
     <script src="http://code.jquery.com/jquery-latest.js"></script>
