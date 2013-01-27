@@ -1,0 +1,12 @@
+/*
+ * Draggable CSS code
+ * 
+ * Adds some classes that make dragging things look nicer
+ */
+[draggable] {
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+	cursor: move;
+}
