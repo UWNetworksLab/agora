@@ -1,0 +1,133 @@
+{
+    "project": {
+        "name": "Agora",
+        "description": "A peer-to-peer file transfer web application built off FreeDOM",
+        "version": "1.0 ALPHA",
+        "logo": "http://www.cs.washington.edu/images/logo/CSElogo2_144.png"
+    },
+    "files": {
+        "js/agora-interface.js": {
+            "name": "js/agora-interface.js",
+            "modules": {},
+            "classes": {
+                "FileSystemItem": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/agora-ui.js": {
+            "name": "js/agora-ui.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "js/draggable.js": {
+            "name": "js/draggable.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {},
+    "classes": {
+        "FileSystemItem": {
+            "name": "FileSystemItem",
+            "shortname": "FileSystemItem",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "js/agora-interface.js",
+            "line": 1,
+            "description": "An N-ary tree that maps the file system through folders and files.",
+            "is_constructor": 1
+        }
+    },
+    "classitems": [
+        {
+            "file": "js/agora-interface.js",
+            "line": 8,
+            "description": "The file or folder name.",
+            "itemtype": "property",
+            "name": "name",
+            "type": "String",
+            "default": "\"\"",
+            "class": "FileSystemItem"
+        },
+        {
+            "file": "js/agora-interface.js",
+            "line": 17,
+            "description": "Indicating if the contents represent a folder",
+            "itemtype": "property",
+            "name": "isFolder",
+            "type": "Boolean",
+            "default": "false",
+            "class": "FileSystemItem"
+        },
+        {
+            "file": "js/agora-interface.js",
+            "line": 26,
+            "description": "The contents of the file or folder.  If isFolder\nis set, it contains other FileSystemItems representing\nthe files/folders inside this folder.  If isMetadata\nis set, the contents are irrelevant.  Otherwise, it\ncontains a bit stream of the file contents.",
+            "itemtype": "property",
+            "name": "contents",
+            "type": "Array",
+            "default": "null",
+            "class": "FileSystemItem"
+        },
+        {
+            "file": "js/agora-interface.js",
+            "line": 39,
+            "description": "The timestamp is an integer representation of when the\nfile was last modified.",
+            "itemtype": "property",
+            "name": "timestamp",
+            "type": "Integer",
+            "default": "0",
+            "class": "FileSystemItem"
+        },
+        {
+            "file": "js/agora-interface.js",
+            "line": 49,
+            "description": "Indicates if this file was deleted.",
+            "itemtype": "property",
+            "name": "isDeleted",
+            "type": "Boolean",
+            "default": "false",
+            "class": "FileSystemItem"
+        },
+        {
+            "file": "js/agora-interface.js",
+            "line": 58,
+            "description": "Indicates if this is just a metadata object or if\nit actually contains information.",
+            "itemtype": "property",
+            "name": "isMetadata",
+            "type": "Boolean",
+            "default": "false",
+            "class": "FileSystemItem"
+        },
+        {
+            "file": "js/agora-ui.js",
+            "line": 1,
+            "description": "This file provides the UI functionality for Agora.",
+            "class": ""
+        },
+        {
+            "file": "js/draggable.js",
+            "line": 42,
+            "description": "Load File Example *",
+            "class": ""
+        }
+    ],
+    "warnings": [
+        {
+            "message": "Missing item type\nThis file provides the UI functionality for Agora.",
+            "line": " js/agora-ui.js:1"
+        },
+        {
+            "message": "Missing item type\nLoad File Example *",
+            "line": " js/draggable.js:42"
+        }
+    ]
+}
