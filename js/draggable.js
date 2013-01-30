@@ -1,3 +1,9 @@
+/**
+ * Example file showcasing the HTML5 DnD API
+ *
+ * @module draggable-example
+ */
+
 // Allows us to change styling for when a drag starts
 $("[draggable]").bind('dragstart', function() {
 	$(this).css("opacity",'0.4');
@@ -39,9 +45,7 @@ $("[draggable]").bind('dragend', function() {
 	$("[draggable]").css("opacity",'');
 });
 
-/*********************
- * Load File Example *
- *********************/
+/* Load File Example */
 $("#loadFile").bind('dragover', function(e) {
 	// Overrides browser behavior
 	if(e.originalEvent.preventDefault) {

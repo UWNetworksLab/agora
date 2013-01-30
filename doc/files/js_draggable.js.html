@@ -43,9 +43,17 @@
             
                 <li><a href="..&#x2F;classes/FileSystemItem.html">FileSystemItem</a></li>
             
+                <li><a href="..&#x2F;classes/GroupShare.html">GroupShare</a></li>
+            
             </ul>
 
             <ul id="api-modules" class="apis modules">
+            
+                <li><a href="..&#x2F;modules/agora-interface.html">agora-interface</a></li>
+            
+                <li><a href="..&#x2F;modules/agora-ui.html">agora-ui</a></li>
+            
+                <li><a href="..&#x2F;modules/draggable-example.html">draggable-example</a></li>
             
             </ul>
         </div>
@@ -86,6 +94,12 @@
 
 <div class="file">
     <pre class="code prettyprint linenums">
+&#x2F;**
+ * Example file showcasing the HTML5 DnD API
+ *
+ * @module draggable-example
+ *&#x2F;
+
 &#x2F;&#x2F; Allows us to change styling for when a drag starts
 $(&quot;[draggable]&quot;).bind(&#x27;dragstart&#x27;, function() {
 	$(this).css(&quot;opacity&quot;,&#x27;0.4&#x27;);
@@ -127,9 +141,7 @@ $(&quot;[draggable]&quot;).bind(&#x27;dragend&#x27;, function() {
 	$(&quot;[draggable]&quot;).css(&quot;opacity&quot;,&#x27;&#x27;);
 });
 
-&#x2F;*********************
- * Load File Example *
- *********************&#x2F;
+&#x2F;* Load File Example *&#x2F;
 $(&quot;#loadFile&quot;).bind(&#x27;dragover&#x27;, function(e) {
 	&#x2F;&#x2F; Overrides browser behavior
 	if(e.originalEvent.preventDefault) {

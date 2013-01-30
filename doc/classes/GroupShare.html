@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>FileSystemItem - Agora</title>
+    <title>GroupShare - Agora</title>
     <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.8.0pr2&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
@@ -90,7 +90,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>FileSystemItem Class</h1>
+                        <h1>GroupShare Class</h1>
 <div class="box meta">
     
 
@@ -98,7 +98,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l7"><code>js&#x2F;agora-interface.js:7</code></a>
+            Defined in: <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l75"><code>js&#x2F;agora-interface.js:75</code></a>
         </div>
     
 
@@ -114,14 +114,14 @@
 
 
 <div class="box intro">
-    <p>An N-ary tree that maps the file system through folders and files.</p>
+    <p>A class that models a group share.</p>
 </div>
 
 
     <div class="constructor">
         <h2>Constructor</h2>
-        <div id="method_FileSystemItem" class="method item">
-    <h3 class="name"><code>FileSystemItem</code></h3>
+        <div id="method_GroupShare" class="method item">
+    <h3 class="name"><code>GroupShare</code></h3>
 
     
         <span class="paren">()</span>
@@ -152,7 +152,7 @@
             
         
         
-        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l7"><code>js&#x2F;agora-interface.js:7</code></a>
+        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l75"><code>js&#x2F;agora-interface.js:75</code></a>
         
         </p>
 
@@ -201,42 +201,21 @@
                     <ul class="index-list properties">
                         
                             <li class="index-item property">
-                                <a href="#property_contents">contents</a>
+                                <a href="#property_fileSystem">fileSystem</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_isDeleted">isDeleted</a>
+                                <a href="#property_groupName">groupName</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_isFolder">isFolder</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_isMetadata">isMetadata</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_name">name</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_timestamp">timestamp</a>
+                                <a href="#property_groupUsers">groupUsers</a>
 
                                 
                                 
@@ -258,9 +237,9 @@
                 <h2 class="off-left">Properties</h2>
 
                 
-                    <div id="property_contents" class="property item">
-    <h3 class="name"><code>contents</code></h3>
-    <span class="type">Array</span>
+                    <div id="property_fileSystem" class="property item">
+    <h3 class="name"><code>fileSystem</code></h3>
+    <span class="type"><a href="../classes/FileSystemItem.html" class="crosslink">FileSystemItem</a></span>
 
     
 
@@ -281,7 +260,7 @@
             
         
         
-        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l32"><code>js&#x2F;agora-interface.js:32</code></a>
+        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l82"><code>js&#x2F;agora-interface.js:82</code></a>
         
         </p>
 
@@ -291,11 +270,8 @@
     </div>
 
     <div class="description">
-        <p>The contents of the file or folder.  If isFolder
-is set, it contains other FileSystemItems representing
-the files/folders inside this folder.  If isMetadata
-is set, the contents are irrelevant.  Otherwise, it
-contains a bit stream of the file contents.</p>
+        <p>Represents the group's file system.  If set to null, the
+group has no file system yet.</p>
     </div>
 
     
@@ -308,147 +284,8 @@ contains a bit stream of the file contents.</p>
 </div>
 
                 
-                    <div id="property_isDeleted" class="property item">
-    <h3 class="name"><code>isDeleted</code></h3>
-    <span class="type">Boolean</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l55"><code>js&#x2F;agora-interface.js:55</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Indicates if this file was deleted.</p>
-    </div>
-
-    
-        <p><strong>Default:</strong> false</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_isFolder" class="property item">
-    <h3 class="name"><code>isFolder</code></h3>
-    <span class="type">Boolean</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l23"><code>js&#x2F;agora-interface.js:23</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Indicating if the contents represent a folder</p>
-    </div>
-
-    
-        <p><strong>Default:</strong> false</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_isMetadata" class="property item">
-    <h3 class="name"><code>isMetadata</code></h3>
-    <span class="type">Boolean</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l64"><code>js&#x2F;agora-interface.js:64</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Indicates if this is just a metadata object or if
-it actually contains information.</p>
-    </div>
-
-    
-        <p><strong>Default:</strong> false</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_name" class="property item">
-    <h3 class="name"><code>name</code></h3>
+                    <div id="property_groupName" class="property item">
+    <h3 class="name"><code>groupName</code></h3>
     <span class="type">String</span>
 
     
@@ -470,7 +307,7 @@ it actually contains information.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l14"><code>js&#x2F;agora-interface.js:14</code></a>
+        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l101"><code>js&#x2F;agora-interface.js:101</code></a>
         
         </p>
 
@@ -480,7 +317,7 @@ it actually contains information.</p>
     </div>
 
     <div class="description">
-        <p>The file or folder name.</p>
+        <p>The name of the group</p>
     </div>
 
     
@@ -493,9 +330,9 @@ it actually contains information.</p>
 </div>
 
                 
-                    <div id="property_timestamp" class="property item">
-    <h3 class="name"><code>timestamp</code></h3>
-    <span class="type">Integer</span>
+                    <div id="property_groupUsers" class="property item">
+    <h3 class="name"><code>groupUsers</code></h3>
+    <span class="type">User</span>
 
     
 
@@ -516,7 +353,7 @@ it actually contains information.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l45"><code>js&#x2F;agora-interface.js:45</code></a>
+        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l92"><code>js&#x2F;agora-interface.js:92</code></a>
         
         </p>
 
@@ -526,12 +363,11 @@ it actually contains information.</p>
     </div>
 
     <div class="description">
-        <p>The timestamp is an integer representation of when the
-file was last modified.</p>
+        <p>Contains the identities of the users that are in this group.</p>
     </div>
 
     
-        <p><strong>Default:</strong> 0</p>
+        <p><strong>Default:</strong> []</p>
     
 
     
