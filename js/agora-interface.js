@@ -5,6 +5,27 @@
  */
 
 /**
+ * A global class containing functions for the Agora interface.
+ *
+ * @class Agora
+ * @constructor
+ */
+function Agora {
+	/**
+	 * Gets the currently authenticated user.
+	 *
+	 * @method getCurrentUser
+	 * @return User
+	 */
+	this.prototype.getCurrentUser = ___agora_getCurrentUser;
+}
+
+// Definition for Agora.getCurrentUser
+function ___agora_getCurrentUser() {
+	// Return a dummy user object
+}
+
+/**
  * An N-ary tree that maps the file system through folders and files.
  *
  * @class FileSystemItem
@@ -44,7 +65,17 @@ function FileSystemItem() {
 
 	/**
 	 * The timestamp is an integer representation of when the
-	 * file was last modified.
+	 * file was last modified.  It is formatted as follows:
+	 *
+	 * YYYYMMDDHHMMSS
+	 *
+	 * Where:
+	 * 		-YYYY = Year
+	 * 		-MM = Month
+	 * 		-DD = Day
+	 * 		-HH = Hour
+	 * 		-MM = Minute
+	 * 		-SS = Second
 	 *
 	 * @property timestamp
 	 * @type Integer
@@ -106,4 +137,48 @@ function GroupShare() {
 	 * @default ""
 	 */
 	this.groupName = "";
+}
+
+/**
+ * A class that models an Agora user.
+ *
+ * @class User
+ * @constructor
+ */
+function User() {
+	/**
+	 * The display name for the user
+	 *
+	 * @property displayName
+	 * @type String
+	 * @default ""
+	 */
+	this.displayName = "";
+	
+	/**
+	 * The unique identifier for the user.
+	 *
+	 * @property UID
+	 * @type String
+	 * @default ""
+	 */
+	this.UID = ""
+	
+	/**
+	 * The user's contact.
+	 *
+	 * @property contacts
+	 * @type User[]
+	 * @default []
+	 */
+	this.contacts = new Array();
+	
+	/**
+	 * Indicates if the current user is online.
+	 *
+	 * @property isOnline
+	 * @type Boolean
+	 * @default false
+	 */
+	this.isOnline = false;
 }
