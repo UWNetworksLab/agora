@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>GroupShare - Agora</title>
+    <title>Agora - Agora</title>
     <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.8.0pr2&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
@@ -94,7 +94,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>GroupShare Class</h1>
+                        <h1>Agora Class</h1>
 <div class="box meta">
     
 
@@ -102,7 +102,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l161"><code>js&#x2F;agora-interface.js:161</code></a>
+            Defined in: <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l7"><code>js&#x2F;agora-interface.js:7</code></a>
         </div>
     
 
@@ -118,14 +118,14 @@
 
 
 <div class="box intro">
-    <p>A class that models a group share.</p>
+    <p>A global class containing functions for the Agora interface.</p>
 </div>
 
 
     <div class="constructor">
         <h2>Constructor</h2>
-        <div id="method_GroupShare" class="method item">
-    <h3 class="name"><code>GroupShare</code></h3>
+        <div id="method_Agora" class="method item">
+    <h3 class="name"><code>Agora</code></h3>
 
     
         <span class="paren">()</span>
@@ -156,7 +156,7 @@
             
         
         
-        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l161"><code>js&#x2F;agora-interface.js:161</code></a>
+        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l7"><code>js&#x2F;agora-interface.js:7</code></a>
         
         </p>
 
@@ -185,8 +185,8 @@
         <li class="api-class-tab index"><a href="#index">Index</a></li>
 
         
+            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
         
-            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
         
         
         
@@ -197,29 +197,20 @@
             <h2 class="off-left">Item Index</h2>
 
             
+                <div class="index-section methods">
+                    <h3>Methods</h3>
 
-            
-                <div class="index-section properties">
-                    <h3>Properties</h3>
-
-                    <ul class="index-list properties">
+                    <ul class="index-list methods">
                         
-                            <li class="index-item property">
-                                <a href="#property_fileSystem">fileSystem</a>
+                            <li class="index-item method">
+                                <a href="#method_getCurrentUser">getCurrentUser</a>
 
                                 
                                 
                             </li>
                         
-                            <li class="index-item property">
-                                <a href="#property_name">name</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_users">users</a>
+                            <li class="index-item method">
+                                <a href="#method_getSpaceByName">getSpaceByName</a>
 
                                 
                                 
@@ -232,18 +223,31 @@
             
 
             
+
+            
         </div>
 
         
-
-        
-            <div id="properties" class="api-class-tabpanel">
-                <h2 class="off-left">Properties</h2>
+            <div id="methods" class="api-class-tabpanel">
+                <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="property_fileSystem" class="property item">
-    <h3 class="name"><code>fileSystem</code></h3>
-    <span class="type"><a href="../classes/FileSystemItem.html" class="crosslink">FileSystemItem</a></span>
+                    <div id="method_getCurrentUser" class="method item">
+    <h3 class="name"><code>getCurrentUser</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+    
+
+    
+
+    
 
     
 
@@ -264,9 +268,10 @@
             
         
         
-        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l168"><code>js&#x2F;agora-interface.js:168</code></a>
+        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l14"><code>js&#x2F;agora-interface.js:14</code></a>
         
         </p>
+
 
         
 
@@ -274,69 +279,44 @@
     </div>
 
     <div class="description">
-        <p>Represents the group's file system.  If set to null, the
-group has no file system yet.</p>
+        <p>Gets the currently authenticated user.</p>
     </div>
 
     
-        <p><strong>Default:</strong> null</p>
-    
 
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                    User - The current user
+                
+            </div>
+        </div>
     
 
     
 </div>
 
                 
-                    <div id="property_name" class="property item">
-    <h3 class="name"><code>name</code></h3>
-    <span class="type">String</span>
+                    <div id="method_getSpaceByName" class="method item">
+    <h3 class="name"><code>getSpaceByName</code></h3>
 
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
     
 
     
 
     
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l187"><code>js&#x2F;agora-interface.js:187</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The name of the group</p>
-    </div>
-
-    
-        <p><strong>Default:</strong> &quot;&quot;</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_users" class="property item">
-    <h3 class="name"><code>users</code></h3>
-    <span class="type"><a href="../classes/User.html" class="crosslink">User[]</a></span>
 
     
 
@@ -357,9 +337,10 @@ group has no file system yet.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l178"><code>js&#x2F;agora-interface.js:178</code></a>
+        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l22"><code>js&#x2F;agora-interface.js:22</code></a>
         
         </p>
+
 
         
 
@@ -367,13 +348,23 @@ group has no file system yet.</p>
     </div>
 
     <div class="description">
-        <p>Contains the identities of the users that are in this group.</p>
+        <p>Gets the space by the specified name, returns false
+if the space can not be found.</p>
     </div>
 
     
-        <p><strong>Default:</strong> []</p>
-    
 
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                    GroupShare or Boolean - The space or false
+                
+            </div>
+        </div>
     
 
     
@@ -381,6 +372,8 @@ group has no file system yet.</p>
 
                 
             </div>
+        
+
         
 
         

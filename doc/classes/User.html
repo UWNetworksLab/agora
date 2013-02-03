@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>GroupShare - Agora</title>
+    <title>User - Agora</title>
     <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.8.0pr2&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
@@ -94,7 +94,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>GroupShare Class</h1>
+                        <h1>User Class</h1>
 <div class="box meta">
     
 
@@ -102,7 +102,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l161"><code>js&#x2F;agora-interface.js:161</code></a>
+            Defined in: <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l197"><code>js&#x2F;agora-interface.js:197</code></a>
         </div>
     
 
@@ -118,14 +118,14 @@
 
 
 <div class="box intro">
-    <p>A class that models a group share.</p>
+    <p>A class that models an Agora user.</p>
 </div>
 
 
     <div class="constructor">
         <h2>Constructor</h2>
-        <div id="method_GroupShare" class="method item">
-    <h3 class="name"><code>GroupShare</code></h3>
+        <div id="method_User" class="method item">
+    <h3 class="name"><code>User</code></h3>
 
     
         <span class="paren">()</span>
@@ -156,7 +156,7 @@
             
         
         
-        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l161"><code>js&#x2F;agora-interface.js:161</code></a>
+        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l197"><code>js&#x2F;agora-interface.js:197</code></a>
         
         </p>
 
@@ -205,21 +205,35 @@
                     <ul class="index-list properties">
                         
                             <li class="index-item property">
-                                <a href="#property_fileSystem">fileSystem</a>
+                                <a href="#property_contacts">contacts</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_name">name</a>
+                                <a href="#property_displayName">displayName</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_users">users</a>
+                                <a href="#property_isOnline">isOnline</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_spaceNames">spaceNames</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_UID">UID</a>
 
                                 
                                 
@@ -241,55 +255,8 @@
                 <h2 class="off-left">Properties</h2>
 
                 
-                    <div id="property_fileSystem" class="property item">
-    <h3 class="name"><code>fileSystem</code></h3>
-    <span class="type"><a href="../classes/FileSystemItem.html" class="crosslink">FileSystemItem</a></span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l168"><code>js&#x2F;agora-interface.js:168</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Represents the group's file system.  If set to null, the
-group has no file system yet.</p>
-    </div>
-
-    
-        <p><strong>Default:</strong> null</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_name" class="property item">
-    <h3 class="name"><code>name</code></h3>
+                    <div id="property_contacts" class="property item">
+    <h3 class="name"><code>contacts</code></h3>
     <span class="type">String</span>
 
     
@@ -311,7 +278,7 @@ group has no file system yet.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l187"><code>js&#x2F;agora-interface.js:187</code></a>
+        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l222"><code>js&#x2F;agora-interface.js:222</code></a>
         
         </p>
 
@@ -321,11 +288,11 @@ group has no file system yet.</p>
     </div>
 
     <div class="description">
-        <p>The name of the group</p>
+        <p>The user's contacts as UIDs.</p>
     </div>
 
     
-        <p><strong>Default:</strong> &quot;&quot;</p>
+        <p><strong>Default:</strong> []</p>
     
 
     
@@ -334,9 +301,9 @@ group has no file system yet.</p>
 </div>
 
                 
-                    <div id="property_users" class="property item">
-    <h3 class="name"><code>users</code></h3>
-    <span class="type"><a href="../classes/User.html" class="crosslink">User[]</a></span>
+                    <div id="property_displayName" class="property item">
+    <h3 class="name"><code>displayName</code></h3>
+    <span class="type">String</span>
 
     
 
@@ -357,7 +324,7 @@ group has no file system yet.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l178"><code>js&#x2F;agora-interface.js:178</code></a>
+        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l204"><code>js&#x2F;agora-interface.js:204</code></a>
         
         </p>
 
@@ -367,11 +334,150 @@ group has no file system yet.</p>
     </div>
 
     <div class="description">
-        <p>Contains the identities of the users that are in this group.</p>
+        <p>The display name for the user</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> &quot;&quot;</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_isOnline" class="property item">
+    <h3 class="name"><code>isOnline</code></h3>
+    <span class="type">Boolean</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l231"><code>js&#x2F;agora-interface.js:231</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Indicates if the current user is online.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> false</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_spaceNames" class="property item">
+    <h3 class="name"><code>spaceNames</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l240"><code>js&#x2F;agora-interface.js:240</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Gets the names of all the spaces (that we
+know of) for this user.</p>
     </div>
 
     
         <p><strong>Default:</strong> []</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_UID" class="property item">
+    <h3 class="name"><code>UID</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l213"><code>js&#x2F;agora-interface.js:213</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The unique identifier for the user.</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> &quot;&quot;</p>
     
 
     

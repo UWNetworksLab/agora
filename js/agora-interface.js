@@ -15,14 +15,69 @@ function Agora {
 	 * Gets the currently authenticated user.
 	 *
 	 * @method getCurrentUser
-	 * @return User
+	 * @return User - The current user
 	 */
 	this.prototype.getCurrentUser = ___agora_getCurrentUser;
+	
+	/**
+	 * Gets the space by the specified name, returns false
+	 * if the space can not be found.
+	 *
+	 * @method getSpaceByName
+	 * @return GroupShare or Boolean - The space or false
+	 */
+	this.prototype.getSpaceByName = ___agora_getSpaceByName;
 }
 
 // Definition for Agora.getCurrentUser
 function ___agora_getCurrentUser() {
-	// Return a dummy user object
+	// TODO: Replace with actual Agora backend call
+	var user = new User();
+
+	user.displayName = "Nicholas Cage";
+	user.isOnline = true;
+	user.UID = "cagen@cs.washington.edu";
+	user.spaceNames = ["Final Project"];
+
+	return user;
+}
+
+// Definition for Agora.getSpaceByName
+function ___agora_getSpaceByName(name) {
+	// TODO: Replace with actual Agora backend call
+	if(name == "Final Project") {
+		var users = new Array(2);
+		users[0] = new User();
+		users[1] = new User();
+
+		users[0].displayName = "Marty Stepp";
+		users[0].isOnline = false;
+		users[0].UID = "stepp@cs.washington.edu";
+		users[0].contacts = ["cagen@cs.washington.edu", "mike@monstersinc.com"];
+
+		users[1].displayName = "Mike Wazowski";
+		users[1].isOnline = true;
+		users[1].UID = "mike@monstersinc.com";
+
+		var fs = new FileSystemItem();
+		
+		fs.contents = new Array[2];
+		fs[0].isMetadata = true;
+		fs[0].name = "hw1.sql";
+		fs[0].timestamp = 20130203132432;
+		
+		fs[1].isMetadata = true;
+		fs[1].name = "writeup.txt";
+		fs[1].timestamp = 20130202024211;
+
+		var space = new GroupShare();
+		
+		space.name = "Final Project";
+		space.user = users;
+		space.fileSystem = fs;
+	} else {
+		return false;
+	}
 }
 
 /**
@@ -123,20 +178,20 @@ function GroupShare() {
 	/**
 	 * Contains the identities of the users that are in this group.
 	 *
-	 * @property groupUsers
+	 * @property users
 	 * @type User[]
 	 * @default []
 	 */
-	this.groupUsers = new Array();
+	this.users = new Array();
 
 	/**
 	 * The name of the group
 	 *
-	 * @property groupName
+	 * @property name
 	 * @type String
 	 * @default ""
 	 */
-	this.groupName = "";
+	this.name = "";
 }
 
 /**
@@ -165,10 +220,10 @@ function User() {
 	this.UID = ""
 	
 	/**
-	 * The user's contact.
+	 * The user's contacts as UIDs.
 	 *
 	 * @property contacts
-	 * @type User[]
+	 * @type String[]
 	 * @default []
 	 */
 	this.contacts = new Array();
@@ -181,4 +236,14 @@ function User() {
 	 * @default false
 	 */
 	this.isOnline = false;
+
+	/**
+	 * Gets the names of all the spaces (that we
+	 * know of) for this user.
+	 *
+	 * @property spaceNames
+	 * @type String[]
+	 * @default []
+	 */
+	this.spaceNames = new Array();
 }

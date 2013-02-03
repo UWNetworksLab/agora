@@ -41,9 +41,13 @@
         <div id="api-tabview-panel">
             <ul id="api-classes" class="apis classes">
             
+                <li><a href="..&#x2F;classes/Agora.html">Agora</a></li>
+            
                 <li><a href="..&#x2F;classes/FileSystemItem.html">FileSystemItem</a></li>
             
                 <li><a href="..&#x2F;classes/GroupShare.html">GroupShare</a></li>
+            
+                <li><a href="..&#x2F;classes/User.html">User</a></li>
             
             </ul>
 
@@ -98,7 +102,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l7"><code>js&#x2F;agora-interface.js:7</code></a>
+            Defined in: <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l83"><code>js&#x2F;agora-interface.js:83</code></a>
         </div>
     
 
@@ -152,7 +156,7 @@
             
         
         
-        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l7"><code>js&#x2F;agora-interface.js:7</code></a>
+        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l83"><code>js&#x2F;agora-interface.js:83</code></a>
         
         </p>
 
@@ -281,7 +285,7 @@
             
         
         
-        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l32"><code>js&#x2F;agora-interface.js:32</code></a>
+        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l108"><code>js&#x2F;agora-interface.js:108</code></a>
         
         </p>
 
@@ -331,7 +335,7 @@ contains a bit stream of the file contents.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l55"><code>js&#x2F;agora-interface.js:55</code></a>
+        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l141"><code>js&#x2F;agora-interface.js:141</code></a>
         
         </p>
 
@@ -377,7 +381,7 @@ contains a bit stream of the file contents.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l23"><code>js&#x2F;agora-interface.js:23</code></a>
+        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l99"><code>js&#x2F;agora-interface.js:99</code></a>
         
         </p>
 
@@ -423,7 +427,7 @@ contains a bit stream of the file contents.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l64"><code>js&#x2F;agora-interface.js:64</code></a>
+        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l150"><code>js&#x2F;agora-interface.js:150</code></a>
         
         </p>
 
@@ -470,7 +474,7 @@ it actually contains information.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l14"><code>js&#x2F;agora-interface.js:14</code></a>
+        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l90"><code>js&#x2F;agora-interface.js:90</code></a>
         
         </p>
 
@@ -516,7 +520,7 @@ it actually contains information.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l45"><code>js&#x2F;agora-interface.js:45</code></a>
+        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l121"><code>js&#x2F;agora-interface.js:121</code></a>
         
         </p>
 
@@ -527,7 +531,17 @@ it actually contains information.</p>
 
     <div class="description">
         <p>The timestamp is an integer representation of when the
-file was last modified.</p>
+file was last modified.  It is formatted as follows:</p>
+
+<p>YYYYMMDDHHMMSS</p>
+
+<p>Where:
+        -YYYY = Year
+        -MM = Month
+        -DD = Day
+        -HH = Hour
+        -MM = Minute
+        -SS = Second</p>
     </div>
 
     

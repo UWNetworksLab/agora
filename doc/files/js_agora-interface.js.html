@@ -41,9 +41,13 @@
         <div id="api-tabview-panel">
             <ul id="api-classes" class="apis classes">
             
+                <li><a href="..&#x2F;classes/Agora.html">Agora</a></li>
+            
                 <li><a href="..&#x2F;classes/FileSystemItem.html">FileSystemItem</a></li>
             
                 <li><a href="..&#x2F;classes/GroupShare.html">GroupShare</a></li>
+            
+                <li><a href="..&#x2F;classes/User.html">User</a></li>
             
             </ul>
 
@@ -101,6 +105,82 @@
  *&#x2F;
 
 &#x2F;**
+ * A global class containing functions for the Agora interface.
+ *
+ * @class Agora
+ * @constructor
+ *&#x2F;
+function Agora {
+	&#x2F;**
+	 * Gets the currently authenticated user.
+	 *
+	 * @method getCurrentUser
+	 * @return User - The current user
+	 *&#x2F;
+	this.prototype.getCurrentUser = ___agora_getCurrentUser;
+	
+	&#x2F;**
+	 * Gets the space by the specified name, returns false
+	 * if the space can not be found.
+	 *
+	 * @method getSpaceByName
+	 * @return GroupShare or Boolean - The space or false
+	 *&#x2F;
+	this.prototype.getSpaceByName = ___agora_getSpaceByName;
+}
+
+&#x2F;&#x2F; Definition for Agora.getCurrentUser
+function ___agora_getCurrentUser() {
+	&#x2F;&#x2F; TODO: Replace with actual Agora backend call
+	var user = new User();
+
+	user.displayName = &quot;Nicholas Cage&quot;;
+	user.isOnline = true;
+	user.UID = &quot;cagen@cs.washington.edu&quot;;
+	user.spaceNames = [&quot;Final Project&quot;];
+
+	return user;
+}
+
+&#x2F;&#x2F; Definition for Agora.getSpaceByName
+function ___agora_getSpaceByName(name) {
+	&#x2F;&#x2F; TODO: Replace with actual Agora backend call
+	if(name == &quot;Final Project&quot;) {
+		var users = new Array(2);
+		users[0] = new User();
+		users[1] = new User();
+
+		users[0].displayName = &quot;Marty Stepp&quot;;
+		users[0].isOnline = false;
+		users[0].UID = &quot;stepp@cs.washington.edu&quot;;
+		users[0].contacts = [&quot;cagen@cs.washington.edu&quot;, &quot;mike@monstersinc.com&quot;];
+
+		users[1].displayName = &quot;Mike Wazowski&quot;;
+		users[1].isOnline = true;
+		users[1].UID = &quot;mike@monstersinc.com&quot;;
+
+		var fs = new FileSystemItem();
+		
+		fs.contents = new Array[2];
+		fs[0].isMetadata = true;
+		fs[0].name = &quot;hw1.sql&quot;;
+		fs[0].timestamp = 20130203132432;
+		
+		fs[1].isMetadata = true;
+		fs[1].name = &quot;writeup.txt&quot;;
+		fs[1].timestamp = 20130202024211;
+
+		var space = new GroupShare();
+		
+		space.name = &quot;Final Project&quot;;
+		space.user = users;
+		space.fileSystem = fs;
+	} else {
+		return false;
+	}
+}
+
+&#x2F;**
  * An N-ary tree that maps the file system through folders and files.
  *
  * @class FileSystemItem
@@ -140,7 +220,17 @@ function FileSystemItem() {
 
 	&#x2F;**
 	 * The timestamp is an integer representation of when the
-	 * file was last modified.
+	 * file was last modified.  It is formatted as follows:
+	 *
+	 * YYYYMMDDHHMMSS
+	 *
+	 * Where:
+	 * 		-YYYY = Year
+	 * 		-MM = Month
+	 * 		-DD = Day
+	 * 		-HH = Hour
+	 * 		-MM = Minute
+	 * 		-SS = Second
 	 *
 	 * @property timestamp
 	 * @type Integer
@@ -188,20 +278,74 @@ function GroupShare() {
 	&#x2F;**
 	 * Contains the identities of the users that are in this group.
 	 *
-	 * @property groupUsers
+	 * @property users
 	 * @type User[]
 	 * @default []
 	 *&#x2F;
-	this.groupUsers = new Array();
+	this.users = new Array();
 
 	&#x2F;**
 	 * The name of the group
 	 *
-	 * @property groupName
+	 * @property name
 	 * @type String
 	 * @default &quot;&quot;
 	 *&#x2F;
-	this.groupName = &quot;&quot;;
+	this.name = &quot;&quot;;
+}
+
+&#x2F;**
+ * A class that models an Agora user.
+ *
+ * @class User
+ * @constructor
+ *&#x2F;
+function User() {
+	&#x2F;**
+	 * The display name for the user
+	 *
+	 * @property displayName
+	 * @type String
+	 * @default &quot;&quot;
+	 *&#x2F;
+	this.displayName = &quot;&quot;;
+	
+	&#x2F;**
+	 * The unique identifier for the user.
+	 *
+	 * @property UID
+	 * @type String
+	 * @default &quot;&quot;
+	 *&#x2F;
+	this.UID = &quot;&quot;
+	
+	&#x2F;**
+	 * The user&#x27;s contacts as UIDs.
+	 *
+	 * @property contacts
+	 * @type String[]
+	 * @default []
+	 *&#x2F;
+	this.contacts = new Array();
+	
+	&#x2F;**
+	 * Indicates if the current user is online.
+	 *
+	 * @property isOnline
+	 * @type Boolean
+	 * @default false
+	 *&#x2F;
+	this.isOnline = false;
+
+	&#x2F;**
+	 * Gets the names of all the spaces (that we
+	 * know of) for this user.
+	 *
+	 * @property spaceNames
+	 * @type String[]
+	 * @default []
+	 *&#x2F;
+	this.spaceNames = new Array();
 }
 
     </pre>
