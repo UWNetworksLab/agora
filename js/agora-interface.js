@@ -120,17 +120,17 @@ function FileSystemItem() {
 
 	/**
 	 * The timestamp is an integer representation of when the
-	 * file was last modified.  It is formatted as follows:
-	 *
-	 * YYYYMMDDHHMMSS
-	 *
-	 * Where:
-	 * 		-YYYY = Year
-	 * 		-MM = Month
-	 * 		-DD = Day
-	 * 		-HH = Hour
-	 * 		-MM = Minute
-	 * 		-SS = Second
+	 * file was last modified.  It is formatted as follows:<br>
+	 *<br>
+	 * YYYYMMDDHHMMSS<br>
+	 *<br>
+	 * Where:<br><br>
+	 * 		-YYYY = Year<br>
+	 * 		-MM = Month<br>
+	 * 		-DD = Day<br>
+	 * 		-HH = Hour<br>
+	 * 		-MM = Minute<br>
+	 * 		-SS = Second<br>
 	 *
 	 * @property timestamp
 	 * @type Integer
@@ -192,6 +192,21 @@ function GroupShare() {
 	 * @default ""
 	 */
 	this.name = "";
+
+	/**
+	 * Adds the specified user to the space
+	 *
+	 * @method addUser
+	 * @param {User} user The user to add
+	 * @return {Boolean} Indicates if the add was successful.
+	 */
+	this.prototype.addUser = ___agora-userShare__addUser;
+}
+
+function ___agora-userShare__addUser(user) {
+	this.users.push(user);
+	// TODO: Send FreeDOM add user message.
+	return true;
 }
 
 /**
