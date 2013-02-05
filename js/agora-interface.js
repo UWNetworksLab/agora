@@ -10,24 +10,25 @@
  * @class Agora
  * @constructor
  */
-function Agora {
-	/**
-	 * Gets the currently authenticated user.
-	 *
-	 * @method getCurrentUser
-	 * @return User - The current user
-	 */
-	this.prototype.getCurrentUser = ___agora_getCurrentUser;
-	
-	/**
-	 * Gets the space by the specified name, returns false
-	 * if the space can not be found.
-	 *
-	 * @method getSpaceByName
-	 * @return GroupShare or Boolean - The space or false
-	 */
-	this.prototype.getSpaceByName = ___agora_getSpaceByName;
-}
+var Agora = {};
+
+/**
+ * Gets the currently authenticated user.
+ *
+ * @method getCurrentUser
+ * @return User - The current user
+ */
+Agora.getCurrentUser = ___agora_getCurrentUser;
+
+/**
+ * Gets the space by the specified name, returns false
+ * if the space can not be found.
+ *
+ * @method getSpaceByName
+ * @return GroupShare or Boolean - The space or false
+ */
+Agora.getSpaceByName = ___agora_getSpaceByName;
+
 
 // Definition for Agora.getCurrentUser
 function ___agora_getCurrentUser() {
@@ -200,13 +201,29 @@ function GroupShare() {
 	 * @param {User} user The user to add
 	 * @return {Boolean} Indicates if the add was successful.
 	 */
-	this.prototype.addUser = ___agora-userShare__addUser;
-}
+	this.prototype.addUser = function(user) {
+		this.users.push(user);
+		// TODO: Send FreeDOM add user message.
+		return true;
+	}
 
-function ___agora-userShare__addUser(user) {
-	this.users.push(user);
-	// TODO: Send FreeDOM add user message.
-	return true;
+	/**
+	 * Removes the specified user from the space
+	 *
+	 * @method removeUser
+	 * @param {User} user The user to remove
+	 * @return {Boolean} Indicates if the remove was successful.
+ 	 */
+	this.prototype.removeUser = function(user) {
+		for(var i = 0; i < this.users.length; i++) {
+			if(user == this.users[i]) {
+				this.users.splice(i,0);
+				// TODO: Send FreeDOM Remove user message.
+				return true;
+			}
+		}
+		return true;
+	}
 }
 
 /**
