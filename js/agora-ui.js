@@ -8,3 +8,9 @@
 $(".fs-item").click(function () {
 	$(this).toggleClass("selected");
 });
+
+// Get the current Username
+$("#user-name").html(function () {
+	var currentUser = Agora.getCurrentUser();
+	return currentUser.displayName;
+});
