@@ -10,7 +10,4 @@ $(".fs-item").click(function () {
 });
 
 // Get the current Username
-$("#user-name").html(function () {
-	var currentUser = Agora.getCurrentUser();
-	return currentUser.displayName;
-});
+$("#user-name").html(Agora.getCurrentUser().displayName);
