@@ -53,7 +53,7 @@
             "namespaces": {},
             "tag": "module",
             "file": "js/agora-interface.js",
-            "line": 197,
+            "line": 212,
             "description": "Provides class and FreeDOM interfacing for Agora"
         },
         "agora-ui": {
@@ -136,7 +136,7 @@
             "module": "agora-interface",
             "namespace": "",
             "file": "js/agora-interface.js",
-            "line": 197,
+            "line": 212,
             "description": "A class that models an Agora user.",
             "is_constructor": 1
         }
@@ -202,7 +202,7 @@
         {
             "file": "js/agora-interface.js",
             "line": 121,
-            "description": "The timestamp is an integer representation of when the\nfile was last modified.  It is formatted as follows:\n\nYYYYMMDDHHMMSS\n\nWhere:\n\t\t-YYYY = Year\n\t\t-MM = Month\n\t\t-DD = Day\n\t\t-HH = Hour\n\t\t-MM = Minute\n\t\t-SS = Second",
+            "description": "The timestamp is an integer representation of when the\nfile was last modified.  It is formatted as follows:<br>\n<br>\nYYYYMMDDHHMMSS<br>\n<br>\nWhere:<br><br>\n\t\t-YYYY = Year<br>\n\t\t-MM = Month<br>\n\t\t-DD = Day<br>\n\t\t-HH = Hour<br>\n\t\t-MM = Minute<br>\n\t\t-SS = Second<br>",
             "itemtype": "property",
             "name": "timestamp",
             "type": "Integer",
@@ -267,7 +267,27 @@
         },
         {
             "file": "js/agora-interface.js",
-            "line": 204,
+            "line": 196,
+            "description": "Adds the specified user to the space",
+            "itemtype": "method",
+            "name": "addUser",
+            "params": [
+                {
+                    "name": "user",
+                    "description": "The user to add",
+                    "type": "User"
+                }
+            ],
+            "return": {
+                "description": "Indicates if the add was successful.",
+                "type": "Boolean"
+            },
+            "class": "GroupShare",
+            "module": "agora-interface"
+        },
+        {
+            "file": "js/agora-interface.js",
+            "line": 219,
             "description": "The display name for the user",
             "itemtype": "property",
             "name": "displayName",
@@ -278,7 +298,7 @@
         },
         {
             "file": "js/agora-interface.js",
-            "line": 213,
+            "line": 228,
             "description": "The unique identifier for the user.",
             "itemtype": "property",
             "name": "UID",
@@ -289,7 +309,7 @@
         },
         {
             "file": "js/agora-interface.js",
-            "line": 222,
+            "line": 237,
             "description": "The user's contacts as UIDs.",
             "itemtype": "property",
             "name": "contacts",
@@ -300,7 +320,7 @@
         },
         {
             "file": "js/agora-interface.js",
-            "line": 231,
+            "line": 246,
             "description": "Indicates if the current user is online.",
             "itemtype": "property",
             "name": "isOnline",
@@ -311,7 +331,7 @@
         },
         {
             "file": "js/agora-interface.js",
-            "line": 240,
+            "line": 255,
             "description": "Gets the names of all the spaces (that we\nknow of) for this user.",
             "itemtype": "property",
             "name": "spaceNames",
