@@ -110,24 +110,25 @@
  * @class Agora
  * @constructor
  *&#x2F;
-function Agora {
-	&#x2F;**
-	 * Gets the currently authenticated user.
-	 *
-	 * @method getCurrentUser
-	 * @return User - The current user
-	 *&#x2F;
-	this.prototype.getCurrentUser = ___agora_getCurrentUser;
-	
-	&#x2F;**
-	 * Gets the space by the specified name, returns false
-	 * if the space can not be found.
-	 *
-	 * @method getSpaceByName
-	 * @return GroupShare or Boolean - The space or false
-	 *&#x2F;
-	this.prototype.getSpaceByName = ___agora_getSpaceByName;
-}
+var Agora = {};
+
+&#x2F;**
+ * Gets the currently authenticated user.
+ *
+ * @method getCurrentUser
+ * @return User - The current user
+ *&#x2F;
+Agora.getCurrentUser = ___agora_getCurrentUser;
+
+&#x2F;**
+ * Gets the space by the specified name, returns false
+ * if the space can not be found.
+ *
+ * @method getSpaceByName
+ * @return GroupShare or Boolean - The space or false
+ *&#x2F;
+Agora.getSpaceByName = ___agora_getSpaceByName;
+
 
 &#x2F;&#x2F; Definition for Agora.getCurrentUser
 function ___agora_getCurrentUser() {
@@ -300,13 +301,29 @@ function GroupShare() {
 	 * @param {User} user The user to add
 	 * @return {Boolean} Indicates if the add was successful.
 	 *&#x2F;
-	this.prototype.addUser = ___agora-userShare__addUser;
-}
+	this.prototype.addUser = function(user) {
+		this.users.push(user);
+		&#x2F;&#x2F; TODO: Send FreeDOM add user message.
+		return true;
+	}
 
-function ___agora-userShare__addUser(user) {
-	this.users.push(user);
-	&#x2F;&#x2F; TODO: Send FreeDOM add user message.
-	return true;
+	&#x2F;**
+	 * Removes the specified user from the space
+	 *
+	 * @method removeUser
+	 * @param {User} user The user to remove
+	 * @return {Boolean} Indicates if the remove was successful.
+ 	 *&#x2F;
+	this.prototype.removeUser = function(user) {
+		for(var i = 0; i &lt; this.users.length; i++) {
+			if(user == this.users[i]) {
+				this.users.splice(i,0);
+				&#x2F;&#x2F; TODO: Send FreeDOM Remove user message.
+				return true;
+			}
+		}
+		return true;
+	}
 }
 
 &#x2F;**
