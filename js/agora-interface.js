@@ -157,6 +157,18 @@ function FileSystemItem() {
 	 * @default false
 	 */
 	this.isMetadata = false;
+
+	/**
+	 * Gets the specified file by name if it exists in
+	 * the current directory.
+	 *
+	 * @method getFileByName
+	 * @param {String} fileName The name of the file
+	 * @return {String} The file
+	 */
+	this.prototype.getFileByName = function(fileName) {
+		return "We did not invent the algorithm.";
+	}
 }
 
 /**
