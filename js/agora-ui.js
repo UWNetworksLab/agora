@@ -11,3 +11,10 @@ $(".fs-item").click(function () {
 
 // Get the current Username
 $("#user-name").html(Agora.getCurrentUser().displayName);
+
+/*$("file-system").html(function () {
+	Agora.getSpace
+	for (var i=0; i<???.length; i++) {
+		document.write(cars[i] + "<br>");
+} 
+});*/
