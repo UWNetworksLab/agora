@@ -269,7 +269,7 @@ var User = Backbone.Model.extend({
 		 * @type String[]
 		 * @default []
 		 */
-		contacts: "",	// TODO: Change to User Collection
+		contacts: new UserCollection(),
 		/**
 		 * Indicates if the current user is online.
 		 *
