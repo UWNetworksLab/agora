@@ -244,50 +244,58 @@ return true;
 * @class User
 * @constructor
 */
-function User() {
-/**
-* The display name for the user
-*
-* @property displayName
-* @type String
-* @default ""
-*/
-this.displayName = "";
+var User = Backbone.Model.extend({
+	defaults: {
+		/**
+		 * The display name for the user
+		 *
+		 * @property displayName
+		 * @type String
+		 * @default ""
+		 */
+		displayName: "",
+		/**
+		 * The unique identifier for the user.
+		 *
+		 * @property UID
+		 * @type String
+		 * @default ""
+		 */
+		UID: "",
+		/**
+		 * The user's contacts as UIDs.
+		 *
+		 * @property contacts
+		 * @type String[]
+		 * @default []
+		 */
+		contacts: "",	// TODO: Change to User Collection
+		/**
+		 * Indicates if the current user is online.
+		 *
+		 * @property isOnline
+		 * @type Boolean
+		 * @default false
+		 */
+		isOnline: false,
+		/**
+		 * Gets the names of all the spaces (that we
+		 * know of) for this user.
+		 *
+		 * @property spaceNames
+		 * @type String[]
+		 * @default []
+		 */
+		spaceNames: ""	// TODO: Change to Space Collection
+	}
+});
 
 /**
-* The unique identifier for the user.
+* A collection of #crossLink "User" objects.
 *
-* @property UID
-* @type String
-* @default ""
+* @class UserCollection
+* @constructor
 */
-this.UID = ""
-
-/**
-* The user's contacts as UIDs.
-*
-* @property contacts
-* @type String[]
-* @default []
-*/
-this.contacts = new Array();
-
-/**
-* Indicates if the current user is online.
-*
-* @property isOnline
-* @type Boolean
-* @default false
-*/
-this.isOnline = false;
-
-/**
-* Gets the names of all the spaces (that we
-* know of) for this user.
-*
-* @property spaceNames
-* @type String[]
-* @default []
-*/
-this.spaceNames = new Array();
-}
+var UserCollection = Backbone.Collection.extend({
+	model: User
+});

@@ -4,7 +4,8 @@ YUI.add("yuidoc-meta", function(Y) {
         "Agora",
         "FileSystemItem",
         "GroupShare",
-        "User"
+        "User",
+        "UserCollection"
     ],
     "modules": [
         "agora-interface",

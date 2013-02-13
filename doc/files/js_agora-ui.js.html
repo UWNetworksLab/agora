@@ -49,6 +49,8 @@
             
                 <li><a href="..&#x2F;classes/User.html">User</a></li>
             
+                <li><a href="..&#x2F;classes/UserCollection.html">UserCollection</a></li>
+            
             </ul>
 
             <ul id="api-modules" class="apis modules">
@@ -109,6 +111,23 @@ $(&quot;.fs-item&quot;).click(function () {
 	$(this).toggleClass(&quot;selected&quot;);
 });
 
+&#x2F;&#x2F; Get the current Username
+$(&quot;#user-name&quot;).html(Agora.getCurrentUser().displayName);
+
+&#x2F;&#x2F; Print file system table
+&#x2F;*
+$(&quot;file-system&quot;).html(function () {
+	Agora.getSpaceByName(&quot;Final Project&quot;);
+	
+	for (var i=0; i&lt;fs.contents.length; i++) {
+		document.write(&quot;&lt;tr&gt;&quot;);
+		document.write(&quot;&lt;td&gt;&quot;+&quot;This is a test&lt;&#x2F;td&gt;&quot;);
+		document.write(&quot;&lt;td&gt;directory&lt;&#x2F;td&gt;&quot;);
+		document.write(&quot;&lt;td&gt;10&#x2F;20&#x2F;2012&lt;&#x2F;td&gt;&quot;);
+		document.write(&quot;&lt;&#x2F;tr&gt;&quot;);
+	}
+});
+*&#x2F;
     </pre>
 </div>
 
