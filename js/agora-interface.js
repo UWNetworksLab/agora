@@ -33,14 +33,12 @@ Agora.getSpaceByName = ___agora_getSpaceByName;
 // Definition for Agora.getCurrentUser
 function ___agora_getCurrentUser() {
 // TODO: Replace with actual Agora backend call
-var user = new User();
-
-user.displayName = "Nicholas Cage";
-user.isOnline = true;
-user.UID = "cagen@cs.washington.edu";
-user.spaceNames = ["Final Project"];
-
-return user;
+return new User({
+	displayName: "Nicholas Cage",
+	isOnline: true,
+	UID: "cagen@cs.washington.edu",
+	spaceNames: ["Final Project"]
+})
 }
 
 // Definition for Agora.getSpaceByName
@@ -87,6 +85,16 @@ return false;
 * @class FileSystemItem
 * @constructor
 */
+var FileSystemItem = Backbone.Model.extend({
+	defaults: {
+		name: "",
+		isFolder: false,
+		contents: new FileSystemItemCollection(),
+		timestamp: new Date(),
+		isDeleted: false,
+		isMetaData: false
+	}
+});
 function FileSystemItem() {
 /**
 * The file or folder name.
