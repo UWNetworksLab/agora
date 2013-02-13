@@ -169,6 +169,7 @@ this.isMetadata = false;
 this.prototype.getFileByName = function(fileName) {
 	return "We did not invent the algorithm.";
 }
+}
 
 /**
 * A class that models a group share.
