@@ -5,6 +5,68 @@
 */
 
 /**
+* A collection of #crossLink "User" objects.
+*
+* @class UserCollection
+* @constructor
+*/
+var UserCollection = Backbone.Collection.extend({
+	model: User
+});
+
+/**
+* A class that models an Agora user.
+*
+* @class User
+* @constructor
+*/
+var User = Backbone.Model.extend({
+	defaults: {
+		/**
+		 * The display name for the user
+		 *
+		 * @property displayName
+		 * @type String
+		 * @default ""
+		 */
+		displayName: "",
+		/**
+		 * The unique identifier for the user.
+		 *
+		 * @property UID
+		 * @type String
+		 * @default ""
+		 */
+		UID: "",
+		/**
+		 * The user's contacts as UIDs.
+		 *
+		 * @property contacts
+		 * @type String[]
+		 * @default []
+		 */
+		contacts: new UserCollection(),
+		/**
+		 * Indicates if the current user is online.
+		 *
+		 * @property isOnline
+		 * @type Boolean
+		 * @default false
+		 */
+		isOnline: false,
+		/**
+		 * Gets the names of all the spaces (that we
+		 * know of) for this user.
+		 *
+		 * @property spaceNames
+		 * @type String[]
+		 * @default []
+		 */
+		spaceNames: ""	// TODO: Change to Space Collection
+	}
+});
+
+/**
 * A global class containing functions for the Agora interface.
 *
 * @class Agora
@@ -89,7 +151,7 @@ var FileSystemItem = Backbone.Model.extend({
 	defaults: {
 		name: "",
 		isFolder: false,
-		contents: new FileSystemItemCollection(),
+		contents: "", //new FileSystemItemCollection(),
 		timestamp: new Date(),
 		isDeleted: false,
 		isMetaData: false
@@ -245,65 +307,3 @@ return true;
 return true;
 }
 }
-
-/**
-* A class that models an Agora user.
-*
-* @class User
-* @constructor
-*/
-var User = Backbone.Model.extend({
-	defaults: {
-		/**
-		 * The display name for the user
-		 *
-		 * @property displayName
-		 * @type String
-		 * @default ""
-		 */
-		displayName: "",
-		/**
-		 * The unique identifier for the user.
-		 *
-		 * @property UID
-		 * @type String
-		 * @default ""
-		 */
-		UID: "",
-		/**
-		 * The user's contacts as UIDs.
-		 *
-		 * @property contacts
-		 * @type String[]
-		 * @default []
-		 */
-		contacts: new UserCollection(),
-		/**
-		 * Indicates if the current user is online.
-		 *
-		 * @property isOnline
-		 * @type Boolean
-		 * @default false
-		 */
-		isOnline: false,
-		/**
-		 * Gets the names of all the spaces (that we
-		 * know of) for this user.
-		 *
-		 * @property spaceNames
-		 * @type String[]
-		 * @default []
-		 */
-		spaceNames: ""	// TODO: Change to Space Collection
-	}
-});
-
-/**
-* A collection of #crossLink "User" objects.
-*
-* @class UserCollection
-* @constructor
-*/
-var UserCollection = Backbone.Collection.extend({
-	model: User
-});
