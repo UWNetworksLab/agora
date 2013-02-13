@@ -10,13 +10,26 @@ $(".fs-item").click(function () {
 });
 
 // Get the current Username
-$("#user-name").html(Agora.getCurrentUser().displayName);
+var UserView = Backbone.View.extend({
+	initialize: function() {
+		this.render();
+	},
+
+	render: function() {
+		var template = _.template( "<%= displayName %>", this.model.toJSON() );
+		this.$el.html(template);
+	}
+
+});
+
+var currentUser = Agora.getCurrentUser();
+var currentUserView = new UserView({ model: currentUser, el: $("#user-name")})
 
 // Print file system table
 /*
 $("file-system").html(function () {
 	Agora.getSpaceByName("Final Project");
-	
+
 	for (var i=0; i<fs.contents.length; i++) {
 		document.write("<tr>");
 		document.write("<td>"+"This is a test</td>");
