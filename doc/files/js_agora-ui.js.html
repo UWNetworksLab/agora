@@ -45,6 +45,8 @@
             
                 <li><a href="..&#x2F;classes/FileSystemItem.html">FileSystemItem</a></li>
             
+                <li><a href="..&#x2F;classes/FileSystemItemCollection.html">FileSystemItemCollection</a></li>
+            
                 <li><a href="..&#x2F;classes/GroupShare.html">GroupShare</a></li>
             
                 <li><a href="..&#x2F;classes/User.html">User</a></li>
@@ -112,13 +114,26 @@ $(&quot;.fs-item&quot;).click(function () {
 });
 
 &#x2F;&#x2F; Get the current Username
-$(&quot;#user-name&quot;).html(Agora.getCurrentUser().displayName);
+var UserView = Backbone.View.extend({
+	initialize: function() {
+		this.render();
+	},
+
+	render: function() {
+		var template = _.template( &quot;&lt;%= displayName %&gt;&quot;, this.model.toJSON() );
+		this.$el.html(template);
+	}
+
+});
+
+var currentUser = Agora.getCurrentUser();
+var currentUserView = new UserView({ model: currentUser, el: $(&quot;#user-name&quot;)})
 
 &#x2F;&#x2F; Print file system table
 &#x2F;*
 $(&quot;file-system&quot;).html(function () {
 	Agora.getSpaceByName(&quot;Final Project&quot;);
-	
+
 	for (var i=0; i&lt;fs.contents.length; i++) {
 		document.write(&quot;&lt;tr&gt;&quot;);
 		document.write(&quot;&lt;td&gt;&quot;+&quot;This is a test&lt;&#x2F;td&gt;&quot;);

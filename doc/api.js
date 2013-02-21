@@ -3,6 +3,7 @@ YUI.add("yuidoc-meta", function(Y) {
     "classes": [
         "Agora",
         "FileSystemItem",
+        "FileSystemItemCollection",
         "GroupShare",
         "User",
         "UserCollection"

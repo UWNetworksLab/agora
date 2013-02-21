@@ -12,11 +12,12 @@
                 "agora-interface": 1
             },
             "classes": {
-                "Agora": 1,
-                "FileSystemItem": 1,
-                "GroupShare": 1,
                 "User": 1,
-                "UserCollection": 1
+                "UserCollection": 1,
+                "FileSystemItem": 1,
+                "FileSystemItemCollection": 1,
+                "GroupShare": 1,
+                "Agora": 1
             },
             "fors": {},
             "namespaces": {}
@@ -45,17 +46,18 @@
             "name": "agora-interface",
             "submodules": {},
             "classes": {
-                "Agora": 1,
-                "FileSystemItem": 1,
-                "GroupShare": 1,
                 "User": 1,
-                "UserCollection": 1
+                "UserCollection": 1,
+                "FileSystemItem": 1,
+                "FileSystemItemCollection": 1,
+                "GroupShare": 1,
+                "Agora": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
             "file": "js/agora-interface.js",
-            "line": 293,
+            "line": 218,
             "description": "Provides class and FreeDOM interfacing for Agora"
         },
         "agora-ui": {
@@ -82,51 +84,6 @@
         }
     },
     "classes": {
-        "Agora": {
-            "name": "Agora",
-            "shortname": "Agora",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "agora-interface",
-            "namespace": "",
-            "file": "js/agora-interface.js",
-            "line": 7,
-            "description": "A global class containing functions for the Agora interface.",
-            "is_constructor": 1
-        },
-        "FileSystemItem": {
-            "name": "FileSystemItem",
-            "shortname": "FileSystemItem",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "agora-interface",
-            "namespace": "",
-            "file": "js/agora-interface.js",
-            "line": 84,
-            "description": "An N-ary tree that maps the file system through folders and files.",
-            "is_constructor": 1
-        },
-        "GroupShare": {
-            "name": "GroupShare",
-            "shortname": "GroupShare",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "agora-interface",
-            "namespace": "",
-            "file": "js/agora-interface.js",
-            "line": 174,
-            "description": "A class that models a group share.",
-            "is_constructor": 1
-        },
         "User": {
             "name": "User",
             "shortname": "User",
@@ -138,7 +95,7 @@
             "module": "agora-interface",
             "namespace": "",
             "file": "js/agora-interface.js",
-            "line": 241,
+            "line": 7,
             "description": "A class that models an Agora user.",
             "is_constructor": 1
         },
@@ -153,39 +110,130 @@
             "module": "agora-interface",
             "namespace": "",
             "file": "js/agora-interface.js",
-            "line": 293,
+            "line": 62,
             "description": "A collection of #crossLink \"User\" objects.",
+            "is_constructor": 1
+        },
+        "FileSystemItem": {
+            "name": "FileSystemItem",
+            "shortname": "FileSystemItem",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "agora-interface",
+            "namespace": "",
+            "file": "js/agora-interface.js",
+            "line": 72,
+            "description": "An N-ary tree that maps the file system through folders and files.",
+            "is_constructor": 1
+        },
+        "FileSystemItemCollection": {
+            "name": "FileSystemItemCollection",
+            "shortname": "FileSystemItemCollection",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "agora-interface",
+            "namespace": "",
+            "file": "js/agora-interface.js",
+            "line": 148,
+            "description": "A collection of #crossLink \"FileSystemItem\" objects.",
+            "is_constructor": 1
+        },
+        "GroupShare": {
+            "name": "GroupShare",
+            "shortname": "GroupShare",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "agora-interface",
+            "namespace": "",
+            "file": "js/agora-interface.js",
+            "line": 158,
+            "description": "A class that models a group share.",
+            "is_constructor": 1
+        },
+        "Agora": {
+            "name": "Agora",
+            "shortname": "Agora",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "agora-interface",
+            "namespace": "",
+            "file": "js/agora-interface.js",
+            "line": 218,
+            "description": "A global class containing functions for the Agora interface.",
             "is_constructor": 1
         }
     },
     "classitems": [
         {
             "file": "js/agora-interface.js",
-            "line": 15,
-            "description": "Gets the currently authenticated user.",
-            "itemtype": "method",
-            "name": "getCurrentUser",
-            "return": {
-                "description": "User - The current user"
-            },
-            "class": "Agora",
+            "line": 18,
+            "description": "The display name for the user",
+            "itemtype": "property",
+            "name": "displayName",
+            "type": "String",
+            "default": "\"\"",
+            "class": "User",
             "module": "agora-interface"
         },
         {
             "file": "js/agora-interface.js",
-            "line": 23,
-            "description": "Gets the space by the specified name, returns false\nif the space can not be found.",
-            "itemtype": "method",
-            "name": "getSpaceByName",
-            "return": {
-                "description": "GroupShare or Boolean - The space or false"
-            },
-            "class": "Agora",
+            "line": 26,
+            "description": "The unique identifier for the user.",
+            "itemtype": "property",
+            "name": "UID",
+            "type": "String",
+            "default": "\"\"",
+            "class": "User",
             "module": "agora-interface"
         },
         {
             "file": "js/agora-interface.js",
-            "line": 91,
+            "line": 34,
+            "description": "The user's contacts as UIDs.",
+            "itemtype": "property",
+            "name": "contacts",
+            "type": "Collection",
+            "default": "[]",
+            "class": "User",
+            "module": "agora-interface"
+        },
+        {
+            "file": "js/agora-interface.js",
+            "line": 42,
+            "description": "Indicates if the current user is online.",
+            "itemtype": "property",
+            "name": "isOnline",
+            "type": "Boolean",
+            "default": "false",
+            "class": "User",
+            "module": "agora-interface"
+        },
+        {
+            "file": "js/agora-interface.js",
+            "line": 50,
+            "description": "Gets the names of all the spaces (that we\nknow of) for this user.",
+            "itemtype": "property",
+            "name": "spaceNames",
+            "type": "String[]",
+            "default": "[]",
+            "class": "User",
+            "module": "agora-interface"
+        },
+        {
+            "file": "js/agora-interface.js",
+            "line": 80,
             "description": "The file or folder name.",
             "itemtype": "property",
             "name": "name",
@@ -196,7 +244,7 @@
         },
         {
             "file": "js/agora-interface.js",
-            "line": 100,
+            "line": 88,
             "description": "Indicating if the contents represent a folder",
             "itemtype": "property",
             "name": "isFolder",
@@ -207,29 +255,29 @@
         },
         {
             "file": "js/agora-interface.js",
-            "line": 109,
+            "line": 96,
             "description": "The contents of the file or folder. If isFolder\nis set, it contains other FileSystemItems representing\nthe files/folders inside this folder. If isMetadata\nis set, the contents are irrelevant. Otherwise, it\ncontains a bit stream of the file contents.",
             "itemtype": "property",
             "name": "contents",
-            "type": "Array",
-            "default": "null",
+            "type": "FileSystemItemCollection",
+            "default": "Empty collection",
             "class": "FileSystemItem",
             "module": "agora-interface"
         },
         {
             "file": "js/agora-interface.js",
-            "line": 122,
-            "description": "The timestamp is an integer representation of when the\nfile was last modified. It is formatted as follows:<br>\n<br>\nYYYYMMDDHHMMSS<br>\n<br>\nWhere:<br><br>\n-YYYY = Year<br>\n-MM = Month<br>\n-DD = Day<br>\n-HH = Hour<br>\n-MM = Minute<br>\n-SS = Second<br>",
+            "line": 108,
+            "description": "The timestamp is an integer representation of when the\nfile was last modified. It is formatted as follows:<br>",
             "itemtype": "property",
             "name": "timestamp",
-            "type": "Integer",
-            "default": "0",
+            "type": "Date",
+            "default": "The current date",
             "class": "FileSystemItem",
             "module": "agora-interface"
         },
         {
             "file": "js/agora-interface.js",
-            "line": 142,
+            "line": 117,
             "description": "Indicates if this file was deleted.",
             "itemtype": "property",
             "name": "isDeleted",
@@ -240,7 +288,7 @@
         },
         {
             "file": "js/agora-interface.js",
-            "line": 151,
+            "line": 125,
             "description": "Indicates if this is just a metadata object or if\nit actually contains information.",
             "itemtype": "property",
             "name": "isMetadata",
@@ -251,7 +299,7 @@
         },
         {
             "file": "js/agora-interface.js",
-            "line": 161,
+            "line": 135,
             "description": "Gets the specified file by name if it exists in\nthe current directory.",
             "itemtype": "method",
             "name": "getFileByName",
@@ -271,7 +319,7 @@
         },
         {
             "file": "js/agora-interface.js",
-            "line": 181,
+            "line": 166,
             "description": "Represents the group's file system. If set to null, the\ngroup has no file system yet.",
             "itemtype": "property",
             "name": "fileSystem",
@@ -282,18 +330,18 @@
         },
         {
             "file": "js/agora-interface.js",
-            "line": 191,
+            "line": 175,
             "description": "Contains the identities of the users that are in this group.",
             "itemtype": "property",
             "name": "users",
-            "type": "User[]",
-            "default": "[]",
+            "type": "UserCollection",
+            "default": "null",
             "class": "GroupShare",
             "module": "agora-interface"
         },
         {
             "file": "js/agora-interface.js",
-            "line": 200,
+            "line": 183,
             "description": "The name of the group",
             "itemtype": "property",
             "name": "name",
@@ -304,7 +352,7 @@
         },
         {
             "file": "js/agora-interface.js",
-            "line": 209,
+            "line": 192,
             "description": "Adds the specified user to the space",
             "itemtype": "method",
             "name": "addUser",
@@ -324,7 +372,7 @@
         },
         {
             "file": "js/agora-interface.js",
-            "line": 222,
+            "line": 204,
             "description": "Removes the specified user from the space",
             "itemtype": "method",
             "name": "removeUser",
@@ -344,57 +392,26 @@
         },
         {
             "file": "js/agora-interface.js",
-            "line": 249,
-            "description": "The display name for the user",
-            "itemtype": "property",
-            "name": "displayName",
-            "type": "String",
-            "default": "\"\"",
-            "class": "User",
+            "line": 225,
+            "description": "Gets the currently authenticated user.",
+            "itemtype": "method",
+            "name": "getCurrentUser",
+            "return": {
+                "description": "User - The current user"
+            },
+            "class": "Agora",
             "module": "agora-interface"
         },
         {
             "file": "js/agora-interface.js",
-            "line": 257,
-            "description": "The unique identifier for the user.",
-            "itemtype": "property",
-            "name": "UID",
-            "type": "String",
-            "default": "\"\"",
-            "class": "User",
-            "module": "agora-interface"
-        },
-        {
-            "file": "js/agora-interface.js",
-            "line": 265,
-            "description": "The user's contacts as UIDs.",
-            "itemtype": "property",
-            "name": "contacts",
-            "type": "String[]",
-            "default": "[]",
-            "class": "User",
-            "module": "agora-interface"
-        },
-        {
-            "file": "js/agora-interface.js",
-            "line": 273,
-            "description": "Indicates if the current user is online.",
-            "itemtype": "property",
-            "name": "isOnline",
-            "type": "Boolean",
-            "default": "false",
-            "class": "User",
-            "module": "agora-interface"
-        },
-        {
-            "file": "js/agora-interface.js",
-            "line": 281,
-            "description": "Gets the names of all the spaces (that we\nknow of) for this user.",
-            "itemtype": "property",
-            "name": "spaceNames",
-            "type": "String[]",
-            "default": "[]",
-            "class": "User",
+            "line": 240,
+            "description": "Gets the space by the specified name, returns false\nif the space can not be found.",
+            "itemtype": "method",
+            "name": "getSpaceByName",
+            "return": {
+                "description": "GroupShare or Boolean - The space or false"
+            },
+            "class": "Agora",
             "module": "agora-interface"
         }
     ],
