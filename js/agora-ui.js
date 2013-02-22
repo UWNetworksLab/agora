@@ -9,7 +9,7 @@ $(".fs-item").click(function () {
 	$(this).toggleClass("selected");
 });
 
-// Get the current Username
+// Current user view/template
 var UserView = Backbone.View.extend({
 	initialize: function() {
 		this.render();
@@ -22,20 +22,19 @@ var UserView = Backbone.View.extend({
 
 });
 
+// Get the current User
 var currentUser = Agora.getCurrentUser();
 var currentUserView = new UserView({ model: currentUser, el: $("#user-name")})
 
-// Print file system table
-/*
-$("file-system").html(function () {
-	Agora.getSpaceByName("Final Project");
+// File view/template
+var FileView = Backbone.View.extend({
+	initialize: function() {
+		this.render();
+	},
 
-	for (var i=0; i<fs.contents.length; i++) {
-		document.write("<tr>");
-		document.write("<td>"+"This is a test</td>");
-		document.write("<td>directory</td>");
-		document.write("<td>10/20/2012</td>");
-		document.write("</tr>");
+	render: function() {
+		var template = _.template( "...", this.model.toJSON() );
+		this.$el.html(template);
 	}
+
 });
-*/
