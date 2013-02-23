@@ -27,39 +27,48 @@ var currentUser = Agora.getCurrentUser();
 var currentUserView = new UserView({ model: currentUser, el: $("#user-name")})
 
 // File view/template
-var FileView = Backbone.View.extend({
-	tagName: 'li',
+var FileSystemItemView = Backbone.View.extend({
+	tagName: 'tr',
+	className: 'fs-item',
+
 	initialize: function() {
 		this.render();
 	},
 
 	render: function() {
-		var template = _.template( "<%= name %>", this.model.toJSON() );
+		var template = _.template( "<td><%= name %></td><td>file</td><td><%= timestamp %></td>", this.model.toJSON() );
 		this.$el.html(template);
 	}
 
 });
 
-var SpaceView = Backbone.View.extend({
+
+// Collection of files view
+var FileSystemItemCollectionView = Backbone.View.extend({
+	el: $("#file-system"),
+
 	initialize: function() {
 		this.render();
 	},
 
 	render: function() {
-		var template = _.template("")
 
-	}
-});
+		var that = this;
+		var list = this.collection.each(function(file){
+			var fv = new FileSystemItemView({ model: file });
+			that.$el.append(fv.el);
+		});
+		return this;
+		}
+	});
 
 // Get the current space
 var currentSpace = Agora.getSpaceByName("Final Project");
 
-// var currentSpaceView = new SpaceView({ model: currentSpace, el: $("#fileList") });
-
+// Get the current file system
 var fs = currentSpace.get("fileSystem");
 
+// Create a file system view
+var spaceView = new FileSystemItemCollectionView({collection: fs});
 
-var file1 = new FileView({ model: fs.at(0), el: $("#fileList") });
-var file2 = new FileView({ model: fs.at(1), el: $("#fileList") });
 
-// $("fileList").html(thisFileViewTerribleName);
