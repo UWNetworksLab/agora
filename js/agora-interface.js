@@ -234,7 +234,7 @@ var Agora = {
 		displayName: "Nicholas Cage",
 		isOnline: true,
 		UID: "cagen@cs.washington.edu",
-		spaceNames: ["Final Project"]
+		spaceNames: ["Final Project", "Design Team", "Cat Lovers Anonymous"]
 	})},
 
 	/**
@@ -265,6 +265,12 @@ var Agora = {
 		}]);
 		var fs = new FileSystemItemCollection()
 		fs.add([{
+			isMetadata: true,
+			name: "cats",
+			timestamp: new Date(),
+			isFolder: true
+		},
+		{
 			isMetadata: true,
 			name: "hw1.sql",
 			timestamp: new Date()

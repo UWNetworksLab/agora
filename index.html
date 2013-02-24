@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Agora</title>
+    <title>Final project files - Agora</title>
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="css/agora-ui.css" rel="stylesheet" media="screen">
   </head>
   <body>
     <div class="container">
@@ -19,31 +20,118 @@
 			<li><a href="#">Logout</a></li>
 		</ul>
 	</div>
-        <h1>Agora</h1>
+        <h1>Agora <small>Final project files</small></h1>
 	<br>
 	<ul class="breadcrumb">
 		You are here:
-		<li class="active">Home</li>
+		<li><a href="#">Home</a> &gt;</li>
+		<li class="active">Final project files</li>
 	</ul>
 	<hr>
-	<div id="user-shares" class="thumbnails">
-		<a href="#" class="thumbnail span3">
-			<img data-src="holder.js/300x300" src="http://dummyimage.com/300x200" alt="">
-		</a>
-		<a href="#" class="thumbnail span3">
-			<img data-src="holder.js/300x300" src="http://dummyimage.com/300x200" alt="">
-		</a>
-		<a href="#" class="thumbnail span3">
-			<img data-src="holder.js/300x300" src="http://dummyimage.com/300x200" alt="">
-		</a>
-		<a href="#" class="thumbnail span3">
-			<img data-src="holder.js/300x300" src="http://dummyimage.com/300x200" alt="">
-		</a>
-		<a href="#" class="thumbnail span3">
-			<img data-src="holder.js/300x300" src="http://dummyimage.com/300x200" alt="">
-		</a>
+	<div class="btn-toolbar clearfix"></div>
+	<div class="space container-fluid"></div>
+
+	<script type="text/template" id="toolbar-template">
+	<div class="btn-group pull-left">
+
+		<% if (isSpace) { %>
+			<a href="#manageUsers" role="button" class="btn" data-toggle="modal">
+				<i class="icon-share"></i> Manage Users
+			</a>
+			<button class="btn"><i class="icon-plus"></i> Add File</button>
+		<% } else { %>
+			<button class="btn"><i class="icon-plus"></i> New Space</button>
+		<% }; %>
+
 	</div>
-      </div>
+	<div class="btn-group pull-right">
+		<% if (isSpace) { %>
+			<button class="btn"><i class="icon-download-alt"></i> Download</button>
+			<button class="btn"><i class="icon-trash"></i> Delete</button>
+			<button class="btn"><i class="icon-pencil"></i> Rename</button>
+			<button class="btn">Move</button>
+		<% } else { %>
+			<button class="btn"><i class="icon-trash"></i> Delete</button>
+			<button class="btn"><i class="icon-pencil"></i> Rename</button>
+		<% }; %>
+	</div>
+	</script>
+
+	<script type="text/template" id="space-list-template">
+	<div id="user-shares" class="thumbnails">
+		<% _.each(spaces, function(space) { %>
+			<a href="#/space/Final Project" class="thumbnail span3">
+				<img data-src="holder.js/300x300" src="http://dummyimage.com/300x200" alt="">
+			</a>
+		<% }); %>
+	</div>
+	</script>
+
+	<script type="text/template" id="file-list-template">
+	<table class="table table-striped">
+		<thead>
+		<tr>
+			<th>File Name</th>
+			<th>Type</th>
+			<th>Last Modified</th>
+		</tr>
+		</thead>
+		<tbody id="file-list">
+		</tbody>
+	</table>
+	</script>
+
+	<script type="text/template" id="file-view-template">
+		<td><%= name %></td>
+		<td><%= isFolder ? 'folder' : 'file' %></td>
+		<td><%= timestamp %></td>
+	</script>
+
+    </div>
+    </div>
+
+    <!-- Add User Dialog -->
+    <div id="manageUsers" class="modal hide fade" tabindex="-1" role="dialog"
+	aria-labelledby="manageUsers" aria-hidden="true">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+		<h3 id="myModalLabel">Manage Users</h3>
+	</div>
+	<div class="modal-body">
+		<div class="btn-group pull-right">
+			<button class="btn"><i class="icon-plus"></i> Add User</button>
+		</div>
+		<table class="table">
+			<thead>
+			<tr>
+				<th></th>
+				<th>Screen Name</th>
+				<th>Email</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr>
+				<td><button class="btn btn-link"><i class="icon-remove"></i></button></td>
+				<td>Tariq Yusuf</td>
+				<td><a href="mailto:yusuft@cs.washington.edu">yusuft@cs.washington.edu</a></td>
+			</tr>
+			<tr>
+				<td><button class="btn btn-link"><i class="icon-remove"></i></button></td>
+				<td>Nicholas Shahan</td>
+				<td><a href="mailto:nicholas.shahan@facebook.com">nicholas.shahan@facebook.com</a></td>
+			</tr>
+			<tr>
+				<td><button class="btn btn-link"><i class="icon-remove"></i></button></td>
+				<td>Calyan Lee</td>
+				<td><a href="mailto:352fge3tg@api.freedom.com">352fge3tg@api.freedom.com</a></td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="modal-footer">
+		<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+		<button class="btn btn-primary">Save Changes</button>
+	</div>
     </div>
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="js/bootstrap.min.js"></script>
