@@ -234,7 +234,16 @@ var FileSystemItem = Backbone.Model.extend({
 		 * @type Boolean
 		 * @default false
 		 *&#x2F;
-		isMetaData: false
+		isMetaData: false,
+		&#x2F;**
+		 * Points back to the parent FileSystemItem
+		 *
+		 * @property parent
+		 * @type FileSystemItem a pointer to the parent
+		 *	FileSystemItem.
+		 * @default null
+		 *&#x2F;
+		isMetaData: null
 	},
 	&#x2F;**
 	 * Gets the specified file by name if it exists in
@@ -246,6 +255,42 @@ var FileSystemItem = Backbone.Model.extend({
 	 *&#x2F;
 	getFileByName: function(fileName) {
 		return &quot;We did not invent the algorithm.&quot;
+	}
+	
+	&#x2F;**
+	 * Puts the specified file in the current directory
+	 *
+	 * @method putFile
+	 * @param {Object} file the file to add
+	 * @return {Boolean} True if successful, false otherwise
+	 *&#x2F;
+	putFile: function(file) {
+		&#x2F;&#x2F; TODO: Replace with Agora call
+		return true;
+	}
+
+	&#x2F;**
+	 * Removes the specified file
+	 *
+	 * @method deleteFile
+	 * @param {String} file the file name to remove
+	 * @return {Boolean} True if successful, false otherwise
+	 *&#x2F;
+	deleteFile: function(file) {
+		&#x2F;&#x2F; TODO: Replace with Agora call
+		return true;
+	}
+
+	&#x2F;**
+	 * Removes the specified file
+	 *
+	 * @method deleteFile
+	 * @param {String} file the file name to remove
+	 * @return {Boolean} True if successful, false otherwise
+	 *&#x2F;
+	renameFile: function(file) {
+		&#x2F;&#x2F; TODO: Replace with Agora call
+		return true;
 	}
 });
 
@@ -338,7 +383,7 @@ var Agora = {
 		displayName: &quot;Nicholas Cage&quot;,
 		isOnline: true,
 		UID: &quot;cagen@cs.washington.edu&quot;,
-		spaceNames: [&quot;Final Project&quot;]
+		spaceNames: [&quot;Final Project&quot;, &quot;Design Team&quot;, &quot;Cat Lovers Anonymous&quot;]
 	})},
 
 	&#x2F;**
@@ -369,6 +414,12 @@ var Agora = {
 		}]);
 		var fs = new FileSystemItemCollection()
 		fs.add([{
+			isMetadata: true,
+			name: &quot;cats&quot;,
+			timestamp: new Date(),
+			isFolder: true
+		},
+		{
 			isMetadata: true,
 			name: &quot;hw1.sql&quot;,
 			timestamp: new Date()

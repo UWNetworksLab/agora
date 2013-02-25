@@ -130,7 +130,16 @@ var FileSystemItem = Backbone.Model.extend({
 		 * @type Boolean
 		 * @default false
 		 */
-		isMetaData: false
+		isMetaData: false,
+		/**
+		 * Points back to the parent FileSystemItem
+		 *
+		 * @property parent
+		 * @type FileSystemItem a pointer to the parent
+		 *	FileSystemItem.
+		 * @default null
+		 */
+		isMetaData: null
 	},
 	/**
 	 * Gets the specified file by name if it exists in
@@ -142,6 +151,42 @@ var FileSystemItem = Backbone.Model.extend({
 	 */
 	getFileByName: function(fileName) {
 		return "We did not invent the algorithm."
+	}
+	
+	/**
+	 * Puts the specified file in the current directory
+	 *
+	 * @method putFile
+	 * @param {Object} file the file to add
+	 * @return {Boolean} True if successful, false otherwise
+	 */
+	putFile: function(file) {
+		// TODO: Replace with Agora call
+		return true;
+	}
+
+	/**
+	 * Removes the specified file
+	 *
+	 * @method deleteFile
+	 * @param {String} file the file name to remove
+	 * @return {Boolean} True if successful, false otherwise
+	 */
+	deleteFile: function(file) {
+		// TODO: Replace with Agora call
+		return true;
+	}
+
+	/**
+	 * Removes the specified file
+	 *
+	 * @method deleteFile
+	 * @param {String} file the file name to remove
+	 * @return {Boolean} True if successful, false otherwise
+	 */
+	renameFile: function(file) {
+		// TODO: Replace with Agora call
+		return true;
 	}
 });
 
