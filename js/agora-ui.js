@@ -10,6 +10,8 @@ var template = function(id) {
 	return _.template( $('#' + id).html() );
 };
 
+var vent = _.extend({}, Backbone.Events);
+
 // Current user view/template
 var UserView = Backbone.View.extend({
 	initialize: function() {
@@ -42,12 +44,27 @@ var FileView = Backbone.View.extend({
 var FileList = Backbone.View.extend({
 	el: '.space',
 
+	initialize: function() {
+		vent.on('file:drop', this.dropFile, this);
+		this.collection.on('add', this.addOne, this);
+	},
+
 	template: template('file-list-template'),
 
 	render: function() {
 		this.$el.html( this.template() );
 		this.collection.each(this.addOne, this);
 		return this;
+	},
+
+	dropFile: function(file) {
+		var fileItem = new FileSystemItem({
+			isMetadata: true,
+			name: escape(file.name),
+			timestamp: new Date(),
+			isFolder: false
+		});
+		this.collection.add(fileItem);
 	},
 
 	addOne: function(file) {
@@ -125,3 +142,65 @@ var Router = Backbone.Router.extend({
 
 new Router();
 Backbone.history.start();
+
+/*
+ * Quick drag and drop test, needs to be cleaned up and
+ * incorporated into backbone if possible
+ */
+
+ // Allows for data transfer
+ $("[draggable]").bind('dragover', function(e) {
+ 	// Overrides browser behavior
+ 	if(e.originalEvent.preventDefault) {
+ 		e.originalEvent.preventDefault();
+ 	}
+
+ 	return false;
+ });
+
+ // Handles the drop event for when you let go of the drag
+ $("[draggable]").bind('drop', function(e) {
+ 	// Overrides the browser's default drop action
+ 	if(e.originalEvent.stopPropagation) {
+ 		e.originalEvent.stopPropagation();
+ 	}
+
+ 	return false;
+ });
+
+ // Code that executes when the drag is finished
+ $("[draggable]").bind('dragend', function() {
+ 	$("[draggable]").css("border", "");
+ 	$("[draggable]").css("opacity",'');
+ });
+
+ /* Load File Example */
+ $("#file-list").bind('dragover', function(e) {
+ 	// Overrides browser behavior
+ 	if(e.originalEvent.preventDefault) {
+ 		e.originalEvent.preventDefault();
+ 	}
+
+ 	// Explicitly specifies copy
+ 	e.originalEvent.dataTransfer.dropEffect = 'copy';
+ 	return false;
+ });
+
+ $("#file-list").bind('drop', function(e) {
+ 	// Overrides the browser's default drop action
+ 	if(e.originalEvent.stopPropagation) {
+ 		e.originalEvent.stopPropagation();
+ 	}
+
+ 	var files = e.originalEvent.dataTransfer.files;
+ 	var output = "";
+ 	for(var i = 0, f; f = files[i]; i++) {
+ 		// output += escape(f.name) + " - " + f.type +
+ 		// 	" (" + f.size + " bytes, last modified " +
+ 		// 	(f.lastModifiedDate ?
+ 		// 	f.lastModifiedDate.toLocaleDateString() :
+ 		// 	'n/a') + ")\n";
+ 		vent.trigger('file:drop', f);
+ 	}
+ 	return false;
+ });

@@ -151,8 +151,8 @@ var FileSystemItem = Backbone.Model.extend({
 	 */
 	getFileByName: function(fileName) {
 		return "We did not invent the algorithm."
-	}
-	
+	},
+
 	/**
 	 * Puts the specified file in the current directory
 	 *
@@ -163,7 +163,7 @@ var FileSystemItem = Backbone.Model.extend({
 	putFile: function(file) {
 		// TODO: Replace with Agora call
 		return true;
-	}
+	},
 
 	/**
 	 * Removes the specified file
@@ -175,7 +175,7 @@ var FileSystemItem = Backbone.Model.extend({
 	deleteFile: function(file) {
 		// TODO: Replace with Agora call
 		return true;
-	}
+	},
 
 	/**
 	 * Removes the specified file
