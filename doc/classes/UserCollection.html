@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>js&#x2F;draggable.js - Agora</title>
+    <title>UserCollection - Agora</title>
     <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.8.0pr2&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
@@ -98,89 +98,123 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: js&#x2F;draggable.js</h1>
+                        <h1>UserCollection Class</h1>
+<div class="box meta">
+    
 
-<div class="file">
-    <pre class="code prettyprint linenums">
-&#x2F;**
- * Example file showcasing the HTML5 DnD API
- *
- * @module draggable-example
- *&#x2F;
+    
 
-&#x2F;&#x2F; Allows us to change styling for when a drag starts
-$(&quot;[draggable]&quot;).bind(&#x27;dragstart&#x27;, function() {
-	$(this).css(&quot;opacity&quot;,&#x27;0.4&#x27;);
-});
+    
+        <div class="foundat">
+            Defined in: <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l62"><code>js&#x2F;agora-interface.js:62</code></a>
+        </div>
+    
 
-&#x2F;&#x2F; Allows for data transfer
-$(&quot;[draggable]&quot;).bind(&#x27;dragover&#x27;, function(e) {
-	&#x2F;&#x2F; Overrides browser behavior
-	if(e.originalEvent.preventDefault) {
-		e.originalEvent.preventDefault();
-	}
+    
+        
+            Module: <a href="../modules/agora-interface.html">agora-interface</a>
+        
+    
 
-	return false;
-});
+    
+</div>
 
-&#x2F;&#x2F; Action if we drag onto another object
-$(&quot;[draggable]&quot;).bind(&#x27;dragenter&#x27;, function() {
-	$(this).css(&quot;border&quot;, &quot;3px dashed black&quot;);
-});
 
-&#x2F;&#x2F; Action if we drag onto another object and then leave
-$(&quot;[draggable]&quot;).bind(&#x27;dragleave&#x27;, function() {
-	$(this).css(&quot;border&quot;, &quot;&quot;);
-});
 
-&#x2F;&#x2F; Handles the drop event for when you let go of the drag
-$(&quot;[draggable]&quot;).bind(&#x27;drop&#x27;, function(e) {
-	&#x2F;&#x2F; Overrides the browser&#x27;s default drop action
-	if(e.originalEvent.stopPropagation) {
-		e.originalEvent.stopPropagation();
-	}
-	
-	return false;
-});
+<div class="box intro">
+    <p>A collection of #crossLink "User" objects.</p>
+</div>
 
-&#x2F;&#x2F; Code that executes when the drag is finished
-$(&quot;[draggable]&quot;).bind(&#x27;dragend&#x27;, function() {
-	$(&quot;[draggable]&quot;).css(&quot;border&quot;, &quot;&quot;);
-	$(&quot;[draggable]&quot;).css(&quot;opacity&quot;,&#x27;&#x27;);
-});
 
-&#x2F;* Load File Example *&#x2F;
-$(&quot;#loadFile&quot;).bind(&#x27;dragover&#x27;, function(e) {
-	&#x2F;&#x2F; Overrides browser behavior
-	if(e.originalEvent.preventDefault) {
-		e.originalEvent.preventDefault();
-	}
+    <div class="constructor">
+        <h2>Constructor</h2>
+        <div id="method_UserCollection" class="method item">
+    <h3 class="name"><code>UserCollection</code></h3>
 
-	&#x2F;&#x2F; Explicitly specifies copy
-	e.originalEvent.dataTransfer.dropEffect = &#x27;copy&#x27;;
-	return false;
-});
+    
+        <span class="paren">()</span>
+    
 
-$(&quot;#loadFile&quot;).bind(&#x27;drop&#x27;, function(e) {
-	&#x2F;&#x2F; Overrides the browser&#x27;s default drop action
-	if(e.originalEvent.stopPropagation) {
-		e.originalEvent.stopPropagation();
-	}
-	
-	var files = e.originalEvent.dataTransfer.files;
-	var output = &quot;&quot;;
-	for(var i = 0, f; f = files[i]; i++) {
-		output += escape(f.name) + &quot; - &quot; + f.type +
-			&quot; (&quot; + f.size + &quot; bytes, last modified &quot; +
-			(f.lastModifiedDate ?
-			f.lastModifiedDate.toLocaleDateString() :
-			&#x27;n&#x2F;a&#x27;) + &quot;)\n&quot;;
-	}
-	$(&quot;#files&quot;).val(output);
-	return false;
-});
+    
 
-    </pre>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l62"><code>js&#x2F;agora-interface.js:62</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+    </div>
+
+
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
+
+        
+        
+        
+        
+    </ul>
+
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
+
+            
+
+            
+
+            
+
+            
+        </div>
+
+        
+
+        
+
+        
+
+        
+    </div>
 </div>
 
                     </div>
