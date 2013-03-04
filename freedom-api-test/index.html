@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Agora Backend Tests</title>
+		<script type="text/javascript" src="/js/freedom.js" data-manifest="manifest.json">
+		</script>
+		<script type="text/javascript">
+			window.onload = function() {
+				window.freedom.on('helloworld', function(data) {
+					alert(data);
+				});
+			}
+		</script>
+	</head>
+	<body>
+		<input type="text" name="textStore" id="textStore" />
+	</body>
+</html>
