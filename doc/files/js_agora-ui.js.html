@@ -45,9 +45,13 @@
             
                 <li><a href="..&#x2F;classes/FileSystemItem.html">FileSystemItem</a></li>
             
+                <li><a href="..&#x2F;classes/FileSystemItemCollection.html">FileSystemItemCollection</a></li>
+            
                 <li><a href="..&#x2F;classes/GroupShare.html">GroupShare</a></li>
             
                 <li><a href="..&#x2F;classes/User.html">User</a></li>
+            
+                <li><a href="..&#x2F;classes/UserCollection.html">UserCollection</a></li>
             
             </ul>
 
@@ -104,11 +108,127 @@
  * @module agora-ui
  *&#x2F;
 
-&#x2F;&#x2F; Allow items to be selectable
-$(&quot;.fs-item&quot;).click(function () {
-	$(this).toggleClass(&quot;selected&quot;);
+&#x2F;&#x2F; Template helper method
+&#x2F;&#x2F; Allows templates to be compiled by simply calling template(id)
+var template = function(id) {
+	return _.template( $(&#x27;#&#x27; + id).html() );
+};
+
+&#x2F;&#x2F; Current user view&#x2F;template
+var UserView = Backbone.View.extend({
+	initialize: function() {
+		this.render();
+	},
+
+	render: function() {
+		var template = _.template( &quot;&lt;%= displayName %&gt;&quot;, this.model.toJSON() );
+		this.$el.html(template);
+	}
 });
 
+&#x2F;&#x2F; Get the current User
+var currentUser = Agora.getCurrentUser();
+var currentUserView = new UserView({ model: currentUser, el: $(&quot;#user-name&quot;)});
+
+&#x2F;&#x2F; Single file view in the table
+var FileView = Backbone.View.extend({
+	tagName: &#x27;tr&#x27;,
+
+	template: template(&#x27;file-view-template&#x27;),
+
+	render: function() {
+		this.$el.html( this.template( this.model.toJSON() ) );
+		return this;
+	},
+});
+
+&#x2F;&#x2F; Collection of files in a table format
+var FileList = Backbone.View.extend({
+	el: &#x27;.space&#x27;,
+
+	template: template(&#x27;file-list-template&#x27;),
+
+	render: function() {
+		this.$el.html( this.template() );
+		this.collection.each(this.addOne, this);
+		return this;
+	},
+
+	addOne: function(file) {
+		var fileView = new FileView({ model: file });
+		$(&#x27;#file-list&#x27;).append(fileView.render().el);
+	},
+
+	events: {
+		&#x27;click tr&#x27;: &#x27;highlight&#x27;
+	},
+
+	highlight: function(e) {
+		$(e.currentTarget).toggleClass(&quot;selected&quot;);
+	}
+
+});
+
+&#x2F;&#x2F; Present the users spaces
+var SpacesList = Backbone.View.extend({
+	el: &#x27;.space&#x27;,
+
+	template: template(&#x27;space-list-template&#x27;),
+
+	render: function() {
+		this.$el.html( this.template( {spaces: currentUser.get(&#x27;spaceNames&#x27;)} ) );
+		return this;
+	},
+
+	events: {
+		&#x27;click a&#x27;: &#x27;goToSpace&#x27;
+	},
+
+	goToSpace: function() {
+		router.navigate(&#x27;space&#x27;, {trigger: true})
+	}
+});
+
+&#x2F;&#x2F; Display the toolbar
+var ToolbarView = Backbone.View.extend({
+	el: &#x27;.btn-toolbar&#x27;,
+
+	template: template(&#x27;toolbar-template&#x27;),
+
+	render: function() {
+		this.$el.html( this.template( this.options ) );
+	}
+});
+
+
+&#x2F;*
+ * Router
+ *&#x2F;
+var Router = Backbone.Router.extend({
+	routes: {
+		&#x27;&#x27;: &#x27;index&#x27;,
+		&#x27;space&#x2F;:id&#x27;: &#x27;space&#x27;
+	},
+
+	index: function() {
+		var spacesList = new SpacesList();
+		var toolbar = new ToolbarView( {isSpace: false} );
+		spacesList.render();
+		toolbar.render();
+	},
+
+	space: function(id) {
+		var currentSpace = Agora.getSpaceByName(id);
+		var fs = currentSpace.get(&#x27;fileSystem&#x27;);
+		var fileList = new FileList({ collection: fs });
+		var toolbar = new ToolbarView( {isSpace: true });
+		fileList.render();
+		toolbar.render();
+	}
+});
+
+new Router();
+Backbone.history.start();
     </pre>
 </div>
 

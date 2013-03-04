@@ -45,9 +45,13 @@
             
                 <li><a href="..&#x2F;classes/FileSystemItem.html">FileSystemItem</a></li>
             
+                <li><a href="..&#x2F;classes/FileSystemItemCollection.html">FileSystemItemCollection</a></li>
+            
                 <li><a href="..&#x2F;classes/GroupShare.html">GroupShare</a></li>
             
                 <li><a href="..&#x2F;classes/User.html">User</a></li>
+            
+                <li><a href="..&#x2F;classes/UserCollection.html">UserCollection</a></li>
             
             </ul>
 
@@ -99,286 +103,340 @@
 <div class="file">
     <pre class="code prettyprint linenums">
 &#x2F;**
- * Provides class and FreeDOM interfacing for Agora
- *
- * @module agora-interface
- *&#x2F;
+* Provides class and FreeDOM interfacing for Agora
+*
+* @module agora-interface
+*&#x2F;
 
 &#x2F;**
- * A global class containing functions for the Agora interface.
- *
- * @class Agora
- * @constructor
- *&#x2F;
-var Agora = {};
-
-&#x2F;**
- * Gets the currently authenticated user.
- *
- * @method getCurrentUser
- * @return User - The current user
- *&#x2F;
-Agora.getCurrentUser = ___agora_getCurrentUser;
-
-&#x2F;**
- * Gets the space by the specified name, returns false
- * if the space can not be found.
- *
- * @method getSpaceByName
- * @return GroupShare or Boolean - The space or false
- *&#x2F;
-Agora.getSpaceByName = ___agora_getSpaceByName;
-
-
-&#x2F;&#x2F; Definition for Agora.getCurrentUser
-function ___agora_getCurrentUser() {
-	&#x2F;&#x2F; TODO: Replace with actual Agora backend call
-	var user = new User();
-
-	user.displayName = &quot;Nicholas Cage&quot;;
-	user.isOnline = true;
-	user.UID = &quot;cagen@cs.washington.edu&quot;;
-	user.spaceNames = [&quot;Final Project&quot;];
-
-	return user;
-}
-
-&#x2F;&#x2F; Definition for Agora.getSpaceByName
-function ___agora_getSpaceByName(name) {
-	&#x2F;&#x2F; TODO: Replace with actual Agora backend call
-	if(name == &quot;Final Project&quot;) {
-		var users = new Array(2);
-		users[0] = new User();
-		users[1] = new User();
-
-		users[0].displayName = &quot;Marty Stepp&quot;;
-		users[0].isOnline = false;
-		users[0].UID = &quot;stepp@cs.washington.edu&quot;;
-		users[0].contacts = [&quot;cagen@cs.washington.edu&quot;, &quot;mike@monstersinc.com&quot;];
-
-		users[1].displayName = &quot;Mike Wazowski&quot;;
-		users[1].isOnline = true;
-		users[1].UID = &quot;mike@monstersinc.com&quot;;
-
-		var fs = new FileSystemItem();
-		
-		fs.contents = new Array[2];
-		fs[0].isMetadata = true;
-		fs[0].name = &quot;hw1.sql&quot;;
-		fs[0].timestamp = 20130203132432;
-		
-		fs[1].isMetadata = true;
-		fs[1].name = &quot;writeup.txt&quot;;
-		fs[1].timestamp = 20130202024211;
-
-		var space = new GroupShare();
-		
-		space.name = &quot;Final Project&quot;;
-		space.user = users;
-		space.fileSystem = fs;
-	} else {
-		return false;
+* A class that models an Agora user.
+*
+* @class User
+* @constructor
+*&#x2F;
+var User = Backbone.Model.extend({
+	initialize: function() {
+		contacts = new Backbone.Collection();
+	},
+	defaults: {
+		&#x2F;**
+		 * The display name for the user
+		 *
+		 * @property displayName
+		 * @type String
+		 * @default &quot;&quot;
+		 *&#x2F;
+		displayName: &quot;&quot;,
+		&#x2F;**
+		 * The unique identifier for the user.
+		 *
+		 * @property UID
+		 * @type String
+		 * @default &quot;&quot;
+		 *&#x2F;
+		UID: &quot;&quot;,
+		&#x2F;**
+		 * The user&#x27;s contacts as UIDs.
+		 *
+		 * @property contacts
+		 * @type Collection
+		 * @default []
+		 *&#x2F;
+		contacts: null,
+		&#x2F;**
+		 * Indicates if the current user is online.
+		 *
+		 * @property isOnline
+		 * @type Boolean
+		 * @default false
+		 *&#x2F;
+		isOnline: false,
+		&#x2F;**
+		 * Gets the names of all the spaces (that we
+		 * know of) for this user.
+		 *
+		 * @property spaceNames
+		 * @type String[]
+		 * @default []
+		 *&#x2F;
+		spaceNames: &quot;&quot;	&#x2F;&#x2F; TODO: Change to Space Collection
 	}
-}
+});
 
 &#x2F;**
- * An N-ary tree that maps the file system through folders and files.
- *
- * @class FileSystemItem
- * @constructor
- *&#x2F;
-function FileSystemItem() {
-	&#x2F;**
-	 * The file or folder name.
-	 *
-	 * @property name
-	 * @type String
-	 * @default &quot;&quot;
-	 *&#x2F;
-	this.name = &quot;&quot;;
-
-	&#x2F;**
-	 * Indicating if the contents represent a folder
-	 *
-	 * @property isFolder
-	 * @type Boolean
-	 * @default false
-	 *&#x2F;
-	this.isFolder = false;
-
-	&#x2F;**
-	 * The contents of the file or folder.  If isFolder
-	 * is set, it contains other FileSystemItems representing
-	 * the files&#x2F;folders inside this folder.  If isMetadata
-	 * is set, the contents are irrelevant.  Otherwise, it
-	 * contains a bit stream of the file contents.
-	 *
-	 * @property contents
-	 * @type Array
-	 * @default null
-	 *&#x2F;
-	this.contents = null;
-
-	&#x2F;**
-	 * The timestamp is an integer representation of when the
-	 * file was last modified.  It is formatted as follows:&lt;br&gt;
-	 *&lt;br&gt;
-	 * YYYYMMDDHHMMSS&lt;br&gt;
-	 *&lt;br&gt;
-	 * Where:&lt;br&gt;&lt;br&gt;
-	 * 		-YYYY = Year&lt;br&gt;
-	 * 		-MM = Month&lt;br&gt;
-	 * 		-DD = Day&lt;br&gt;
-	 * 		-HH = Hour&lt;br&gt;
-	 * 		-MM = Minute&lt;br&gt;
-	 * 		-SS = Second&lt;br&gt;
-	 *
-	 * @property timestamp
-	 * @type Integer
-	 * @default 0
-	 *&#x2F;
-	this.timestamp = 0;
-
-	&#x2F;**
-	 * Indicates if this file was deleted.
-	 *
-	 * @property isDeleted
-	 * @type Boolean
-	 * @default false
-	 *&#x2F;
-	this.isDeleted = false;
-
-	&#x2F;**
-	 * Indicates if this is just a metadata object or if
-	 * it actually contains information.
-	 *
-	 * @property isMetadata
-	 * @type Boolean
-	 * @default false
-	 *&#x2F;
-	this.isMetadata = false;
-}
+* A collection of #crossLink &quot;User&quot; objects.
+*
+* @class UserCollection
+* @constructor
+*&#x2F;
+var UserCollection = Backbone.Collection.extend({
+	model: User
+});
 
 &#x2F;**
- * A class that models a group share.
- *
- * @class GroupShare
- * @constructor
- *&#x2F;
-function GroupShare() {
+* An N-ary tree that maps the file system through folders and files.
+*
+* @class FileSystemItem
+* @constructor
+*&#x2F;
+var FileSystemItem = Backbone.Model.extend({
+	defaults: {
+		&#x2F;**
+		 * The file or folder name.
+		 *
+		 * @property name
+		 * @type String
+		 * @default &quot;&quot;
+		 *&#x2F;
+		name: &quot;&quot;,
+		&#x2F;**
+		 * Indicating if the contents represent a folder
+		 *
+		 * @property isFolder
+		 * @type Boolean
+		 * @default false
+		 *&#x2F;
+		isFolder: false,
+		&#x2F;**
+		 * The contents of the file or folder. If isFolder
+		 * is set, it contains other FileSystemItems representing
+		 * the files&#x2F;folders inside this folder. If isMetadata
+		 * is set, the contents are irrelevant. Otherwise, it
+		 * contains a bit stream of the file contents.
+		 *
+		 * @property contents
+		 * @type FileSystemItemCollection
+		 * @default Empty collection
+		 *&#x2F;
+		contents: &quot;&quot;, &#x2F;&#x2F;new FileSystemItemCollection(),
+		&#x2F;**
+		 * The timestamp is an integer representation of when the
+		 * file was last modified. It is formatted as follows:&lt;br&gt;
+		 *
+		 * @property timestamp
+		 * @type Date
+		 * @default The current date
+		 *&#x2F;
+		timestamp: new Date(),
+		&#x2F;**
+		 * Indicates if this file was deleted.
+		 *
+		 * @property isDeleted
+		 * @type Boolean
+		 * @default false
+		 *&#x2F;
+		isDeleted: false,
+		&#x2F;**
+		 * Indicates if this is just a metadata object or if
+		 * it actually contains information.
+		 *
+		 * @property isMetadata
+		 * @type Boolean
+		 * @default false
+		 *&#x2F;
+		isMetaData: false,
+		&#x2F;**
+		 * Points back to the parent FileSystemItem
+		 *
+		 * @property parent
+		 * @type FileSystemItem a pointer to the parent
+		 *	FileSystemItem.
+		 * @default null
+		 *&#x2F;
+		isMetaData: null
+	},
 	&#x2F;**
-	 * Represents the group&#x27;s file system.  If set to null, the
-	 * group has no file system yet.
+	 * Gets the specified file by name if it exists in
+	 * the current directory.
 	 *
-	 * @property fileSystem
-	 * @type FileSystemItem
-	 * @default null
+	 * @method getFileByName
+	 * @param {String} fileName The name of the file
+	 * @return {String} The file
 	 *&#x2F;
-	this.fileSystem = null;
+	getFileByName: function(fileName) {
+		return &quot;We did not invent the algorithm.&quot;
+	}
+	
+	&#x2F;**
+	 * Puts the specified file in the current directory
+	 *
+	 * @method putFile
+	 * @param {Object} file the file to add
+	 * @return {Boolean} True if successful, false otherwise
+	 *&#x2F;
+	putFile: function(file) {
+		&#x2F;&#x2F; TODO: Replace with Agora call
+		return true;
+	}
 
 	&#x2F;**
-	 * Contains the identities of the users that are in this group.
+	 * Removes the specified file
 	 *
-	 * @property users
-	 * @type User[]
-	 * @default []
+	 * @method deleteFile
+	 * @param {String} file the file name to remove
+	 * @return {Boolean} True if successful, false otherwise
 	 *&#x2F;
-	this.users = new Array();
+	deleteFile: function(file) {
+		&#x2F;&#x2F; TODO: Replace with Agora call
+		return true;
+	}
 
 	&#x2F;**
-	 * The name of the group
+	 * Removes the specified file
 	 *
-	 * @property name
-	 * @type String
-	 * @default &quot;&quot;
+	 * @method deleteFile
+	 * @param {String} file the file name to remove
+	 * @return {Boolean} True if successful, false otherwise
 	 *&#x2F;
-	this.name = &quot;&quot;;
+	renameFile: function(file) {
+		&#x2F;&#x2F; TODO: Replace with Agora call
+		return true;
+	}
+});
 
+&#x2F;**
+* A collection of #crossLink &quot;FileSystemItem&quot; objects.
+*
+* @class FileSystemItemCollection
+* @constructor
+*&#x2F;
+var FileSystemItemCollection = Backbone.Collection.extend({
+	model: FileSystemItem
+});
+
+&#x2F;**
+* A class that models a group share.
+*
+* @class GroupShare
+* @constructor
+*&#x2F;
+var GroupShare = Backbone.Model.extend({
+	default: {
+		&#x2F;**
+		* Represents the group&#x27;s file system. If set to null, the
+		* group has no file system yet.
+		*
+		* @property fileSystem
+		* @type FileSystemItem
+		* @default null
+		*&#x2F;
+		fileSystem: null,
+		&#x2F;**
+		* Contains the identities of the users that are in this group.
+		*
+		* @property users
+		* @type UserCollection
+		* @default null
+		*&#x2F;
+		users: null,
+		&#x2F;**
+		* The name of the group
+		*
+		* @property name
+		* @type String
+		* @default &quot;&quot;
+		*&#x2F;
+		name: &quot;&quot;
+	},
 	&#x2F;**
-	 * Adds the specified user to the space
-	 *
-	 * @method addUser
-	 * @param {User} user The user to add
-	 * @return {Boolean} Indicates if the add was successful.
-	 *&#x2F;
-	this.prototype.addUser = function(user) {
-		this.users.push(user);
+	* Adds the specified user to the space
+	*
+	* @method addUser
+	* @param {User} user The user to add
+	* @return {Boolean} Indicates if the add was successful.
+	*&#x2F;
+	addUser: function(user) {
+		this.users.add(user);
 		&#x2F;&#x2F; TODO: Send FreeDOM add user message.
 		return true;
-	}
-
+	},
 	&#x2F;**
-	 * Removes the specified user from the space
-	 *
-	 * @method removeUser
-	 * @param {User} user The user to remove
-	 * @return {Boolean} Indicates if the remove was successful.
- 	 *&#x2F;
-	this.prototype.removeUser = function(user) {
-		for(var i = 0; i &lt; this.users.length; i++) {
-			if(user == this.users[i]) {
-				this.users.splice(i,0);
-				&#x2F;&#x2F; TODO: Send FreeDOM Remove user message.
-				return true;
-			}
-		}
+	* Removes the specified user from the space
+	*
+	* @method removeUser
+	* @param {User} user The user to remove
+	* @return {Boolean} Indicates if the remove was successful.
+	*&#x2F;
+	removeUser: function(user) {
+		this.users.remove(user);
+		&#x2F;&#x2F; TODO: Send FreeDOM remove user message.
 		return true;
 	}
-}
+});
 
 &#x2F;**
- * A class that models an Agora user.
- *
- * @class User
- * @constructor
- *&#x2F;
-function User() {
+* A global class containing functions for the Agora interface.
+*
+* @class Agora
+* @constructor
+*&#x2F;
+var Agora = {
 	&#x2F;**
-	 * The display name for the user
-	 *
-	 * @property displayName
-	 * @type String
-	 * @default &quot;&quot;
-	 *&#x2F;
-	this.displayName = &quot;&quot;;
-	
-	&#x2F;**
-	 * The unique identifier for the user.
-	 *
-	 * @property UID
-	 * @type String
-	 * @default &quot;&quot;
-	 *&#x2F;
-	this.UID = &quot;&quot;
-	
-	&#x2F;**
-	 * The user&#x27;s contacts as UIDs.
-	 *
-	 * @property contacts
-	 * @type String[]
-	 * @default []
-	 *&#x2F;
-	this.contacts = new Array();
-	
-	&#x2F;**
-	 * Indicates if the current user is online.
-	 *
-	 * @property isOnline
-	 * @type Boolean
-	 * @default false
-	 *&#x2F;
-	this.isOnline = false;
+	* Gets the currently authenticated user.
+	*
+	* @method getCurrentUser
+	* @return User - The current user
+	*&#x2F;
+	getCurrentUser: function() {
+	&#x2F;&#x2F; TODO: Replace with actual Agora backend call
+	return new User({
+		displayName: &quot;Nicholas Cage&quot;,
+		isOnline: true,
+		UID: &quot;cagen@cs.washington.edu&quot;,
+		spaceNames: [&quot;Final Project&quot;, &quot;Design Team&quot;, &quot;Cat Lovers Anonymous&quot;]
+	})},
 
 	&#x2F;**
-	 * Gets the names of all the spaces (that we
-	 * know of) for this user.
-	 *
-	 * @property spaceNames
-	 * @type String[]
-	 * @default []
-	 *&#x2F;
-	this.spaceNames = new Array();
-}
+	* Gets the space by the specified name, returns false
+	* if the space can not be found.
+	*
+	* @method getSpaceByName
+	* @return GroupShare or Boolean - The space or false
+	*&#x2F;
+	getSpaceByName: function(name) {
+		&#x2F;&#x2F; TODO: Replace with actual Agora backend call
+		if(name != &quot;Final Project&quot;) {
+			return false;
+		}
+		var users = new UserCollection();
+		users.add([{
+			displayName: &quot;Marty Stepp&quot;,
+			isOnline: false,
+			UID: &quot;stepp@cs.washington.edu&quot;,
+			contacts: new Backbone.Collection([
+				&quot;cagen@cs.washington.edu&quot;, &quot;mike@monstersinc.com&quot;
+			])
+		},
+		{
+			displayName: &quot;Mike Wazowski&quot;,
+			isOnline: true,
+			UID: &quot;mike@monstersinc.com&quot;
+		}]);
+		var fs = new FileSystemItemCollection()
+		fs.add([{
+			isMetadata: true,
+			name: &quot;cats&quot;,
+			timestamp: new Date(),
+			isFolder: true
+		},
+		{
+			isMetadata: true,
+			name: &quot;hw1.sql&quot;,
+			timestamp: new Date()
+		},
+		{
+			isMetadata: true,
+			name: &quot;writeup.txt&quot;,
+			timestamp: new Date()
+		}]);
+
+		return new GroupShare({
+			name: &quot;Final Project&quot;,
+			user: users,
+			fileSystem: fs
+		});
+	}
+};
 
     </pre>
 </div>

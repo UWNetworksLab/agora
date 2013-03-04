@@ -45,9 +45,13 @@
             
                 <li><a href="..&#x2F;classes/FileSystemItem.html">FileSystemItem</a></li>
             
+                <li><a href="..&#x2F;classes/FileSystemItemCollection.html">FileSystemItemCollection</a></li>
+            
                 <li><a href="..&#x2F;classes/GroupShare.html">GroupShare</a></li>
             
                 <li><a href="..&#x2F;classes/User.html">User</a></li>
+            
+                <li><a href="..&#x2F;classes/UserCollection.html">UserCollection</a></li>
             
             </ul>
 
@@ -102,7 +106,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l84"><code>js&#x2F;agora-interface.js:84</code></a>
+            Defined in: <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l72"><code>js&#x2F;agora-interface.js:72</code></a>
         </div>
     
 
@@ -156,7 +160,7 @@
             
         
         
-        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l84"><code>js&#x2F;agora-interface.js:84</code></a>
+        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l72"><code>js&#x2F;agora-interface.js:72</code></a>
         
         </p>
 
@@ -185,6 +189,8 @@
         <li class="api-class-tab index"><a href="#index">Index</a></li>
 
         
+            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+        
         
             <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
         
@@ -196,6 +202,42 @@
         <div id="index" class="api-class-tabpanel index">
             <h2 class="off-left">Item Index</h2>
 
+            
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods">
+                        
+                            <li class="index-item method">
+                                <a href="#method_deleteFile">deleteFile</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_deleteFile">deleteFile</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_getFileByName">getFileByName</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_putFile">putFile</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
             
 
             
@@ -240,6 +282,13 @@
                             </li>
                         
                             <li class="index-item property">
+                                <a href="#property_parent">parent</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
                                 <a href="#property_timestamp">timestamp</a>
 
                                 
@@ -256,15 +305,36 @@
         </div>
 
         
-
-        
-            <div id="properties" class="api-class-tabpanel">
-                <h2 class="off-left">Properties</h2>
+            <div id="methods" class="api-class-tabpanel">
+                <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="property_contents" class="property item">
-    <h3 class="name"><code>contents</code></h3>
-    <span class="type">Array</span>
+                    <div id="method_deleteFile" class="method item">
+    <h3 class="name"><code>deleteFile</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>file</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Boolean</span>
+        </span>
+    
+
+    
+
+    
 
     
 
@@ -285,7 +355,409 @@
             
         
         
-        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l109"><code>js&#x2F;agora-interface.js:109</code></a>
+        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l168"><code>js&#x2F;agora-interface.js:168</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Removes the specified file</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">file</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>the file name to remove</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Boolean</span>:
+                    
+                    True if successful, false otherwise
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_deleteFile" class="method item">
+    <h3 class="name"><code>deleteFile</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>file</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Boolean</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l180"><code>js&#x2F;agora-interface.js:180</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Removes the specified file</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">file</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>the file name to remove</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Boolean</span>:
+                    
+                    True if successful, false otherwise
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_getFileByName" class="method item">
+    <h3 class="name"><code>getFileByName</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>fileName</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">String</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l144"><code>js&#x2F;agora-interface.js:144</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Gets the specified file by name if it exists in
+the current directory.</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">fileName</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The name of the file</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">String</span>:
+                    
+                    The file
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_putFile" class="method item">
+    <h3 class="name"><code>putFile</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>file</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Boolean</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l156"><code>js&#x2F;agora-interface.js:156</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Puts the specified file in the current directory</p>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">file</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>the file to add</p>
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Boolean</span>:
+                    
+                    True if successful, false otherwise
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+            </div>
+        
+
+        
+            <div id="properties" class="api-class-tabpanel">
+                <h2 class="off-left">Properties</h2>
+
+                
+                    <div id="property_contents" class="property item">
+    <h3 class="name"><code>contents</code></h3>
+    <span class="type"><a href="../classes/FileSystemItemCollection.html" class="crosslink">FileSystemItemCollection</a></span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l96"><code>js&#x2F;agora-interface.js:96</code></a>
         
         </p>
 
@@ -295,15 +767,15 @@
     </div>
 
     <div class="description">
-        <p>The contents of the file or folder.  If isFolder
+        <p>The contents of the file or folder. If isFolder
 is set, it contains other FileSystemItems representing
-the files/folders inside this folder.  If isMetadata
-is set, the contents are irrelevant.  Otherwise, it
+the files/folders inside this folder. If isMetadata
+is set, the contents are irrelevant. Otherwise, it
 contains a bit stream of the file contents.</p>
     </div>
 
     
-        <p><strong>Default:</strong> null</p>
+        <p><strong>Default:</strong> Empty collection</p>
     
 
     
@@ -335,7 +807,7 @@ contains a bit stream of the file contents.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l142"><code>js&#x2F;agora-interface.js:142</code></a>
+        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l117"><code>js&#x2F;agora-interface.js:117</code></a>
         
         </p>
 
@@ -381,7 +853,7 @@ contains a bit stream of the file contents.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l100"><code>js&#x2F;agora-interface.js:100</code></a>
+        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l88"><code>js&#x2F;agora-interface.js:88</code></a>
         
         </p>
 
@@ -427,7 +899,7 @@ contains a bit stream of the file contents.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l151"><code>js&#x2F;agora-interface.js:151</code></a>
+        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l125"><code>js&#x2F;agora-interface.js:125</code></a>
         
         </p>
 
@@ -474,7 +946,7 @@ it actually contains information.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l91"><code>js&#x2F;agora-interface.js:91</code></a>
+        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l80"><code>js&#x2F;agora-interface.js:80</code></a>
         
         </p>
 
@@ -497,9 +969,10 @@ it actually contains information.</p>
 </div>
 
                 
-                    <div id="property_timestamp" class="property item">
-    <h3 class="name"><code>timestamp</code></h3>
-    <span class="type">Integer</span>
+                    <div id="property_parent" class="property item">
+    <h3 class="name"><code>parent</code></h3>
+    <span class="type">FileSystemItem a pointer to the parent
+	FileSystemItem.</span>
 
     
 
@@ -520,7 +993,53 @@ it actually contains information.</p>
             
         
         
-        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l122"><code>js&#x2F;agora-interface.js:122</code></a>
+        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l134"><code>js&#x2F;agora-interface.js:134</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Points back to the parent FileSystemItem</p>
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_timestamp" class="property item">
+    <h3 class="name"><code>timestamp</code></h3>
+    <span class="type">Date</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="..&#x2F;files&#x2F;js_agora-interface.js.html#l108"><code>js&#x2F;agora-interface.js:108</code></a>
         
         </p>
 
@@ -531,21 +1050,11 @@ it actually contains information.</p>
 
     <div class="description">
         <p>The timestamp is an integer representation of when the
-file was last modified.  It is formatted as follows:<br>
-<br>
-YYYYMMDDHHMMSS<br>
-<br>
-Where:<br><br>
-        -YYYY = Year<br>
-        -MM = Month<br>
-        -DD = Day<br>
-        -HH = Hour<br>
-        -MM = Minute<br>
-        -SS = Second<br></p>
+file was last modified. It is formatted as follows:<br></p>
     </div>
 
     
-        <p><strong>Default:</strong> 0</p>
+        <p><strong>Default:</strong> The current date</p>
     
 
     
