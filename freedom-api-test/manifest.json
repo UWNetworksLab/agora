@@ -1,9 +1,0 @@
-{
-	"name": "Agora",
-	"description": "A browser-based file synchronization tool",
-	"app": {
-		"script": "agoraBackend.js"
-	},
-	"provides": ["agoraBackend"],
-	"permissions": ["agoraBackend"]
-}
