@@ -12,6 +12,15 @@
 */
 //(function() {
 
+/// FREEDOM RESPONSE METHODS ///
+// Functions that we need to execute
+var inFlight = {};
+
+freedom.on("agora_getcurrentuser_response", function(user) {
+	inFlight[user.reqid](user);
+	delete inFlight[user.reqid];
+});
+
 window.Agora = {
 
 	Models: {},
@@ -25,8 +34,11 @@ window.Agora = {
 	* @method getCurrentUser
 	* @return User - The current user
 	*/
-	getCurrentUser: function() {
-	// TODO: Replace with actual Agora backend call
+	getCurrentUser: function(continuation) {
+	var reqId = Math.random();
+	inFlight[reqId] = continuation;
+	freedom.emit("agora_getcurrentuser", reqId);
+	// TODO: Remove below, this is here for backwards compatibility
 	return new Agora.Models.User({
 		displayName: "Nicholas Cage",
 		isOnline: true,
