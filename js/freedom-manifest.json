@@ -2,6 +2,6 @@
 	"name": "Agora",
 	"description": "A browser-based file synchronization tool",
 	"app": {
-		"script": "agoraBackend.js"
+		"script": "agora-backend.js"
 	}
 }
