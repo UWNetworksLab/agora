@@ -38,21 +38,35 @@
 			<a href="#manageUsers" role="button" class="btn" data-toggle="modal">
 				<i class="icon-share"></i> Manage Users
 			</a>
-			<button class="btn"><i class="icon-plus"></i> Add File</button>
+			<a href="#addFile" role="button" class="btn" data-toggle="modal">
+				<i class="icon-plus"></i> Add File
+			</a>
 		<% } else { %>
-			<button class="btn"><i class="icon-plus"></i> New Space</button>
+			<a href="#newSpace" role="button" class="btn" data-toggle="modal">
+				<i class="icon-plus"></i> New Space
+			</a>
 		<% }; %>
 
 	</div>
 	<div class="btn-group pull-right">
 		<% if (isSpace) { %>
 			<button class="btn"><i class="icon-download-alt"></i> Download</button>
-			<button class="btn"><i class="icon-trash"></i> Delete</button>
-			<button class="btn"><i class="icon-pencil"></i> Rename</button>
-			<button class="btn">Move</button>
+			<a href="#deleteFile" role="button" class="btn" data-toggle="modal">
+				<i class="icon-trash"></i> Delete
+			</a>
+			<a href="#renameFile" role="button" class="btn" data-toggle="modal">
+				<i class="icon-pencil"></i> Rename
+			</a>
+			<a href="#move" role="button" class="btn" data-toggle="modal">
+				<i class="icon-share-alt"></i> Move
+			</a>
 		<% } else { %>
-			<button class="btn"><i class="icon-trash"></i> Delete</button>
-			<button class="btn"><i class="icon-pencil"></i> Rename</button>
+			<a href="#deleteSpace" role="button" class="btn" data-toggle="modal">
+				<i class="icon-trash"></i> Delete
+			</a>
+			<a href="#renameSpace" role="button" class="btn" data-toggle="modal">
+				<i class="icon-pencil"></i> Rename
+			</a>
 		<% }; %>
 	</div>
 	</script>
@@ -86,7 +100,7 @@
 		<td><%= isFolder ? 'folder' : 'file' %></td>
 		<td><%= timestamp %></td>
 	</script>
-	<script type="text/javascript" src="/js/freedom.js" data-manifest="js/freedom-manifest.json"></script>
+	<script type="text/javascript" src="js/freedom.js" data-manifest="js/freedom-manifest.json"></script>
     </div>
     </div>
 
@@ -133,6 +147,134 @@
 		<button class="btn btn-primary">Save Changes</button>
 	</div>
     </div>
+
+    <!-- Add File Dialog -->
+    <div id="addFile" class="modal hide fade" tabindex="-1" role="dialog"
+	aria-labelledby="addFile" aria-hidden="true">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+		<h3 id="myModalLabel">Add new files</h3>
+	</div>
+	<div class="modal-body">
+		<input type="file" name="datafile" size="100">
+	</div>
+	<div class="modal-footer">
+		<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+		<button class="btn btn-primary">Upload</button>
+	</div>
+    </div>
+
+    <!-- Delete File Dialog -->
+    <div id="deleteFile" class="modal hide fade" tabindex="-1" role="dialog"
+	aria-labelledby="deleteFile" aria-hidden="true">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+		<h3 id="myModalLabel">Delete selected files</h3>
+	</div>
+	<div class="modal-body">
+		Are you sure you want to delete:<br>...
+		
+	</div>
+	<div class="modal-footer">
+		<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+		<button class="btn btn-primary">Delete</button>
+	</div>
+    </div>
+
+    <!-- Rename Dialog -->
+    <div id="renameFile" class="modal hide fade" tabindex="-1" role="dialog"
+	aria-labelledby="renameFile" aria-hidden="true">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+		<h3 id="myModalLabel">Rename files</h3>
+	</div>
+	<div class="modal-body">
+		<form>
+    		<fieldset>
+    		<input type="text" placeholder="filename.ext">
+    		</fieldset>
+    	</form>	
+	</div>
+	<div class="modal-footer">
+		<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+		<button class="btn btn-primary">Save</button>
+	</div>
+    </div>
+
+    <!-- Move Dialog -->
+    <div id="move" class="modal hide fade" tabindex="-1" role="dialog"
+	aria-labelledby="move" aria-hidden="true">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+		<h3 id="myModalLabel">Move to</h3>
+	</div>
+	<div class="modal-body">
+		Folder list ...
+	</div>
+	<div class="modal-footer">
+		<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+		<button class="btn btn-primary">Move</button>
+	</div>
+    </div>
+
+    <!-- New Space Dialog -->
+    <div id="newSpace" class="modal hide fade" tabindex="-1" role="dialog"
+	aria-labelledby="newSpace" aria-hidden="true">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+		<h3 id="myModalLabel">Create a New Space</h3>
+	</div>
+	<div class="modal-body">
+		<form>
+    		<fieldset>
+    		<input type="text" placeholder="Name your new space...">
+    		</fieldset>
+    	</form>	
+	</div>
+	<div class="modal-footer">
+		<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+		<button class="btn btn-primary">Create</button>
+	</div>
+    </div>
+
+    <!-- Delete Space Dialog -->
+    <div id="deleteSpace" class="modal hide fade" tabindex="-1" role="dialog"
+	aria-labelledby="deleteSpace" aria-hidden="true">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+		<h3 id="myModalLabel">Delete selected space</h3>
+	</div>
+	<div class="modal-body">
+		Are you sure you want to delete:<br>...
+		
+	</div>
+	<div class="modal-footer">
+		<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+		<button class="btn btn-primary">Delete</button>
+	</div>
+    </div>
+
+    <!-- Rename Space Dialog -->
+    <div id="renameSpace" class="modal hide fade" tabindex="-1" role="dialog"
+	aria-labelledby="renameSpace" aria-hidden="true">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+		<h3 id="myModalLabel">Rename Space</h3>
+	</div>
+	<div class="modal-body">
+		<form>
+    		<fieldset>
+    		<input type="text" placeholder="Space Name">
+    		</fieldset>
+    	</form>	
+	</div>
+	<div class="modal-footer">
+		<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+		<button class="btn btn-primary">Save</button>
+	</div>
+    </div>
+
+
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/underscore.js"></script>
