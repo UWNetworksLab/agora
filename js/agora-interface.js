@@ -17,8 +17,13 @@
 var inFlight = {};
 
 freedom.on("agora_getcurrentuser_response", function(user) {
-	inFlight[user.reqid](user);
-	delete inFlight[user.reqid];
+   inFlight[user.reqid](new User(user));
+   delete inFlight[user.reqid];
+});
+
+freedom.on("agora_getspacebyname_response", function(space) {
+   inFlight[space.reqid](new GroupShare(space));
+   delete inFlight[space.reqid];
 });
 
 window.Agora = {
@@ -54,7 +59,11 @@ window.Agora = {
 	* @return GroupShare or Boolean - The space or false
 	*/
 	getSpaceByName: function(name) {
-		// TODO: Replace with actual Agora backend call
+                var reqId = math.random();
+                inFlight[reqId] = continuation;
+                freedom.emit("agora_getspacebyname_response", val);
+		// TODO: Remove this once fully implemented, below is for backwards
+                // compatibility
 		if(name != "Final Project") {
 			return false;
 		}
