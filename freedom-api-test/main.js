@@ -48,6 +48,8 @@ Backbone.sync = function(method, model, options) {
    }
 };
 
-var TestModel = Backbone.Model.extend({
+TestModel = Backbone.Model.extend({
    message: "test"
 });
+
+var tm = new TestModel();
