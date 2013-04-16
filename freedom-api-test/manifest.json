@@ -8,6 +8,6 @@
       "storage"
    ],
    "dependencies": {
-      "storage": "/js/freedom/storage.js"
+      "storage": "/js/freedom/storage.json"
    }
 }

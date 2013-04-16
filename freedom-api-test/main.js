@@ -15,7 +15,7 @@
  */
 Backbone.sync = function(method, model, options) {
    // Error handling
-   if(model.id === undefined)
+   if(model.attributes.id === undefined)
       throw "Backbone.sync: id not defined in model";
    if(options.modelName === undefined)
       throw "Backbone.sync: modelName not defined in options";
@@ -31,6 +31,7 @@ Backbone.sync = function(method, model, options) {
          console.info("Backbone.sync: read called");
          freedom.emit("sync_read", model.id, options.modelName,
             function(modelResult) {
+               console.log("hi");
                model.attributes = modelResult;
             }
          );
