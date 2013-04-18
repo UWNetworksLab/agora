@@ -29,12 +29,11 @@ Backbone.sync = function(method, model, options) {
          break;
       case "read":
          console.info("Backbone.sync: read called");
-         freedom.emit("sync_read", model.id, options.modelName,
-            function(modelResult) {
-               console.log("hi");
-               model.attributes = modelResult;
-            }
-         );
+         freedom.emit("sync_read", model.id, options.modelName);
+         freedom.once("sync_read_completed", function(modelResult) {
+            console.log("hi");
+            model.set(modelResult);
+         });
          break;
       case "update":
          console.info("Backbone.sync: update called");
@@ -53,4 +52,5 @@ TestModel = Backbone.Model.extend({
    message: "test"
 });
 
-var tm = new TestModel();
+// TESTING CODE
+var tm = new TestModel({message: "this is a test message"});
