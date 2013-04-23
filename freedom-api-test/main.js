@@ -1,3 +1,4 @@
+Backbone.Model[] handles = array();
 /**
  * Overrides the built-in synchronization for Backbone.sync to use
  * the FreeDOM API.  In order for the synchronization to work properly
@@ -28,12 +29,10 @@ Backbone.sync = function(method, model, options) {
          freedom.emit("sync_update", model, options.modelName);
          break;
       case "read":
+         int handleID = Math.random();
+         handles[handleID] = model;
          console.info("Backbone.sync: read called");
-         freedom.emit("sync_read", model.id, options.modelName);
-         freedom.once("sync_read_completed", function(modelResult) {
-            console.log("hi");
-            model.set(modelResult);
-         });
+         freedom.emit("sync_read", handleID, model.id, options.modelName);
          break;
       case "update":
          console.info("Backbone.sync: update called");
@@ -47,6 +46,12 @@ Backbone.sync = function(method, model, options) {
          throw "Backbone.sync: Invalid method " + method;
    }
 };
+
+// Handle read return case
+freedom.on("sync_read_complete", function(handlerID, value) {
+   handles[handlerID] = value;
+   delete handles[handlerID];
+});
 
 TestModel = Backbone.Model.extend({
    message: "test"
