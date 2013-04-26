@@ -6,19 +6,22 @@
 var storage = freedom.storage();
 
 // Create/Update model
-freedom.on("sync_update", function (model, modelName) {
-   var promise = storage.set(modelName + "_" + model.id, model);
+freedom.on("sync_update", function (modelInformation) {
+   console.log("name is " + modelInformation[1]);
+   var promise = storage.set(modelInformation[1] + "_" +
+      modelInformation[0].id, JSON.stringify(modelInformation[0]));
 });
 
 // Read model
-freedom.on("sync_read", function (handlerID, id, modelName) {
-   var promise = storage.get(modelName + "_" + id);
+freedom.on("sync_read", function (modelInformation) {
+   var promise = storage.get(modelInformation[2] + "_" +
+      modelInformation[1]);
    promise.done(function (val) {
-      freedom.emit("sync_read_completed", handlerID, val);
+      freedom.emit("sync_read_completed", [modelInformation[0], val]);
    });
 });
 
 // Delete model
-freedom.on("sync_delete", function (id, modelName) {
-   var promise = storage.set(modelName + "_" + id, {});
+freedom.on("sync_delete", function (modelInformation) {
+   var promise = storage.set(modelInformation[1] + "_" + modelInformation[0], "{}");
 });
