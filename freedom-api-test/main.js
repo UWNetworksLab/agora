@@ -49,9 +49,7 @@ Backbone.sync = function(method, model, options) {
 
 // Handle read return case
 freedom.on("sync_read_completed", function(modelInformation) {
-   console.log(modelInformation[1]);
    handles[modelInformation[0]].set(JSON.parse(modelInformation[1]).attributes);
-   console.info(modelInformation[1]);
    delete handles[modelInformation[0]];
 });
 

@@ -19,3 +19,36 @@ freedom.on("agora_getspacebyname", function(reqid, name) {
       freedom.emit('agora_getspacebyname_response', val);
    });
 });
+
+/*** Backbone.sync functions ***/
+
+// Creates a new model and calls back a new model ID
+freedom.on("backbone_sync_create", function(modelInformation) {
+   var newID = (new Date()).getTime() +
+      Math.floor(Math.random() * 1000);
+   var promise = storage.set(newID,
+      JSON.stringify(modelInformation[1].attributes));
+   promise.done(function(value) {
+      freedom.emit("backbone_sync_create_callback", [modelInformation[0], newID]);
+   });
+});
+
+// Reads the model and calls back with the model result
+freedom.on("backbone_sync_read", function(modelInformation) {
+   var promise = storage.get(modelInformation[1]);
+   promise.done(function(value) {
+      freedom.emit("backbone_sync_read_callback",
+         [modelInformation[0], value]);
+   });
+});
+
+// Updates the model
+freedom.on("backbone_sync_update", function(model) {
+   var promise = storage.set(model.attributes.id,
+      JSON.stringify(model.attributes));
+});
+
+// Deletes the model (TODO: change from set {} to actual delete)
+freedom.on("backbone_sync_delete", function(model) {
+   var promise = storage.set(model.get("id"), "");
+});

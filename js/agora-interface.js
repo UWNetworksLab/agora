@@ -26,6 +26,60 @@ freedom.on("agora_getspacebyname_response", function(space) {
    delete inFlight[space.reqid];
 });
 
+/*** Backbone.sync override ***/
+var modificationHandles = [];
+
+/**
+ * Overrides the built-in synchronization function in Backbone.js
+ * to use the FreeDOM API.  On creation, an ID is automatically
+ * assigned to the model and stored in the 'id' property of the
+ * model.  Any 'update', 'read', or 'delete' calls will depend
+ * on this automatically set identifier.
+ *
+ * @method Backbone.sync
+ * @param method the sync method to use, either 'create',
+ *    'read', 'update', or 'delete'.
+ * @param model the model to sync to FreeDOM storage.
+ * @param options any custom options to use when storing (none
+ *    supported right now).
+ */
+Backbone.sync = function(method, model, options) {
+   switch(method) {
+      case "create":
+         var callbackInit = Math.random();
+         modificationHandles[callbackInit] = model;
+         freedom.emit("backbone_sync_create", [callbackInit, model]);
+         break;
+      case "read":
+         var handleID = Math.random();
+         modificationHandles[handleID] = model;
+         freedom.emit("backbone_sync_read", [handleID, model.get("id")]);
+         break;
+      case "update":
+         freedom.emit("backbone_sync_update", model);
+         break;
+      case "delete":
+         freedom.emit("backbone_sync_delete", model.id);
+         break;
+      default:
+         throw "Backbone.sync: Undefined sync method " + method;
+         break;
+   }
+};
+
+// Ensures the model is set with the newly assigned ID.
+freedom.on("backbone_sync_create_callback", function(modelInformation) {
+   modificationHandles[modelInformation[0]].set("id",
+      modelInformation[1]);
+});
+
+// Loads the model information once read from FreeDOM
+freedom.on("backbone_sync_read_callback", function(modelInformation) {
+   modificationHandles[modelInformation[0]].set(JSON.parse(modelInformation[1]));
+   delete modificationHandles[modelInformation[0]];
+});
+/*** End Backbone.sync override ***/
+
 window.Agora = {
 
 	Models: {},

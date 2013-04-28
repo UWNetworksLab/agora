@@ -1,7 +1,0 @@
-{
-	"name": "Agora",
-	"description": "A browser-based file synchronization tool",
-	"app": {
-		"script": "agora-backend.js"
-	}
-}
