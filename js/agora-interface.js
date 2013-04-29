@@ -113,7 +113,7 @@ window.Agora = {
 	* @return GroupShare or Boolean - The space or false
 	*/
 	getSpaceByName: function(name) {
-                var reqId = math.random();
+                var reqId = Math.random();
                 inFlight[reqId] = continuation;
                 freedom.emit("agora_getspacebyname_response", val);
 		// TODO: Remove this once fully implemented, below is for backwards
