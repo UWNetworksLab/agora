@@ -15,7 +15,7 @@ Agora.Views.App = Backbone.View.extend({
 // Current user view/template
 Agora.Views.User = Backbone.View.extend({
     initialize: function() {
-        this.render();
+        this.model.on('change', this.render, this);
     },
 
     render: function() {

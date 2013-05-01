@@ -5,9 +5,13 @@
 */
 
 (function() {
-    // Grab the current user
-    Agora.currentUser = Agora.getCurrentUser();
+    // fetch the current user
 
+    // temporary initialization of data for testing purposes
+    initializeDummyData();
+    Agora.currentUser = new Agora.Models.User({id: 24601});
+    Agora.currentUser.fetch();
+    
     // Initialize Backbone views
     Agora.appView = new Agora.Views.App();
 

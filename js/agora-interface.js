@@ -170,4 +170,17 @@ window.template = function(id) {
 // Custom PubSub event listener
 window.vent = _.extend({}, Backbone.Events);
 
-//})();
+
+
+// temporary initialization of data for testing purposes
+var initializeDummyData = function () {
+    tempUser = new Agora.Models.User({
+        displayName: "Nicholas Cage",
+        isOnline: true,
+        UID: "cagen@cs.washington.edu",
+        spaceNames: ["Final Project", "Design Team", "Cat Lovers Anonymous"],
+        id: 24601
+    });
+
+    tempUser.save();
+};
