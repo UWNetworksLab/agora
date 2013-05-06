@@ -48,7 +48,7 @@ Backbone.sync = function(method, model, options) {
       case "create":
          var callbackInit = Math.random();
          modificationHandles[callbackInit] = model;
-         freedom.emit("backbone_sync_create", [callbackInit, model]);
+         freedom.emit("backbone_sync_create", [callbackInit, model.attributes]);
          break;
       case "read":
          var handleID = Math.random();
@@ -56,10 +56,10 @@ Backbone.sync = function(method, model, options) {
          freedom.emit("backbone_sync_read", [handleID, model.get("id")]);
          break;
       case "update":
-         freedom.emit("backbone_sync_update", model);
+         freedom.emit("backbone_sync_update", model.attributes);
          break;
       case "delete":
-         freedom.emit("backbone_sync_delete", model.id);
+         freedom.emit("backbone_sync_delete", model.get("id"));
          break;
       default:
          throw "Backbone.sync: Undefined sync method " + method;

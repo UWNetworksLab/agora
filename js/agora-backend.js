@@ -50,5 +50,5 @@ freedom.on("backbone_sync_update", function(model) {
 
 // Deletes the model (TODO: change from set {} to actual delete)
 freedom.on("backbone_sync_delete", function(model) {
-   var promise = storage.set(model.get("id"), "");
+   var promise = storage.set(model.get("id"), undefined);
 });
