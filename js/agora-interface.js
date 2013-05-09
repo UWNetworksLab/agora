@@ -113,9 +113,9 @@ window.Agora = {
 	* @return GroupShare or Boolean - The space or false
 	*/
 	getSpaceByName: function(name) {
-                var reqId = Math.random();
-                inFlight[reqId] = continuation;
-                freedom.emit("agora_getspacebyname_response", val);
+                // var reqId = Math.random();
+                // inFlight[reqId] = continuation;
+                // freedom.emit("agora_getspacebyname_response", val);
 		// TODO: Remove this once fully implemented, below is for backwards
                 // compatibility
 		if(name != "Final Project") {
@@ -140,17 +140,20 @@ window.Agora = {
 			isMetadata: true,
 			name: "cats",
 			timestamp: new Date(),
-			isFolder: true
+			isFolder: true,
+            id: 100
 		},
 		{
 			isMetadata: true,
 			name: "hw1.sql",
-			timestamp: new Date()
+			timestamp: new Date(),
+            id: 101
 		},
 		{
 			isMetadata: true,
 			name: "writeup.txt",
-			timestamp: new Date()
+			timestamp: new Date(),
+            id: 102
 		}]);
 
 		return new Agora.Models.GroupShare({
@@ -174,6 +177,7 @@ window.vent = _.extend({}, Backbone.Events);
 
 // temporary initialization of data for testing purposes
 var initializeDummyData = function () {
+    // create a current user
     tempUser = new Agora.Models.User({
         displayName: "Nicholas Cage",
         isOnline: true,
@@ -181,6 +185,5 @@ var initializeDummyData = function () {
         spaceNames: ["Final Project", "Design Team", "Cat Lovers Anonymous"],
         id: 24601
     });
-
     tempUser.save();
 };

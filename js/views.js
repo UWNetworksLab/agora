@@ -28,10 +28,36 @@ Agora.Views.User = Backbone.View.extend({
 Agora.Views.File = Backbone.View.extend({
     tagName: 'tr',
 
+    attributes: {
+        'draggable': 'true',
+        'downloadurl': ''
+    },
+
     template: template('file-view-template'),
+
+    events: {
+        'dragstart': 'dragout'
+    },
+
+    initialize: function() {
+        this.model.bind('change', this.render, this);
+    },
+
+    dragout: function(e) {
+        console.log(this.$el.attr('downloadurl'));
+        e.originalEvent.dataTransfer.setData("DownloadURL", this.$el.attr('downloadurl'));
+    },
+
+    buildURL: function() {
+        var file = this.model.attributes;
+        var url = file.type + ":" + file.name + ":" + file.contents;
+        return url;
+    },
 
     render: function() {
         this.$el.html( this.template( this.model.toJSON() ) );
+        var url = this.buildURL();
+        this.$el.attr('downloadurl', url);
         return this;
     },
 });
@@ -42,6 +68,7 @@ Agora.Views.FileList = Backbone.View.extend({
 
     initialize: function() {
         vent.on('file:drop', this.dropFile, this);
+        vent.on('file:read', this.updateFileContents, this);
         this.collection.on('add', this.addOne, this);
     },
 
@@ -55,21 +82,45 @@ Agora.Views.FileList = Backbone.View.extend({
 
     dropFile: function(file) {
         var fileItem = new Agora.Models.File({
-            isMetadata: true,
             name: escape(file.name),
+            isMetadata: false,
             timestamp: new Date(),
-            isFolder: false
+            isFolder: false,
+            type: file.type
         });
+
+        // read the file contents into a data url
+        var reader = new FileReader();
+
+        // Closure to capture the file information.
+        reader.onload = (function(theFile) {
+          return function(e) {
+            var result = e.target.result;
+            vent.trigger('file:read', {'file': fileItem,'url': result});
+          };
+        })(file);
+
+        // Read in the image file as a data URL.
+        reader.readAsDataURL(file);
+
+        fileItem.set("id", 200);
+
         this.collection.add(fileItem);
     },
 
+    updateFileContents: function(f) {
+        f.file.set("contents", f.url);
+        f.file.save();
+    },
+
     addOne: function(file) {
+        file.save();
         var fileView = new Agora.Views.File({ model: file });
         $('#file-list').append(fileView.render().el);
     },
 
     events: {
-        'click tr': 'highlight'
+        'click tbody tr': 'highlight'
     },
 
     highlight: function(e) {

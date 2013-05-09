@@ -129,7 +129,15 @@ Agora.Models.File = Backbone.Model.extend({
          *  FileSystemItem.
          * @default null
          */
-        isMetaData: null
+        parent: null,
+        /**
+         * MIME type of the file
+         *
+         * @property type
+         * @type String
+         * @default ""
+         */
+        type: ""
     },
     /**
      * Gets the specified file by name if it exists in

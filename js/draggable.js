@@ -35,7 +35,7 @@ $("[draggable]").bind('drop', function(e) {
 	if(e.originalEvent.stopPropagation) {
 		e.originalEvent.stopPropagation();
 	}
-	
+
 	return false;
 });
 
@@ -62,7 +62,7 @@ $("#loadFile").bind('drop', function(e) {
 	if(e.originalEvent.stopPropagation) {
 		e.originalEvent.stopPropagation();
 	}
-	
+
 	var files = e.originalEvent.dataTransfer.files;
 	var output = "";
 	for(var i = 0, f; f = files[i]; i++) {

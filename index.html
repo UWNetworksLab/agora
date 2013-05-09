@@ -82,7 +82,7 @@
 	</script>
 
 	<script type="text/template" id="file-list-template">
-	<table class="table table-striped" draggable="true" id="file-list">
+	<table class="table table-striped" id="file-list">
 		<thead>
 		<tr>
 			<th>File Name</th>
@@ -95,14 +95,17 @@
 	</table>
 	</script>
 
-	<script type="text/template" id="file-view-template">
-		<td><%= name %></td>
+    <script type="text/template" id="file-view-template">
+		<td draggable=true><%= name %></a></td>
 		<td><%= isFolder ? 'folder' : 'file' %></td>
 		<td><%= timestamp %></td>
 	</script>
 	<script type="text/javascript" src="js/freedom/freedom.js" data-manifest="js/freedom/freedom-manifest.json"></script>
+    <pre id="dropzone" class="container-fluid" draggable="true">Drop files here!</pre>
     </div>
     </div>
+
+
 
     <!-- Add User Dialog -->
     <div id="manageUsers" class="modal hide fade" tabindex="-1" role="dialog"
@@ -173,7 +176,7 @@
 	</div>
 	<div class="modal-body">
 		Are you sure you want to delete:<br>...
-		
+
 	</div>
 	<div class="modal-footer">
 		<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
@@ -193,7 +196,7 @@
     		<fieldset>
     		<input type="text" placeholder="filename.ext">
     		</fieldset>
-    	</form>	
+    	</form>
 	</div>
 	<div class="modal-footer">
 		<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
@@ -229,7 +232,7 @@
     		<fieldset>
     		<input type="text" placeholder="Name your new space...">
     		</fieldset>
-    	</form>	
+    	</form>
 	</div>
 	<div class="modal-footer">
 		<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
@@ -246,7 +249,7 @@
 	</div>
 	<div class="modal-body">
 		Are you sure you want to delete:<br>...
-		
+
 	</div>
 	<div class="modal-footer">
 		<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
@@ -266,7 +269,7 @@
     		<fieldset>
     		<input type="text" placeholder="Space Name">
     		</fieldset>
-    	</form>	
+    	</form>
 	</div>
 	<div class="modal-footer">
 		<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>

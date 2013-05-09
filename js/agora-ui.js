@@ -9,59 +9,63 @@
  * incorporated into backbone if possible
  */
 
- // Allows for data transfer
- $("[draggable]").bind('dragover', function(e) {
- 	// Overrides browser behavior
- 	if(e.originalEvent.preventDefault) {
- 		e.originalEvent.preventDefault();
- 	}
+// Allows for data transfer
+$("[draggable]").bind('dragover', function(e) {
+	// Overrides browser behavior
+	if(e.originalEvent.preventDefault) {
+		e.originalEvent.preventDefault();
+	}
 
- 	return false;
- });
+	return false;
+});
 
- // Handles the drop event for when you let go of the drag
- $("[draggable]").bind('drop', function(e) {
- 	// Overrides the browser's default drop action
- 	if(e.originalEvent.stopPropagation) {
- 		e.originalEvent.stopPropagation();
- 	}
+// Action if we drag onto another object
+$("[draggable]").bind('dragenter', function() {
+    $(this).css("border", "3px dashed black");
+});
 
- 	return false;
- });
+// Action if we drag onto another object and then leave
+$("[draggable]").bind('dragleave', function() {
+    $(this).css("border", "");
+});
 
- // Code that executes when the drag is finished
- $("[draggable]").bind('dragend', function() {
- 	$("[draggable]").css("border", "");
- 	$("[draggable]").css("opacity",'');
- });
+// Handles the drop event for when you let go of the drag
+$("[draggable]").bind('drop', function(e) {
+	// Overrides the browser's default drop action
+	if(e.originalEvent.stopPropagation) {
+		e.originalEvent.stopPropagation();
+	}
 
- /* Load File Example */
- $("#file-list").bind('dragover', function(e) {
- 	// Overrides browser behavior
- 	if(e.originalEvent.preventDefault) {
- 		e.originalEvent.preventDefault();
- 	}
+	return false;
+});
 
- 	// Explicitly specifies copy
- 	e.originalEvent.dataTransfer.dropEffect = 'copy';
- 	return false;
- });
+// Code that executes when the drag is finished
+$("[draggable]").bind('dragend', function() {
+	$("[draggable]").css("border", "");
+	$("[draggable]").css("opacity",'');
+});
 
- $("#file-list").bind('drop', function(e) {
- 	// Overrides the browser's default drop action
- 	if(e.originalEvent.stopPropagation) {
- 		e.originalEvent.stopPropagation();
- 	}
+/* Load File Example */
+$("#dropzone").bind('dragover', function(e) {
+	// Overrides browser behavior
+	if(e.originalEvent.preventDefault) {
+		e.originalEvent.preventDefault();
+	}
 
- 	var files = e.originalEvent.dataTransfer.files;
- 	var output = "";
- 	for(var i = 0, f; f = files[i]; i++) {
- 		// output += escape(f.name) + " - " + f.type +
- 		// 	" (" + f.size + " bytes, last modified " +
- 		// 	(f.lastModifiedDate ?
- 		// 	f.lastModifiedDate.toLocaleDateString() :
- 		// 	'n/a') + ")\n";
- 		vent.trigger('file:drop', f);
- 	}
- 	return false;
- });
+	// Explicitly specifies copy
+	e.originalEvent.dataTransfer.dropEffect = 'copy';
+	return false;
+});
+
+$("#dropzone").bind('drop', function(e) {
+	// Overrides the browser's default drop action
+	if(e.originalEvent.stopPropagation) {
+		e.originalEvent.stopPropagation();
+	}
+
+	var files = e.originalEvent.dataTransfer.files;
+	for(var i = 0, f; f = files[i]; i++) {
+		vent.trigger('file:drop', f);
+	}
+	return false;
+});
