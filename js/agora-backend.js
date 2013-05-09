@@ -27,7 +27,7 @@ freedom.on("backbone_sync_create", function(modelInformation) {
    var newID = (new Date()).getTime() +
       Math.floor(Math.random() * 1000);
    var promise = storage.set(newID,
-      JSON.stringify(modelInformation[1].attributes));
+      JSON.stringify(modelInformation[1]));
    promise.done(function(value) {
       freedom.emit("backbone_sync_create_callback", [modelInformation[0], newID]);
    });
