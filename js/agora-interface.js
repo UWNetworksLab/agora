@@ -178,7 +178,7 @@ window.vent = _.extend({}, Backbone.Events);
 // temporary initialization of data for testing purposes
 var initializeDummyData = function () {
     // create a current user
-    tempUser = new Agora.Models.User({
+    var tempUser = new Agora.Models.User({
         displayName: "Nicholas Cage",
         isOnline: true,
         UID: "cagen@cs.washington.edu",
@@ -186,4 +186,27 @@ var initializeDummyData = function () {
         id: 24601
     });
     tempUser.save();
+
+    var tempFile1 = new Agora.Models.File({
+        isMetadata: true,
+        name: "cats",
+        timestamp: new Date(),
+        isFolder: true,
+        id: 100
+    });
+    var tempFile2 = new Agora.Models.File({
+        isMetadata: true,
+        name: "hw1.sql",
+        timestamp: new Date(),
+        id: 101
+    });
+    var tempFile3 = new Agora.Models.File({
+        isMetadata: true,
+        name: "writeup.txt",
+        timestamp: new Date(),
+        id: 102
+    });
+    tempFile1.save();
+    tempFile2.save();
+    tempFile3.save();
 };
