@@ -189,16 +189,16 @@ Agora.Models.File = Backbone.Model.extend({
 });
 
 /**
-* A class that models a group share.
+* A class that models a sharing space.
 *
-* @class GroupShare
+* @class Space
 * @constructor
 */
-Agora.Models.GroupShare = Backbone.Model.extend({
+Agora.Models.Space = Backbone.Model.extend({
     default: {
         /**
-        * Represents the group's file system. If set to null, the
-        * group has no file system yet.
+        * Represents the space's file system. If set to null, the
+        * space has no file system yet.
         *
         * @property fileSystem
         * @type Agora.Models.File
@@ -206,7 +206,8 @@ Agora.Models.GroupShare = Backbone.Model.extend({
         */
         fileSystem: null,
         /**
-        * Contains the identities of the users that are in this group.
+        * Contains the identities of the users that have access
+        * to this space. Not used yet.
         *
         * @property users
         * @type Agora.Collections.Users
@@ -214,7 +215,7 @@ Agora.Models.GroupShare = Backbone.Model.extend({
         */
         users: null,
         /**
-        * The name of the group
+        * The name of the space
         *
         * @property name
         * @type String

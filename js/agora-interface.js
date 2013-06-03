@@ -22,7 +22,7 @@ freedom.on("agora_getcurrentuser_response", function(user) {
 });
 
 freedom.on("agora_getspacebyname_response", function(space) {
-   inFlight[space.reqid](new GroupShare(space));
+   inFlight[space.reqid](new Space(space));
    delete inFlight[space.reqid];
 });
 
@@ -71,6 +71,7 @@ Backbone.sync = function(method, model, options) {
 freedom.on("backbone_sync_create_callback", function(modelInformation) {
    modificationHandles[modelInformation[0]].set("id",
       modelInformation[1]);
+   vent.trigger('file:new', modelInformation[1]);
 });
 
 // Loads the model information once read from FreeDOM
@@ -110,7 +111,7 @@ window.Agora = {
 	* if the space can not be found.
 	*
 	* @method getSpaceByName
-	* @return GroupShare or Boolean - The space or false
+	* @return Space or Boolean - The space or false
 	*/
 	getSpaceByName: function(name) {
                 // var reqId = Math.random();
@@ -156,7 +157,7 @@ window.Agora = {
             id: 102
 		}]);
 
-		return new Agora.Models.GroupShare({
+		return new Agora.Models.Space({
 			name: "Final Project",
 			user: users,
 			fileSystem: fs
