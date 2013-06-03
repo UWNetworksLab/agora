@@ -36,11 +36,18 @@ Agora.Views.File = Backbone.View.extend({
     template: template('file-view-template'),
 
     events: {
-        'dragstart': 'dragout'
+        'dragstart': 'dragout',
+        'click .deleteFile': 'delete',
+        'click .renameFile': 'rename',
     },
 
     initialize: function() {
         this.model.bind('change', this.render, this);
+    },
+
+    delete: function() {
+        console.log("delete this file: " + this.model.attributes.name);
+        //need to display a modal window to confirm delete
     },
 
     dragout: function(e) {
@@ -52,6 +59,13 @@ Agora.Views.File = Backbone.View.extend({
         var file = this.model.attributes;
         var url = file.type + ":" + file.name + ":" + file.contents;
         return url;
+    },
+
+    rename: function() {
+        console.log("rename this file: " + this.model.attributes.name);
+        this.$('.fileName').html(template('rename-file-template'));
+        // need to set focus on the text box
+        // need to confirm with a 'return' keypress
     },
 
     render: function() {
