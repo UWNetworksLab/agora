@@ -116,13 +116,11 @@ Agora.Views.FileList = Backbone.View.extend({
 
         // Read in the image file as a data URL.
         reader.readAsDataURL(file);
-
-        this.collection.add(fileItem);
     },
 
     updateFileContents: function(f) {
         f.file.set("contents", f.url);
-        f.file.save();
+        this.collection.add(f.file);
     },
 
     addOne: function(file) {
