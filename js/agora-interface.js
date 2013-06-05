@@ -71,6 +71,7 @@ Backbone.sync = function(method, model, options) {
 freedom.on("backbone_sync_create_callback", function(modelInformation) {
    modificationHandles[modelInformation[0]].set("id",
       modelInformation[1]);
+   console.log('asdf');
    vent.trigger('file:new', modelInformation[1]);
 });
 
@@ -210,4 +211,21 @@ var initializeDummyData = function () {
     tempFile1.save();
     tempFile2.save();
     tempFile3.save();
+
+    var tempSpace1 = new Agora.Models.Space({
+        name: "Final Project",
+        id: 9000
+    });
+    var tempSpace2 = new Agora.Models.Space({
+        name: "Design Team",
+        id: 9001
+    });
+    var tempSpace3 = new Agora.Models.Space({
+        name: "Cat Lovers Anonymous",
+        id: 9002
+    });
+    tempSpace1.save();
+    tempSpace2.save();
+    tempSpace3.save();
+
 };

@@ -11,7 +11,7 @@ Agora.Router = Backbone.Router.extend({
     },
 
     index: function() {
-        var spacesList = new Agora.Views.Spaces();
+        var spacesList = new Agora.Views.Spaces({ collection: spaces });
         var toolbar = new Agora.Views.Toolbar( {isSpace: false} );
         spacesList.render();
         toolbar.render();

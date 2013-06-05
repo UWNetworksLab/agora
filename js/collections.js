@@ -23,3 +23,7 @@ Agora.Collections.Users = Backbone.Collection.extend({
 Agora.Collections.Files = Backbone.Collection.extend({
     model: Agora.Models.File
 });
+
+Agora.Collections.Spaces = Backbone.Collection.extend({
+    model: Agora.Models.Space
+});

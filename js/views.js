@@ -42,7 +42,7 @@ Agora.Views.File = Backbone.View.extend({
     },
 
     initialize: function() {
-        this.model.bind('change', this.render, this);
+        this.model.on('change', this.render, this);
     },
 
     delete: function() {
@@ -141,25 +141,83 @@ Agora.Views.FileList = Backbone.View.extend({
 
 });
 
-// Present the users spaces
-Agora.Views.Spaces = Backbone.View.extend({
-    el: '.space',
+// Represents a single space that the user has access to
+Agora.Views.Space = Backbone.View.extend({
+    tagName: 'a',
 
-    template: template('space-list-template'),
+    attributes: {
+        'href': ''
+    },
+
+    className: 'thumbnail span3',
+
+    template: _.template("<img data-src=\"holder.js/300x300\" src=\"http://dummyimage.com/300x200\" />"),
+
+    initialize: function() {
+        this.model.on('change', this.render, this);
+        vent.on('file:new', this.newFile, this);
+    },
 
     render: function() {
-        this.$el.html( this.template( {spaces: Agora.currentUser.get('spaceNames')} ) );
+        this.$el.html( this.template() );
+        this.$el.attr('href', '#/space/' + this.model.attributes.name);
         return this;
     },
 
+    newFile: function(file) {
+        console.log(file);
+    }
+});
+
+// Represents all of the spaces the user has access to
+Agora.Views.Spaces = Backbone.View.extend({
+    el: '.space',
+
+    template: _.template("<div id=\"space-list\" class=\"thumbnails\"></div>"),
+
     events: {
         'click a': 'goToSpace'
+    },
+
+    initialize: function() {
+        this.collection.on('add', this.addOne, this);
+    },
+
+    render: function() {
+        this.$el.html( this.template() );
+        this.collection.each(this.addOne, this);
+        return this;
+    },
+
+    addOne: function(space) {
+        var spaceView = new Agora.Views.Space({ model: space });
+        $('#space-list').append(spaceView.render().el);
     },
 
     goToSpace: function() {
         Agora.router.navigate('space', {trigger: true})
     }
 });
+
+// // Present the users spaces
+// Agora.Views.Spaces = Backbone.View.extend({
+//     el: '.space',
+
+//     template: template('space-list-template'),
+
+//     render: function() {
+//         this.$el.html( this.template( {spaces: Agora.currentUser.get('spaceNames')} ) );
+//         return this;
+//     },
+
+//     events: {
+//         'click a': 'goToSpace'
+//     },
+
+//     goToSpace: function() {
+//         Agora.router.navigate('space', {trigger: true})
+//     }
+// });
 
 // Display the toolbar
 Agora.Views.Toolbar = Backbone.View.extend({

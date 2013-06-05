@@ -14,7 +14,7 @@
     Agora.currentUser.fetch();
 
     //files
-    fs = new Agora.Collections.Files()
+    fs = new Agora.Collections.Files();
     var tempFile1 = new Agora.Models.File({id: 100});
     var tempFile2 = new Agora.Models.File({id: 101});
     var tempFile3 = new Agora.Models.File({id: 102});
@@ -22,8 +22,18 @@
     tempFile2.fetch();
     tempFile3.fetch();
     fs.add([tempFile1,tempFile2,tempFile3]);
-    
-    
+
+    //spaces
+    spaces = new Agora.Collections.Spaces();
+    var tempSpace1 = new Agora.Models.Space({id: 9000});
+    var tempSpace2 = new Agora.Models.Space({id: 9001});
+    var tempSpace3 = new Agora.Models.Space({id: 9002});
+    tempSpace1.fetch();
+    tempSpace2.fetch();
+    tempSpace3.fetch();
+    spaces.add([tempSpace1,tempSpace2,tempSpace3]);
+
+
     // Initialize Backbone views
     Agora.appView = new Agora.Views.App();
 
