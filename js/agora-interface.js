@@ -71,7 +71,6 @@ Backbone.sync = function(method, model, options) {
 freedom.on("backbone_sync_create_callback", function(modelInformation) {
    modificationHandles[modelInformation[0]].set("id",
       modelInformation[1]);
-   console.log('asdf');
    vent.trigger('file:new', modelInformation[1]);
 });
 
@@ -184,7 +183,7 @@ var initializeDummyData = function () {
         displayName: "Nicholas Cage",
         isOnline: true,
         UID: "cagen@cs.washington.edu",
-        spaceNames: ["Final Project", "Design Team", "Cat Lovers Anonymous"],
+        spaceNames: ["Final-Project", "Design-Team", "Cat-Lovers-Anonymous"],
         id: 24601
     });
     tempUser.save();
@@ -214,15 +213,15 @@ var initializeDummyData = function () {
 
     var tempSpace1 = new Agora.Models.Space({
         name: "Final Project",
-        id: 9000
+        id: "Final-Project"
     });
     var tempSpace2 = new Agora.Models.Space({
         name: "Design Team",
-        id: 9001
+        id: "Design-Team"
     });
     var tempSpace3 = new Agora.Models.Space({
         name: "Cat Lovers Anonymous",
-        id: 9002
+        id: "Cat-Lovers-Anonymous"
     });
     tempSpace1.save();
     tempSpace2.save();

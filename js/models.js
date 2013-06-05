@@ -55,7 +55,7 @@ Agora.Models.User = Backbone.Model.extend({
          * @type String[]
          * @default []
          */
-        spaceNames: ""  // TODO: Change to Space Collection
+        spaceNames: []  // TODO: Change to Space Collection
     }
 });
 
@@ -195,7 +195,7 @@ Agora.Models.File = Backbone.Model.extend({
 * @constructor
 */
 Agora.Models.Space = Backbone.Model.extend({
-    default: {
+    defaults: {
         /**
         * Represents the space's file system. If set to null, the
         * space has no file system yet.

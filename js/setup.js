@@ -25,14 +25,6 @@
 
     //spaces
     spaces = new Agora.Collections.Spaces();
-    var tempSpace1 = new Agora.Models.Space({id: 9000});
-    var tempSpace2 = new Agora.Models.Space({id: 9001});
-    var tempSpace3 = new Agora.Models.Space({id: 9002});
-    tempSpace1.fetch();
-    tempSpace2.fetch();
-    tempSpace3.fetch();
-    spaces.add([tempSpace1,tempSpace2,tempSpace3]);
-
 
     // Initialize Backbone views
     Agora.appView = new Agora.Views.App();

@@ -21,6 +21,7 @@ Agora.Router = Backbone.Router.extend({
         // disabled because we are loading fake files with freedom now
         //var currentSpace = Agora.getSpaceByName(id);
         //var fs = currentSpace.get('fileSystem');
+
         var fileList = new Agora.Views.FileList({ collection: fs });
         var toolbar = new Agora.Views.Toolbar({ isSpace: true });
         fileList.render();

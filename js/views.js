@@ -9,13 +9,28 @@ Agora.Views.App = Backbone.View.extend({
     initialize: function() {
         // display the current user's info
         new Agora.Views.User({ model: Agora.currentUser, el: $("#user-name")});
+        vent.on('user:update', this.getSpaces, this);
+    },
+
+    getSpaces: function() {
+        spacelist = Agora.currentUser.get('spaceNames');
+        _.each(spacelist, function(space) {
+            var tempSpace = new Agora.Models.Space({id: space});
+            tempSpace.fetch();
+            spaces.add(tempSpace);
+        });
     }
 });
 
 // Current user view/template
 Agora.Views.User = Backbone.View.extend({
     initialize: function() {
-        this.model.on('change', this.render, this);
+        this.model.on('change', this.update, this);
+    },
+
+    update: function() {
+        vent.trigger('user:update');
+        this.render();
     },
 
     render: function() {
@@ -83,6 +98,7 @@ Agora.Views.FileList = Backbone.View.extend({
     initialize: function() {
         vent.on('file:drop', this.dropFile, this);
         vent.on('file:read', this.updateFileContents, this);
+        vent.on('file:new', this.newFile, this);
         this.collection.on('add', this.addOne, this);
     },
 
@@ -135,6 +151,10 @@ Agora.Views.FileList = Backbone.View.extend({
 
     highlight: function(e) {
         $(e.currentTarget).toggleClass("selected");
+    },
+
+    newFile: function(file) {
+
     }
 
 });
@@ -153,17 +173,12 @@ Agora.Views.Space = Backbone.View.extend({
 
     initialize: function() {
         this.model.on('change', this.render, this);
-        vent.on('file:new', this.newFile, this);
     },
 
     render: function() {
         this.$el.html( this.template() );
         this.$el.attr('href', '#/space/' + this.model.attributes.name);
         return this;
-    },
-
-    newFile: function(file) {
-        console.log(file);
     }
 });
 
@@ -188,6 +203,7 @@ Agora.Views.Spaces = Backbone.View.extend({
     },
 
     addOne: function(space) {
+        Agora.currentUser.get('spaceNames').push(space.get('name'));
         var spaceView = new Agora.Views.Space({ model: space });
         $('#space-list').append(spaceView.render().el);
     },
@@ -196,26 +212,6 @@ Agora.Views.Spaces = Backbone.View.extend({
         Agora.router.navigate('space', {trigger: true})
     }
 });
-
-// // Present the users spaces
-// Agora.Views.Spaces = Backbone.View.extend({
-//     el: '.space',
-
-//     template: template('space-list-template'),
-
-//     render: function() {
-//         this.$el.html( this.template( {spaces: Agora.currentUser.get('spaceNames')} ) );
-//         return this;
-//     },
-
-//     events: {
-//         'click a': 'goToSpace'
-//     },
-
-//     goToSpace: function() {
-//         Agora.router.navigate('space', {trigger: true})
-//     }
-// });
 
 // Display the toolbar
 Agora.Views.Toolbar = Backbone.View.extend({
