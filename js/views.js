@@ -10,6 +10,7 @@ Agora.Views.App = Backbone.View.extend({
         // display the current user's info
         new Agora.Views.User({ model: Agora.currentUser, el: $("#user-name")});
         vent.on('user:update', this.getSpaces, this);
+        vent.on('space:update', this.getFiles, this);
     },
 
     getSpaces: function() {
@@ -18,6 +19,16 @@ Agora.Views.App = Backbone.View.extend({
             var tempSpace = new Agora.Models.Space({id: space});
             tempSpace.fetch();
             spaces.add(tempSpace);
+        });
+    },
+
+    getFiles: function() {
+        filelist = Agora.currentSpace.get('fileSystem');
+        console.log(filelist);
+        _.each(filelist, function(file) {
+            var tempFile = new Agora.Models.File({id: file});
+            tempFile.fetch();
+            fs.add(tempFile);
         });
     }
 });
@@ -88,7 +99,7 @@ Agora.Views.File = Backbone.View.extend({
         var url = this.buildURL();
         this.$el.attr('downloadurl', url);
         return this;
-    },
+    }
 });
 
 // Collection of files in a table format
@@ -153,8 +164,9 @@ Agora.Views.FileList = Backbone.View.extend({
         $(e.currentTarget).toggleClass("selected");
     },
 
-    newFile: function(file) {
-
+    newFile: function(id) {
+        Agora.currentSpace.get('fileSystem').push(id);
+        Agora.currentSpace.save();
     }
 
 });
@@ -177,7 +189,7 @@ Agora.Views.Space = Backbone.View.extend({
 
     render: function() {
         this.$el.html( this.template() );
-        this.$el.attr('href', '#/space/' + this.model.attributes.name);
+        this.$el.attr('href', '#/space/' + this.model.attributes.id);
         return this;
     }
 });
@@ -203,7 +215,8 @@ Agora.Views.Spaces = Backbone.View.extend({
     },
 
     addOne: function(space) {
-        Agora.currentUser.get('spaceNames').push(space.get('name'));
+        space.save();
+        Agora.currentUser.get('spaceNames').push(space.get('id'));
         var spaceView = new Agora.Views.Space({ model: space });
         $('#space-list').append(spaceView.render().el);
     },

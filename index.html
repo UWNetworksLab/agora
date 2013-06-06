@@ -71,16 +71,6 @@
 	</div>
 	</script>
 
-	<script type="text/template" id="space-list-template">
-	<div id="user-shares" class="thumbnails">
-		<% _.each(spaces, function(space) { %>
-			<a href="#/space/Final Project" class="thumbnail span3">
-				<img data-src="holder.js/300x300" src="http://dummyimage.com/300x200" alt="">
-			</a>
-		<% }); %>
-	</div>
-	</script>
-
 	<script type="text/template" id="file-list-template">
 	<table class="table table-striped" id="file-list">
 		<thead>
@@ -107,12 +97,12 @@
                 <i class="icon-trash"></i>
             </a>
         </td>
-        
+
 	</script>
 
     <script type="text/template" id="rename-file-template">
         <input type="text" name="renameFile" value="<%= name %>" />
-    </script>    
+    </script>
 	<script type="text/javascript" src="js/freedom/freedom.js" data-manifest="js/freedom/freedom-manifest.json"></script>
     <pre id="dropzone" class="container-fluid" draggable="true">Drop files here!</pre>
     </div>
