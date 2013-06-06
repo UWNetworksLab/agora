@@ -4,6 +4,13 @@
 * @module views
 */
 
+// jquery hacks to listen for modal window button clicks
+    $('#createNewSpace').bind('click', function() {
+        var spaceName = $('#newSpaceName').val();
+        vent.trigger('space:createNewSpace', spaceName);
+    });
+
+
 // Global app view
 Agora.Views.App = Backbone.View.extend({
     initialize: function() {
@@ -63,17 +70,26 @@ Agora.Views.File = Backbone.View.extend({
 
     events: {
         'dragstart': 'dragout',
-        'click .deleteFile': 'delete',
+        'click .deleteFile': 'deleteFile',
         'click .renameFile': 'rename',
     },
 
     initialize: function() {
         this.model.on('change', this.render, this);
+        this.model.on('destroy', this.unrender, this);
     },
 
-    delete: function() {
-        console.log("delete this file: " + this.model.attributes.name);
-        //need to display a modal window to confirm delete
+    deleteFile: function() {
+        var modalWindow = $('#deleteFile');
+        modalWindow.modal('toggle');
+        var file = this.model;
+        $('#deleteFile .modal-body').text("");
+        $('#deleteFile .modal-body').text("Are you sure you want to delete " + file.attributes.name + "?");
+        $('#deleteFile .btn-primary').bind('click', function() {
+            file.destroy();
+            modalWindow.modal('toggle');
+        });
+
     },
 
     dragout: function(e) {
@@ -94,6 +110,10 @@ Agora.Views.File = Backbone.View.extend({
         // need to confirm with a 'return' keypress
     },
 
+    unrender: function() {
+        this.remove();
+    },
+
     render: function() {
         this.$el.html( this.template( this.model.toJSON() ) );
         var url = this.buildURL();
@@ -110,6 +130,7 @@ Agora.Views.FileList = Backbone.View.extend({
         vent.on('file:drop', this.dropFile, this);
         vent.on('file:read', this.updateFileContents, this);
         vent.on('file:new', this.newFile, this);
+        //vent.on('file:delete', this.deleteFile, this);
         this.collection.on('add', this.addOne, this);
     },
 
@@ -120,6 +141,19 @@ Agora.Views.FileList = Backbone.View.extend({
         this.collection.each(this.addOne, this);
         return this;
     },
+
+    // deleteFile: function(file) {
+    //     var modalWindow = $('#deleteFile')
+    //     modalWindow.modal('toggle');
+    //     $('#deleteFile .modal-body').text("")
+
+    //     $('#deleteFile .modal-body').text("Are you sure you want to delete " + file.attributes.name + "?");
+    //     var filesCollection = this.collection;
+    //     $('#deleteFile .btn-primary').bind('click', function() {
+    //         filesCollection.remove(file);
+    //         modalWindow.modal('toggle');
+    //     });
+    // },
 
     dropFile: function(file) {
         var fileItem = new Agora.Models.File({
@@ -206,6 +240,16 @@ Agora.Views.Spaces = Backbone.View.extend({
 
     initialize: function() {
         this.collection.on('add', this.addOne, this);
+        vent.on('space:createNewSpace', this.createNewSpace, this);
+    },
+
+    createNewSpace: function(spaceName) {
+        newSpace = new Agora.Models.Space({
+            name: spaceName,
+            id: spaceName.replace(" ", "-"),
+        });
+
+        spaces.add(newSpace);
     },
 
     render: function() {

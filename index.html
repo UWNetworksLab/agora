@@ -233,13 +233,13 @@
 	<div class="modal-body">
 		<form>
     		<fieldset>
-    		<input type="text" placeholder="Name your new space...">
+    		<input id="newSpaceName" type="text" placeholder="Name your new space...">
     		</fieldset>
     	</form>
 	</div>
 	<div class="modal-footer">
 		<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-		<button class="btn btn-primary">Create</button>
+		<button class="btn btn-primary" id="createNewSpace" data-dismiss="modal">Create</button>
 	</div>
     </div>
 
@@ -251,8 +251,7 @@
 		<h3 id="myModalLabel">Delete selected space</h3>
 	</div>
 	<div class="modal-body">
-		Are you sure you want to delete:<br>...
-
+		Are you sure you want to delete 
 	</div>
 	<div class="modal-footer">
 		<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
