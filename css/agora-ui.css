@@ -4,5 +4,18 @@
 }
 
 .space {
-    padding: 0;
+    /*padding: 0;*/
+}
+
+.tile {
+    /*border: 1px solid black;*/
+    /*padding: 8px;*/
+    overflow: hidden;
+}
+
+.thumbnail {
+    background: white;
+    padding-left: 10px;
+    padding-right: 0px;
+    padding-bottom: 10px;
 }

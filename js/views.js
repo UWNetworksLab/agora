@@ -30,8 +30,8 @@ Agora.Views.App = Backbone.View.extend({
     },
 
     getFiles: function() {
+        console.log("getFiles");
         filelist = Agora.currentSpace.get('fileSystem');
-        console.log(filelist);
         _.each(filelist, function(file) {
             var tempFile = new Agora.Models.File({id: file});
             tempFile.fetch();
@@ -93,7 +93,6 @@ Agora.Views.File = Backbone.View.extend({
     },
 
     dragout: function(e) {
-        console.log(this.$el.attr('downloadurl'));
         e.originalEvent.dataTransfer.setData("DownloadURL", this.$el.attr('downloadurl'));
     },
 
@@ -132,11 +131,18 @@ Agora.Views.FileList = Backbone.View.extend({
         vent.on('file:new', this.newFile, this);
         //vent.on('file:delete', this.deleteFile, this);
         this.collection.on('add', this.addOne, this);
+        this.collection.on('reset', this.reset, this);
     },
 
     template: template('file-list-template'),
 
+    reset: function() {
+        console.log('resetfn');
+    },
+
     render: function() {
+        $("#dropzone").show();
+        console.log(this.collection);
         this.$el.html( this.template() );
         this.collection.each(this.addOne, this);
         return this;
@@ -181,11 +187,12 @@ Agora.Views.FileList = Backbone.View.extend({
 
     updateFileContents: function(f) {
         f.file.set("contents", f.url);
+        f.file.save();
         this.collection.add(f.file);
     },
 
     addOne: function(file) {
-        file.save();
+        console.log("file addOne");
         var fileView = new Agora.Views.File({ model: file });
         $('#file-list').append(fileView.render().el);
     },
@@ -215,14 +222,15 @@ Agora.Views.Space = Backbone.View.extend({
 
     className: 'thumbnail span3',
 
-    template: _.template("<img data-src=\"holder.js/300x300\" src=\"http://dummyimage.com/300x200\" />"),
+    template: _.template('<h1 class="tile"><%= name %></h1>'),
 
     initialize: function() {
         this.model.on('change', this.render, this);
     },
 
     render: function() {
-        this.$el.html( this.template() );
+        this.$el.html( this.template( this.model.toJSON() ) );
+        model = this.model;
         this.$el.attr('href', '#/space/' + this.model.attributes.id);
         return this;
     }
@@ -232,7 +240,7 @@ Agora.Views.Space = Backbone.View.extend({
 Agora.Views.Spaces = Backbone.View.extend({
     el: '.space',
 
-    template: _.template("<div id=\"space-list\" class=\"thumbnails\"></div>"),
+    template: _.template('<div id="space-list" class="thumbnails"></div>'),
 
     events: {
         'click a': 'goToSpace'
@@ -246,20 +254,21 @@ Agora.Views.Spaces = Backbone.View.extend({
     createNewSpace: function(spaceName) {
         newSpace = new Agora.Models.Space({
             name: spaceName,
-            id: spaceName.replace(" ", "-"),
+            id: spaceName.replace(/ /g, "-"),
         });
 
+        space.save();
         spaces.add(newSpace);
     },
 
     render: function() {
+        $("#dropzone").hide();
         this.$el.html( this.template() );
         this.collection.each(this.addOne, this);
         return this;
     },
 
     addOne: function(space) {
-        space.save();
         Agora.currentUser.get('spaceNames').push(space.get('id'));
         var spaceView = new Agora.Views.Space({ model: space });
         $('#space-list').append(spaceView.render().el);
