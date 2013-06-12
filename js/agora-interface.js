@@ -68,7 +68,7 @@ Backbone.sync = function(method, model, options) {
          break;
    }
 
-   freedom.once("backbone_sync_done", function() {deferred.done();});
+   freedom.once("backbone_sync_done", function() {deferred.resolve();});
    return deferred;
 };
 
