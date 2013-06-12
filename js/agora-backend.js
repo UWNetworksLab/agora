@@ -29,7 +29,7 @@ freedom.on("backbone_sync_create", function(modelInformation) {
    var promise = storage.set(newID,
       JSON.stringify(modelInformation[1]));
    promise.done(function(value) {
-      freedom.emit("backbone_sync_create_callback", [modelInformation[0], newID]);
+      freedom.emit("backbone_sync_done");
    });
 });
 
@@ -37,8 +37,7 @@ freedom.on("backbone_sync_create", function(modelInformation) {
 freedom.on("backbone_sync_read", function(modelInformation) {
    var promise = storage.get(modelInformation[1]);
    promise.done(function(value) {
-      freedom.emit("backbone_sync_read_callback",
-         [modelInformation[0], value]);
+      freedom.emit("backbone_sync_done");
    });
 });
 
@@ -46,9 +45,15 @@ freedom.on("backbone_sync_read", function(modelInformation) {
 freedom.on("backbone_sync_update", function(model) {
    var promise = storage.set(model.id,
       JSON.stringify(model));
+   promise.done(function(value) {
+      freedom.emit("backbone_sync_done");
+   });
 });
 
 // Deletes the model (TODO: change from set {} to actual delete)
 freedom.on("backbone_sync_delete", function(model) {
    var promise = storage.set(model.id, undefined);
+   promise.done(function(value) {
+      freedom.emit("backbone_sync_done");
+   });
 });

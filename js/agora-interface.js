@@ -44,6 +44,8 @@ var modificationHandles = [];
  *    supported right now).
  */
 Backbone.sync = function(method, model, options) {
+   var deferred = jQuery.Deferred();
+
    switch(method) {
       case "create":
          var callbackInit = Math.random();
@@ -65,6 +67,9 @@ Backbone.sync = function(method, model, options) {
          throw "Backbone.sync: Undefined sync method " + method;
          break;
    }
+
+   freedom.once("backbone_sync_done", function() {deferred.done();});
+   return deferred;
 };
 
 // Ensures the model is set with the newly assigned ID.
