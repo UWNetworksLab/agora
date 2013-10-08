@@ -1,5 +1,0 @@
-These files are for the configuration of yuidoc so that the files output properly.  To compile the documentation, run:
-
-yuidoc .
-
-at the root directory of the repository.

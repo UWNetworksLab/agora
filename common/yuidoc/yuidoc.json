@@ -1,9 +1,0 @@
-{
-	"name":			"Agora",
-	"description":		"A peer-to-peer file transfer web application built off FreeDOM",
-	"version":		"1.0 ALPHA",
-	"logo":			"http://www.cs.washington.edu/images/logo/CSElogo2_144.png",
-	"options": {
-		"outdir": "doc"
-	}
-}
