@@ -1,0 +1,3 @@
+[submodule "common/js/freedom"]
+	path = common/js/freedom
+	url = https://github.com/UWNetworksLab/freedom.git

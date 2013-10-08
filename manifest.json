@@ -2,6 +2,7 @@
   "name": "Agora",
   "description": "A Peer-to-peer file transfer app",
   "version": "0.1",
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
   "app": {
     "background": {
       "scripts": ["background.js"]
