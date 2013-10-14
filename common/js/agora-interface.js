@@ -92,6 +92,7 @@ window.Agora = {
 	Collections: {},
 	Views: {},
 	Router: {},
+  Template: {},
 
 	/**
 	* Gets the currently authenticated user.

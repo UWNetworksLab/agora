@@ -66,7 +66,7 @@ Agora.Views.File = Backbone.View.extend({
         'downloadurl': ''
     },
 
-    template: template('file-view-template'),
+    template: Agora.Template.FileView,
 
     events: {
         'dragstart': 'dragout',
@@ -134,7 +134,7 @@ Agora.Views.FileList = Backbone.View.extend({
         this.collection.on('reset', this.reset, this);
     },
 
-    template: template('file-list-template'),
+    template: Agora.Template.FileList,
 
     reset: function() {
         console.log('resetfn');
@@ -283,7 +283,7 @@ Agora.Views.Spaces = Backbone.View.extend({
 Agora.Views.Toolbar = Backbone.View.extend({
     el: '.btn-toolbar',
 
-    template: template('toolbar-template'),
+    template: Agora.Template.Toolbar,
 
     render: function() {
         this.$el.html( this.template( this.options ) );

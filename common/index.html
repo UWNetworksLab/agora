@@ -30,86 +30,6 @@
 	<hr>
 	<div class="btn-toolbar clearfix"></div>
 	<div class="space container-fluid"></div>
-
-    <!-- <div class="container-fluid">
-        <div class="thumbnails">
-        <div class="span3 tile"><h1>Final Project</h1></div>
-        <div class="span3 tile"><h1>Design Team</h1></div>
-        <div class="span3 tile"><h1>Cat Lovers Anonymous</h1></div>
-        </div>
-    </div> -->
-	<script type="text/template" id="toolbar-template">
-	<div class="btn-group pull-left">
-
-		<% if (isSpace) { %>
-			<a href="#manageUsers" role="button" class="btn" data-toggle="modal">
-				<i class="icon-share"></i> Manage Users
-			</a>
-			<a href="#addFile" role="button" class="btn" data-toggle="modal">
-				<i class="icon-plus"></i> Add File
-			</a>
-		<% } else { %>
-			<a href="#newSpace" role="button" class="btn" data-toggle="modal">
-				<i class="icon-plus"></i> New Space
-			</a>
-		<% }; %>
-
-	</div>
-	<div class="btn-group pull-right">
-		<% if (isSpace) { %>
-			<button class="btn"><i class="icon-download-alt"></i> Download</button>
-			<a href="#deleteFile" role="button" class="btn" data-toggle="modal">
-				<i class="icon-trash"></i> Delete
-			</a>
-			<a href="#renameFile" role="button" class="btn" data-toggle="modal">
-				<i class="icon-pencil"></i> Rename
-			</a>
-			<a href="#move" role="button" class="btn" data-toggle="modal">
-				<i class="icon-share-alt"></i> Move
-			</a>
-		<% } else { %>
-			<a href="#deleteSpace" role="button" class="btn" data-toggle="modal">
-				<i class="icon-trash"></i> Delete
-			</a>
-			<a href="#renameSpace" role="button" class="btn" data-toggle="modal">
-				<i class="icon-pencil"></i> Rename
-			</a>
-		<% }; %>
-	</div>
-	</script>
-
-	<script type="text/template" id="file-list-template">
-	<table class="table table-striped" id="file-list">
-		<thead>
-		<tr>
-			<th>File Name</th>
-			<th>Type</th>
-			<th>Last Modified</th>
-		</tr>
-		</thead>
-		<tbody id="file-list">
-		</tbody>
-	</table>
-	</script>
-
-    <script type="text/template" id="file-view-template">
-		<td draggable=true class="fileName"><%= name %></a></td>
-		<td><%= isFolder ? 'folder' : 'file' %></td>
-		<td><%= timestamp %></td>
-        <td>
-            <a role="button" class="btn renameFile" >
-                <i class="icon-pencil"></i>
-            </a>
-            <a role="button" class="btn deleteFile">
-                <i class="icon-trash"></i>
-            </a>
-        </td>
-
-	</script>
-
-    <script type="text/template" id="rename-file-template">
-        <input type="text" name="renameFile" value="<%= name %>" />
-    </script>
 	<script type="text/javascript" src="js/freedom/freedom.js" data-manifest="js/freedom/package.json"></script>
     <pre id="dropzone" class="container-fluid" draggable=true style="display:none;">Drop files here!</pre>
     </div>
@@ -292,6 +212,7 @@
     <script src="js/lib/underscore.js"></script>
     <script src="js/lib/backbone.js"></script>
     <script src="js/agora-interface.js"></script>
+    <script src="js/data/template.js"></script>
     <script src="js/data/router.js"></script>
     <script src="js/data/models.js"></script>
     <script src="js/data/collections.js"></script>
