@@ -1,4 +1,0 @@
-agora
-=====
-
-Agora Shared Spaces
