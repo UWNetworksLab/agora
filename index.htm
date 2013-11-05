@@ -18,12 +18,31 @@
 
       <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="#">User Name</a></li>
+          <li><a href="#" id="userName">User Name</a></li>
         </ul>
       </div>
     </nav>
 
-    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
-    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <ol class="breadcrumb">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Homework</a></li>
+      <li class="active">CSE 484</li>
+    </ol>
+
+    <table class="table table-hover">
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Date Modified</th>
+      </tr>
+      <tr>
+        <td><span class="glyphicon glyphicon-file"></span> doc1.pdf</td>
+        <td>Adobe PDF</td>
+        <td>04 November 2013 2:55pm</td>
+    </table>
+    <script type="text/javascript" src="//code.jquery.com/jquery-latest.js"></script>
+    <script type="text/javascript" src="//underscorejs.org/underscore.js"></script>
+    <script type="text/javascript" src="//backbonejs.org/backbone.js"></script>
+    <script type="text/javascript" src="js/lib/bootstrap.js"></script>
   </body>
 </html>
