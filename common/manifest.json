@@ -1,0 +1,13 @@
+{
+  "name": "Agora",
+  "description": "Peer-to-peer file space syncrhonization system",
+  "app": {
+    "script": "js/agora-backend.js"
+  },
+  "dependencies": {
+    "socialprovider": {
+      "url": "js/freedom/providers/social/websocket-server/social.ws.json",
+      "api": "social"
+    }
+  }
+}

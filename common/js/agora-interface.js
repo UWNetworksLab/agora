@@ -86,6 +86,26 @@ freedom.on("backbone_sync_read_callback", function(modelInformation) {
 });
 /*** End Backbone.sync override ***/
 
+/*** Social Provider API Hooks ***/
+freedom.on("agora_userUpdate", function(userInfo) {
+  if(Agora.User) {
+    Agora.User = new Agora.Models.User();
+  }
+
+  Agora.User.UID = userInfo.userId;
+  Agora.User.displayName = userInfo.name;
+});
+
+freedom.on("agora_userStatusUpdate", function(statusInfo) {
+  if(statusInfo == "online") {
+    Agora.User.isOnline = true;
+
+  } else {
+    Agora.User.isOnline = false;
+  }
+});
+/*** END Social Provider API Hooks ***/
+
 window.Agora = {
 
 	Models: {},
@@ -93,24 +113,20 @@ window.Agora = {
 	Views: {},
 	Router: {},
   Template: {},
+  User: {},
 
 	/**
-	* Gets the currently authenticated user.
+	* Gets the currently authenticated user and returns it
+  * to the given continuation function.
 	*
 	* @method getCurrentUser
-	* @return User - The current user
+  * @deprecated
 	*/
 	getCurrentUser: function(continuation) {
-	var reqId = Math.random();
-	inFlight[reqId] = continuation;
-	freedom.emit("agora_getcurrentuser", reqId);
-	// TODO: Remove below, this is here for backwards compatibility
-	return new Agora.Models.User({
-		displayName: "Nicholas Cage",
-		isOnline: true,
-		UID: "cagen@cs.washington.edu",
-		spaceNames: ["Final Project", "Design Team", "Cat Lovers Anonymous"]
-	})},
+    var reqId = Math.random();
+    inFlight[reqId] = continuation;
+    freedom.emit("agora_getcurrentuser", reqId);
+	},
 
 	/**
 	* Gets the space by the specified name, returns false
@@ -118,6 +134,7 @@ window.Agora = {
 	*
 	* @method getSpaceByName
 	* @return Space or Boolean - The space or false
+  * @depricated
 	*/
 	getSpaceByName: function(name) {
                 // var reqId = Math.random();

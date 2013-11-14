@@ -3,7 +3,6 @@
 *
 * @module router
 */
-
 Agora.Router = Backbone.Router.extend({
     routes: {
         '': 'index',

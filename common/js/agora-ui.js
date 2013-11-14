@@ -4,6 +4,10 @@
  * @module agora-ui
  */
 
+// Initialize the router
+Agora.RouterInstance = new Agora.Router();
+Backbone.history.start();
+
 /*
  * Quick drag and drop test, needs to be cleaned up and
  * incorporated into backbone if possible
