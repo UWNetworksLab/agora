@@ -8,6 +8,10 @@
     "socialprovider": {
       "url": "js/freedom/providers/social/websocket-server/social.ws.json",
       "api": "social"
+    },
+    "storageprovider": {
+      "url": "js/freedom/providers/storage/isolated-storage.json",
+      "api": "storage"
     }
   }
 }

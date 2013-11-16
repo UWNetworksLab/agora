@@ -48,14 +48,13 @@ Agora.Models.User = Backbone.Model.extend({
          */
         isOnline: false,
         /**
-         * Gets the names of all the spaces (that we
-         * know of) for this user.
+         * Gets the spaces for this user.
          *
-         * @property spaceNames
-         * @type String[]
-         * @default []
+         * @property spaces
+         * @type Spaces
+         * @default null
          */
-        spaceNames: []  // TODO: Change to Space Collection
+        spaces: null
     }
 });
 
@@ -204,7 +203,7 @@ Agora.Models.Space = Backbone.Model.extend({
         * @type Agora.Models.File
         * @default null
         */
-        fileSystem: [],
+        fileSystem: null,
         /**
         * Contains the identities of the users that have access
         * to this space. Not used yet.

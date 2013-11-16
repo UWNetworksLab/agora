@@ -94,6 +94,8 @@ freedom.on("agora_userUpdate", function(userInfo) {
 
   Agora.User.UID = userInfo.userId;
   Agora.User.displayName = userInfo.name;
+  Agora.User.Spaces = new Agora.Collections.Spaces({id: "__spaces"});
+  Agora.user.Spaces.fetch();
 });
 
 freedom.on("agora_userStatusUpdate", function(statusInfo) {

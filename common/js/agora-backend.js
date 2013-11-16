@@ -1,9 +1,9 @@
-var storage = freedom.storage();
+/*var storage = freedom.storageprovider();
 var social = freedom.socialprovider();
 var networks = {};
 
 /*** Social Provider API Hooks ***/
-social.on('onStatus', function(message) {
+/*social.on('onStatus', function(message) {
   // Attempt to connect to the network
   if (!networks.hasOwnProperty(msg.network)) {
     social.login({
@@ -24,9 +24,9 @@ social.on('onStatus', function(message) {
   }
 });
 
-social.on('onChange', function(message)) {
+social.on('onChange', function(message) {
   freedom.emit('agora_userUpdate', message);
-}
+});
 
 social.on('onMessage', function(data) {
   freedom.emit('agora_onNotify', data);
@@ -36,7 +36,7 @@ freedom.on('agora_notify', function(val) {
   social.sendMessage(val.to, val.message);
 });
 /*** END Social Provider API Hooks ***/
-
+/*
 // Callback for Agora.getCurrentUser
 freedom.on("agora_getcurrentuser", function(reqid) {
    freedom.emit("agora_getcurrentuser_response", {
@@ -55,10 +55,10 @@ freedom.on("agora_getspacebyname", function(reqid, name) {
       val.reqid = reqid;
       freedom.emit('agora_getspacebyname_response', val);
    });
-});
+});*/
 
 /*** Backbone.sync functions ***/
-
+/*
 // Creates a new model and calls back a new model ID
 freedom.on("backbone_sync_create", function(modelInformation) {
    var newID = (new Date()).getTime() +
@@ -93,4 +93,4 @@ freedom.on("backbone_sync_delete", function(model) {
    promise.done(function(value) {
       freedom.emit("backbone_sync_done");
    });
-});
+});*/
