@@ -10,7 +10,7 @@
 * @class Agora
 * @constructor
 */
-//(function() {
+(function() {
 
 /// FREEDOM RESPONSE METHODS ///
 // Functions that we need to execute
@@ -77,12 +77,14 @@ freedom.on("backbone_sync_create_callback", function(modelInformation) {
    modificationHandles[modelInformation[0]].set("id",
       modelInformation[1]);
    vent.trigger('file:new', modelInformation[1]);
+   freedom.emit("backbone_sync_done");
 });
 
 // Loads the model information once read from FreeDOM
 freedom.on("backbone_sync_read_callback", function(modelInformation) {
    modificationHandles[modelInformation[0]].set(JSON.parse(modelInformation[1]));
    delete modificationHandles[modelInformation[0]];
+   freedom.emit("backbone_sync_done");
 });
 /*** End Backbone.sync override ***/
 
@@ -107,6 +109,7 @@ freedom.on("agora_userStatusUpdate", function(statusInfo) {
   }
 });
 /*** END Social Provider API Hooks ***/
+})();
 
 window.Agora = {
 

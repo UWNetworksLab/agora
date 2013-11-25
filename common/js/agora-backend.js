@@ -1,11 +1,11 @@
-/*var storage = freedom.storageprovider();
+var storage = freedom.storageprovider();
 var social = freedom.socialprovider();
 var networks = {};
 
 /*** Social Provider API Hooks ***/
-/*social.on('onStatus', function(message) {
+social.on('onStatus', function(message) {
   // Attempt to connect to the network
-  if (!networks.hasOwnProperty(msg.network)) {
+  if (!networks.hasOwnProperty(message.network)) {
     social.login({
       network: message.network,
       agent: 'Agora',
@@ -36,7 +36,7 @@ freedom.on('agora_notify', function(val) {
   social.sendMessage(val.to, val.message);
 });
 /*** END Social Provider API Hooks ***/
-/*
+
 // Callback for Agora.getCurrentUser
 freedom.on("agora_getcurrentuser", function(reqid) {
    freedom.emit("agora_getcurrentuser_response", {
@@ -55,18 +55,17 @@ freedom.on("agora_getspacebyname", function(reqid, name) {
       val.reqid = reqid;
       freedom.emit('agora_getspacebyname_response', val);
    });
-});*/
+});
 
 /*** Backbone.sync functions ***/
-/*
+
 // Creates a new model and calls back a new model ID
 freedom.on("backbone_sync_create", function(modelInformation) {
-   var newID = (new Date()).getTime() +
-      Math.floor(Math.random() * 1000);
-   var promise = storage.set(newID,
+   var promise = storage.set(modelInformation[0].id,
       JSON.stringify(modelInformation[1]));
    promise.done(function(value) {
-      freedom.emit("backbone_sync_done");
+      freedom.emit("backbone_sync_create_callback", [modelInformation[0],
+        value]);
    });
 });
 
@@ -74,7 +73,8 @@ freedom.on("backbone_sync_create", function(modelInformation) {
 freedom.on("backbone_sync_read", function(modelInformation) {
    var promise = storage.get(modelInformation[1]);
    promise.done(function(value) {
-      freedom.emit("backbone_sync_done");
+      freedom.emit("backbone_sync_read_callback", [modelInformation[0],
+        value]);
    });
 });
 
@@ -93,4 +93,4 @@ freedom.on("backbone_sync_delete", function(model) {
    promise.done(function(value) {
       freedom.emit("backbone_sync_done");
    });
-});*/
+});
