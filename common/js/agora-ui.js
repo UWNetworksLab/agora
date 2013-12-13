@@ -73,3 +73,8 @@ $("#dropzone").bind('drop', function(e) {
 	}
 	return false;
 });
+
+// Listen to social UI Events
+function userUpdateUI() {
+  $("#user-name").text(Agora.User.displayName);
+}
