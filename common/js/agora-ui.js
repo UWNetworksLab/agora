@@ -71,6 +71,16 @@ $("#dropzone").bind('drop', function(e) {
 	return false;
 });
 
+// On space add
+$("#createNewSpace").click(function() {
+  var newSpaceID = guid();
+  Agora.User.Spaces.add(new Agora.Models.Space({
+    id: newSpaceID,
+    name: $("#newSpaceName").val()
+  }));
+  syncModelUI(Agora.User.Spaces.get(newSpaceID), "save");
+});
+
 // Listen to social UI Events
 function userUpdateUI() {
   // If the page hasn't been loaded before, the router has not been initialized.
