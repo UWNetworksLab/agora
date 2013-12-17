@@ -5,6 +5,78 @@
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="css/agora-ui.css" rel="stylesheet" media="screen">
+<script type="text/template" id="toolbar-template">
+        <div class="btn-group pull-left">
+
+                <% if (isSpace) { %>
+                        <a href="#manageUsers" role="button" class="btn" data-toggle="modal">
+                                <i class="icon-share"></i> Manage Users
+                        </a>
+                        <a href="#addFile" role="button" class="btn" data-toggle="modal">
+                                <i class="icon-plus"></i> Add File
+                        </a>
+                <% } else { %>
+                        <a href="#newSpace" role="button" class="btn" data-toggle="modal">
+                                <i class="icon-plus"></i> New Space
+                        </a>
+                <% }; %>
+
+        </div>
+        <div class="btn-group pull-right">
+                <% if (isSpace) { %>
+                        <button class="btn"><i class="icon-download-alt"></i> Download</button>
+                        <a href="#deleteFile" role="button" class="btn" data-toggle="modal">
+                                <i class="icon-trash"></i> Delete
+                        </a>
+                        <a href="#renameFile" role="button" class="btn" data-toggle="modal">
+                                <i class="icon-pencil"></i> Rename
+                        </a>
+                        <a href="#move" role="button" class="btn" data-toggle="modal">
+                                <i class="icon-share-alt"></i> Move
+                        </a>
+                <% } else { %>
+                        <a href="#deleteSpace" role="button" class="btn" data-toggle="modal">
+                                <i class="icon-trash"></i> Delete
+                        </a>
+                        <a href="#renameSpace" role="button" class="btn" data-toggle="modal">
+                                <i class="icon-pencil"></i> Rename
+                        </a>
+                <% }; %>
+        </div>
+        </script>
+
+        <script type="text/template" id="file-list-template">
+        <table class="table table-striped" id="file-list">
+                <thead>
+                <tr>
+                        <th>File Name</th>
+                        <th>Type</th>
+                        <th>Last Modified</th>
+                </tr>
+                </thead>
+                <tbody id="file-list">
+                </tbody>
+        </table>
+        </script>
+
+    <script type="text/template" id="file-view-template">
+                <td draggable=true class="fileName"><%= name %></a></td>
+                <td><%= isFolder ? 'folder' : 'file' %></td>
+                <td><%= timestamp %></td>
+        <td>
+            <a role="button" class="btn renameFile" >
+                <i class="icon-pencil"></i>
+            </a>
+            <a role="button" class="btn deleteFile">
+                <i class="icon-trash"></i>
+            </a>
+        </td>
+
+        </script>
+
+    <script type="text/template" id="rename-file-template">
+        <input type="text" name="renameFile" value="<%= name %>" />
+    </script>
   </head>
   <body>
     <div class="container">

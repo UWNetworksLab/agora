@@ -3,10 +3,7 @@
  *
  * @module agora-ui
  */
-
-// Initialize the router
-Agora.RouterInstance = new Agora.Router();
-Backbone.history.start();
+var isSpace = false;
 
 /*
  * Quick drag and drop test, needs to be cleaned up and
@@ -76,5 +73,11 @@ $("#dropzone").bind('drop', function(e) {
 
 // Listen to social UI Events
 function userUpdateUI() {
+  // If the page hasn't been loaded before, the router has not been initialized.
+  // Initialize it now
+  if(!Agora.RouterInstance && Agora.User.Spaces) {
+    Agora.RouterInstance = new Agora.Router();
+    Backbone.history.start();
+  }
   $("#user-name").text(Agora.User.displayName);
 }

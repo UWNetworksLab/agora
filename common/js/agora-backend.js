@@ -61,7 +61,7 @@ freedom.on("agora_getspacebyname", function(reqid, name) {
 
 // Creates a new model and calls back a new model ID
 freedom.on("backbone_sync_create", function(modelInformation) {
-   var promise = storage.set(modelInformation[0].id,
+   var promise = storage.set(modelInformation[2],
       JSON.stringify(modelInformation[1]));
    promise.done(function(value) {
       freedom.emit("backbone_sync_create_callback", [modelInformation[0],
@@ -73,24 +73,73 @@ freedom.on("backbone_sync_create", function(modelInformation) {
 freedom.on("backbone_sync_read", function(modelInformation) {
    var promise = storage.get(modelInformation[1]);
    promise.done(function(value) {
-      freedom.emit("backbone_sync_read_callback", [modelInformation[0],
-        value]);
+      var result = null;
+      
+      if(modelInformation[2]) {
+        // Find the ID to return
+        for(var i = 0; i < value.length; i++) {
+           if(value[i].id == modelInformation[2]) {
+              result = value;
+              break;
+           }
+        }
+        freedom.emit("backbone_sync_read_callback", [modelInformation[0],
+          result]);
+      } else {
+        freedom.emit("backbone_sync_read_callback", [modelInformation[0],
+          value]);
+      }
    });
 });
 
 // Updates the model
 freedom.on("backbone_sync_update", function(model) {
-   var promise = storage.set(model.id,
-      JSON.stringify(model));
+   var promise = storage.get(model[1]);
    promise.done(function(value) {
-      freedom.emit("backbone_sync_done");
+      var found = false;
+      
+      // Find and update
+      for(var i = 0; i < value.length; i++) {
+         if(value[i].id == model[0].id) {
+            value[i] = model[0];
+            found = true;
+            break;
+         }
+      }
+
+      // If not found, make a new one
+      if(!found) {
+         value.push(model);
+      }
+
+      var promise2 = storage.set(model[1], value);
+      promise2.done(function(value2) {
+        freedom.emit("backbone_sync_done");
+      });
    });
 });
 
 // Deletes the model (TODO: change from set {} to actual delete)
 freedom.on("backbone_sync_delete", function(model) {
-   var promise = storage.set(model.id, undefined);
+   var promise = storage.get(model[1]);
    promise.done(function(value) {
-      freedom.emit("backbone_sync_done");
+      // Find and update
+      for(var i = 0; i < value.length; i++) {
+         if(value[i].id == model[0].id) {
+            value[i] = undefined;
+            break;
+         }
+      }
+
+      // If empty, remove entirely
+      var promise2 = null;
+      if(value.length == 0) {
+         promise2 = storage.set(model[1], undefined);
+      } else {
+         promise2 = storage.set(model[1], value);
+      }
+      promise2.done(function(value2) {
+        freedom.emit("backbone_sync_done");
+      });
    });
 });

@@ -50,18 +50,18 @@ Backbone.sync = function(method, model, options) {
       case "create":
          var callbackInit = Math.random();
          modificationHandles[callbackInit] = model;
-         freedom.emit("backbone_sync_create", [callbackInit, model.attributes]);
+         freedom.emit("backbone_sync_create", [callbackInit, model.toJSON(options), model.url]);
          break;
       case "read":
          var handleID = Math.random();
          modificationHandles[handleID] = model;
-         freedom.emit("backbone_sync_read", [handleID, model.get("id")]);
+         freedom.emit("backbone_sync_read", [handleID, model.url, model.get("id")]);
          break;
       case "update":
-         freedom.emit("backbone_sync_update", model.attributes);
+         freedom.emit("backbone_sync_update", [model.toJSON(options), model.url]);
          break;
       case "delete":
-         freedom.emit("backbone_sync_delete", model.get("id"));
+         freedom.emit("backbone_sync_delete", [model.get("id"), model.url]);
          break;
       default:
          throw "Backbone.sync: Undefined sync method " + method;
@@ -96,7 +96,7 @@ freedom.on("agora_userUpdate", function(userInfo) {
 
   Agora.User.UID = userInfo.userId;
   Agora.User.displayName = userInfo.name;
-  Agora.User.Spaces = new Agora.Collections.Spaces({id: "__spaces"});
+  Agora.User.Spaces = new Agora.Collections.Spaces();
   Agora.User.Spaces.fetch();
 
   // Trigger UI

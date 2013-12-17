@@ -283,7 +283,7 @@ Agora.Views.Spaces = Backbone.View.extend({
 Agora.Views.Toolbar = Backbone.View.extend({
     el: '.btn-toolbar',
 
-    template: Agora.Template.Toolbar,
+    template: template('toolbar-template'),
 
     render: function() {
         this.$el.html( this.template( this.options ) );

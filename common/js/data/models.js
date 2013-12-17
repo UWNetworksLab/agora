@@ -93,7 +93,7 @@ Agora.Models.File = Backbone.Model.extend({
          * @type Agora.Collections.Files
          * @default Empty collection
          */
-        contents: "", //new Agora.Collections.Files(),
+        contents: null, //new Agora.Collections.Files(),
         /**
          * The timestamp is an integer representation of when the
          * file was last modified. It is formatted as follows:<br>
