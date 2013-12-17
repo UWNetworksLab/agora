@@ -81,3 +81,12 @@ function userUpdateUI() {
   }
   $("#user-name").text(Agora.User.displayName);
 }
+
+// Saves the given model while simultaneously updating the UI
+function syncModelUI(model, funcName) {
+  $("#status-bar").addClass("in");
+  var result = model[funcName]();
+  result.done(function() {
+    $("#status-bar").removeClass("in");
+  });
+}

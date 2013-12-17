@@ -28,6 +28,7 @@ freedom.on("agora_getspacebyname_response", function(space) {
 
 /*** Backbone.sync override ***/
 var modificationHandles = [];
+var deferredHandles = [];
 
 /**
  * Overrides the built-in synchronization function in Backbone.js
@@ -50,11 +51,13 @@ Backbone.sync = function(method, model, options) {
       case "create":
          var callbackInit = Math.random();
          modificationHandles[callbackInit] = model;
+         deferredHandles[callbackInit] = deferred;
          freedom.emit("backbone_sync_create", [callbackInit, model.toJSON(options), model.url]);
          break;
       case "read":
          var handleID = Math.random();
          modificationHandles[handleID] = model;
+         deferredHandles[handleID] = deferred;
          freedom.emit("backbone_sync_read", [handleID, model.url, model.get("id")]);
          break;
       case "update":
@@ -68,7 +71,6 @@ Backbone.sync = function(method, model, options) {
          break;
    }
 
-   freedom.once("backbone_sync_done", function() {deferred.resolve();});
    return deferred;
 };
 
@@ -76,15 +78,18 @@ Backbone.sync = function(method, model, options) {
 freedom.on("backbone_sync_create_callback", function(modelInformation) {
    modificationHandles[modelInformation[0]].set("id",
       modelInformation[1]);
+   delete modificationHandles[modelInformation[0]];
+   deferredHandles[modelInformation[0]].resolve();
+   delete deferredHandles[modelInformation[0]];
    vent.trigger('file:new', modelInformation[1]);
-   freedom.emit("backbone_sync_done");
 });
 
 // Loads the model information once read from FreeDOM
 freedom.on("backbone_sync_read_callback", function(modelInformation) {
    modificationHandles[modelInformation[0]].set(JSON.parse(modelInformation[1]));
    delete modificationHandles[modelInformation[0]];
-   freedom.emit("backbone_sync_done");
+   deferredHandles[modelInformation[0]].resolve();
+   delete deferredHandles[modelInformation[0]];
 });
 /*** End Backbone.sync override ***/
 
@@ -100,7 +105,7 @@ freedom.on("agora_userUpdate", function(userInfo) {
   Agora.User.Spaces.fetch();
 
   // Trigger UI
-  if(userUpdateUI) userUpdateUI();
+  userUpdateUI();
 });
 
 freedom.on("agora_userStatusUpdate", function(statusInfo) {
