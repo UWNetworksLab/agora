@@ -54,6 +54,10 @@ var deferredHandles = [];
  */
 Backbone.sync = function(method, model, options) {
    var deferred = jQuery.Deferred();
+   console.log("Backbone.sync: \"" + method +
+      "\" operation for " + JSON.stringify(model) +
+      " with options " + JSON.stringify(options));
+   return;
 
    switch(method) {
       case "create":

@@ -4,13 +4,6 @@
 * @module views
 */
 
-// jquery hacks to listen for modal window button clicks
-    $('#createNewSpace').bind('click', function() {
-        var spaceName = $('#newSpaceName').val();
-        vent.trigger('space:createNewSpace', spaceName);
-    });
-
-
 // Global app view
 Agora.Views.App = Backbone.View.extend({
     initialize: function() {
@@ -269,7 +262,6 @@ Agora.Views.Spaces = Backbone.View.extend({
     },
 
     addOne: function(space) {
-        Agora.currentUser.get('spaceNames').push(space.get('id'));
         var spaceView = new Agora.Views.Space({ model: space });
         $('#space-list').append(spaceView.render().el);
     },
