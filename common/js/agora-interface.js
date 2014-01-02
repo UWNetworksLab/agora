@@ -36,7 +36,17 @@ freedom.on("agora_getspacebyname_response", function(space) {
 
 /*** Backbone.sync override ***/
 var modificationHandles = [];
-var deferredHandles = [];
+var deferredPairs = [];
+
+// Decrement operation and see if complete
+function finishDeferredOperation(deferredID) {
+   deferredPairs[deferredID].opcount--;
+
+   // If no operations left, resolve
+   if(deferredPairs[deferredID].opcount == 0) {
+      deferredPairs[deferredID].object.resolve();
+   }
+}
 
 /**
  * Overrides the built-in synchronization function in Backbone.js
@@ -53,71 +63,75 @@ var deferredHandles = [];
  *    supported right now).
  */
 Backbone.sync = function(method, model, options) {
-   var deferred = jQuery.Deferred();
+   var deferredID = Math.random();
+   var modelID = model.id;
+   
+   deferredPairs[deferredID] = {object: jQuery.Deferred(), opcount: 1};
    console.log("Backbone.sync: \"" + method +
       "\" operation for " + JSON.stringify(model) +
       " with options " + JSON.stringify(options));
-   return;
 
-   switch(method) {
+   // If this is a valid backbone object, sync it normally.
+   if(model instanceof Backbone.Model || model instanceof Backbone.Collection) {
+      switch(method) {
       case "create":
-         var callbackInit = Math.random();
-         modificationHandles[callbackInit] = model;
-         deferredHandles[callbackInit] = deferred;
-         freedom.emit("backbone_sync_create", [callbackInit, model.toJSON(options), model.url]);
+      case "update":
+         deferredPairs[deferredID].opcount++;
+         freedom.emit("backbone_sync_update", [deferredID, modelID, model.toJSON()]);
          break;
       case "read":
-         var handleID = Math.random();
-         modificationHandles[handleID] = model;
-         deferredHandles[handleID] = deferred;
-         freedom.emit("backbone_sync_read", [handleID, model.url, model.get("id")]);
-         break;
-      case "update":
-         freedom.emit("backbone_sync_update", [model.toJSON(options), model.url]);
+         modificationHandles[deferredID] = model;
+         deferredPairs[deferredID].opcount++;
+         freedom.emit("backbone_sync_read", [deferredID, modelID]);
          break;
       case "delete":
-         freedom.emit("backbone_sync_delete", [model.get("id"), model.url]);
+         deferredPairs[deferredID].opcount++;
+         freedom.emit("backbone_sync_delete", [deferredID, modelID]);
          break;
       default:
-         throw "Backbone.sync: Undefined sync method " + method;
-         break;
+         delete deferredPairs[deferredID];
+         throw "Backbone.sync: Invalid method \"" + method + "\"";
+      }
+   } else {
+      delete deferredPairs[deferredID];
+      throw "Backbone.sync: Non-syncable object passed to function.";
    }
 
-   return deferred;
+   finishDeferredOperation(deferredID);
+   return deferredPairs[deferredID].object;
 };
 
-// Ensures the model is set with the newly assigned ID.
-freedom.on("backbone_sync_create_callback", function(modelInformation) {
-   modificationHandles[modelInformation[0]].set("id",
-      modelInformation[1]);
-   delete modificationHandles[modelInformation[0]];
-   deferredHandles[modelInformation[0]].resolve();
-   delete deferredHandles[modelInformation[0]];
-   vent.trigger('file:new', modelInformation[1]);
+// Return call for sync complete
+freedom.on("backbone_sync_done", function(deferredID) {
+   finishDeferredOperation(deferredID);
 });
 
 // Loads the model information once read from FreeDOM
 freedom.on("backbone_sync_read_callback", function(modelInformation) {
    modificationHandles[modelInformation[0]].set(JSON.parse(modelInformation[1]));
    delete modificationHandles[modelInformation[0]];
-   deferredHandles[modelInformation[0]].resolve();
-   delete deferredHandles[modelInformation[0]];
+   finishDeferredOperation(modelInformation[0]);
 });
 /*** End Backbone.sync override ***/
 
 /*** Social Provider API Hooks ***/
 freedom.on("agora_userUpdate", function(userInfo) {
-  if(Agora.User) {
-    Agora.User = new Agora.Models.User();
-  }
+   if(Agora.User) {
+      Agora.User = new Agora.Models.User();
+   }
 
-  Agora.User.UID = userInfo.userId;
-  Agora.User.displayName = userInfo.name;
-  Agora.User.Spaces = new Agora.Collections.Spaces();
-  Agora.User.Spaces.fetch();
+   Agora.User.set({
+      UID: userInfo.userId,
+      displayName: userInfo.name,
+      spaces: new Agora.Collections.Spaces()
+   });
 
-  // Trigger UI
-  userUpdateUI();
+   // Get spaces for this user
+   Agora.User.get("spaces").set({id: userInfo.userId});
+   Agora.User.get("spaces").fetch();
+
+   // Trigger UI
+   userUpdateUI();
 });
 
 freedom.on("agora_userStatusUpdate", function(statusInfo) {

@@ -78,7 +78,7 @@ $("#createNewSpace").click(function() {
     id: newSpaceID,
     name: $("#newSpaceName").val()
   }));
-  syncModelUI(Agora.User.Spaces.get(newSpaceID), "save");
+  syncModelUI(Agora.User.Spaces, "update");
 });
 
 // Listen to social UI Events
@@ -95,7 +95,7 @@ function userUpdateUI() {
 // Saves the given model while simultaneously updating the UI
 function syncModelUI(model, funcName) {
   $("#status-bar").addClass("in");
-  var result = model[funcName]();
+  var result = model.sync("update", model);
   result.done(function() {
     $("#status-bar").removeClass("in");
   });

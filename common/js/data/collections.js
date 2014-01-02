@@ -26,5 +26,4 @@ Agora.Collections.Files = Backbone.Collection.extend({
 
 Agora.Collections.Spaces = Backbone.Collection.extend({
     model: Agora.Models.Space,
-    url: "/spaces"
 });
