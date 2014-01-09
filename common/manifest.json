@@ -10,7 +10,7 @@
       "api": "social"
     },
     "storageprovider": {
-      "url": "js/freedom/providers/storage/isolated-storage.json",
+      "url": "js/freedom/providers/storage/isolated/storage.isolated.json",
       "api": "storage"
     }
   }

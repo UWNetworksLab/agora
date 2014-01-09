@@ -8,7 +8,7 @@ social.on('onStatus', function(message) {
   if (!networks.hasOwnProperty(message.network)) {
     social.login({
       network: message.network,
-      agent: 'Agora',
+      agent: 'agora',
       version: '0.1',
       url: '',
       interactive: true

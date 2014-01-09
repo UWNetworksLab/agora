@@ -137,7 +137,6 @@ freedom.on("agora_userUpdate", function(userInfo) {
 freedom.on("agora_userStatusUpdate", function(statusInfo) {
   if(statusInfo == "online") {
     Agora.User.isOnline = true;
-
   } else {
     Agora.User.isOnline = false;
   }
