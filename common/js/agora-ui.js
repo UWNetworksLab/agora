@@ -74,22 +74,22 @@ $("#dropzone").bind('drop', function(e) {
 // On space add
 $("#createNewSpace").click(function() {
   var newSpaceID = guid();
-  Agora.User.Spaces.add(new Agora.Models.Space({
+  Agora.User.get("spaces").add(new Agora.Models.Space({
     id: newSpaceID,
     name: $("#newSpaceName").val()
   }));
-  syncModelUI(Agora.User.Spaces, "update");
+  syncModelUI(Agora.User.get("spaces"), "update");
 });
 
 // Listen to social UI Events
 function userUpdateUI() {
   // If the page hasn't been loaded before, the router has not been initialized.
   // Initialize it now
-  if(!Agora.RouterInstance && Agora.User.Spaces) {
+  if(!Agora.RouterInstance && Agora.User.get("spaces")) {
     Agora.RouterInstance = new Agora.Router();
     Backbone.history.start();
   }
-  $("#user-name").text(Agora.User.displayName);
+  $("#user-name").text(Agora.User.get("displayName"));
 }
 
 // Saves the given model while simultaneously updating the UI

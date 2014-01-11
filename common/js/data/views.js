@@ -267,7 +267,7 @@ Agora.Views.Spaces = Backbone.View.extend({
     },
 
     goToSpace: function() {
-        Agora.router.navigate('space', {trigger: true})
+        Agora.RouterInstance.navigate('space', {trigger: true})
     }
 });
 

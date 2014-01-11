@@ -116,29 +116,35 @@ freedom.on("backbone_sync_read_callback", function(modelInformation) {
 
 /*** Social Provider API Hooks ***/
 freedom.on("agora_userUpdate", function(userInfo) {
-   if(Agora.User) {
-      Agora.User = new Agora.Models.User();
-   }
-
-   Agora.User.set({
-      UID: userInfo.userId,
-      displayName: userInfo.name,
-      spaces: new Agora.Collections.Spaces()
-   });
-
-   // Get spaces for this user
-   Agora.User.get("spaces").set({id: userInfo.userId});
-   Agora.User.get("spaces").fetch();
-
-   // Trigger UI
-   userUpdateUI();
 });
 
 freedom.on("agora_userStatusUpdate", function(statusInfo) {
-  if(statusInfo == "online") {
-    Agora.User.isOnline = true;
+  console.log(JSON.stringify(statusInfo));
+  
+  if(Agora.User) {
+    Agora.User = new Agora.Models.User();
+  }
+  
+  if(statusInfo.message == "online") {
+    Agora.User.set({isOnline: true});
   } else {
-    Agora.User.isOnline = false;
+    Agora.User.set({isOnline: false});
+  }
+
+  if (statusInfo.userId) {
+    Agora.User.set({
+      UID: statusInfo.userId,
+      // TODO: CHANGE BACK TO STATUSINFO.NAME
+      displayName: statusInfo.userId,
+      spaces: new Agora.Collections.Spaces()
+    });
+
+    // Get spaces for this user
+    Agora.User.get("spaces").id = statusInfo.userId;
+    Agora.User.get("spaces").fetch();
+
+    // Trigger UI
+    userUpdateUI();
   }
 });
 /*** END Social Provider API Hooks ***/

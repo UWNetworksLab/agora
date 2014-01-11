@@ -17,11 +17,12 @@ social.on('onStatus', function(message) {
   networks[message.network] = message;
 
   // Notify Agora of important information
-  if(message.status == social.STATUS_NETWORK["ONLINE"]) {
+  /*if(message.status == social.STATUS_NETWORK["ONLINE"]) {
     freedom.emit("agora_userStatusUpdate", "online");
   } else {
     freedom.emit("agora_userStatusUpdate", message.message);
-  }
+  }*/
+  freedom.emit("agora_userStatusUpdate", message);
 });
 
 social.on('onChange', function(message) {
