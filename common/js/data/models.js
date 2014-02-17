@@ -12,7 +12,10 @@
 */
 Agora.Models.User = Backbone.Model.extend({
     initialize: function() {
-        contacts = new Backbone.Collection();
+        this.set({
+          contacts: new Agora.Collections.Users(),
+          spaces: new Agora.Collections.Spaces()
+        });
     },
     defaults: {
         /**
@@ -23,14 +26,6 @@ Agora.Models.User = Backbone.Model.extend({
          * @default ""
          */
         displayName: "",
-        /**
-         * The unique identifier for the user.
-         *
-         * @property UID
-         * @type String
-         * @default ""
-         */
-        UID: "",
         /**
          * The user's contacts as UIDs.
          *
@@ -93,7 +88,7 @@ Agora.Models.File = Backbone.Model.extend({
          * @type Agora.Collections.Files
          * @default Empty collection
          */
-        contents: null, //new Agora.Collections.Files(),
+        contents: new Agora.Collections.Files(),
         /**
          * The timestamp is an integer representation of when the
          * file was last modified. It is formatted as follows:<br>

@@ -19,7 +19,7 @@ Agora.Router = Backbone.Router.extend({
     space: function(id) {
         Agora.currentSpace = Agora.User.get("spaces").get(id);
         Agora.currentSpace.on('change', function() {vent.trigger('space:update')});
-        var fileList = new Agora.Views.FileList({ collection: Agora.currentSpace.get("fileSystem") });
+        var fileList = new Agora.Views.FileList({ model: Agora.currentSpace.get("fileSystem") });
         var toolbar = new Agora.Views.Toolbar({ isSpace: true });
         fileList.render();
         toolbar.render();

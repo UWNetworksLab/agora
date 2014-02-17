@@ -12,6 +12,12 @@ function guid() {
   });
 }
 
+if (typeof String.prototype.startsWith != 'function') {
+  String.prototype.startsWith = function(str) {
+    return this.slice(0, str.length) == str;
+  };
+}
+
 /**
 * A global class containing functions for the Agora interface.
 *
@@ -116,6 +122,24 @@ freedom.on("backbone_sync_read_callback", function(modelInformation) {
 
 /*** Social Provider API Hooks ***/
 freedom.on("agora_userUpdate", function(userInfo) {
+  var user = Agora.User.get("contacts").get(userInfo.userId);
+
+  // Set up the user object
+  if (user === undefined) {
+    user = new Agora.Models.User();
+    user.set({
+      id: userInfo.userId,
+      displayName: userInfo.name
+    });
+  }
+
+  // Add/remove based on status
+  if (userInfo.clients[userInfo.userId].status == 2) {
+    Agora.User.get("contacts").add(user);
+  } else {
+    Agora.User.get("contacts").remove(user);
+  }
+  console.log(JSON.stringify(userInfo));
 });
 
 freedom.on("agora_userStatusUpdate", function(statusInfo) {
@@ -133,8 +157,7 @@ freedom.on("agora_userStatusUpdate", function(statusInfo) {
 
   if (statusInfo.userId) {
     Agora.User.set({
-      UID: statusInfo.userId,
-      // TODO: CHANGE BACK TO STATUSINFO.NAME
+      id: statusInfo.userId,
       displayName: statusInfo.userId,
       spaces: new Agora.Collections.Spaces()
     });
@@ -147,8 +170,33 @@ freedom.on("agora_userStatusUpdate", function(statusInfo) {
     userUpdateUI();
   }
 });
+
+freedom.on("agora_onNotify", function(data) {
+  console.log(JSON.stringify(data));
+
+  if (typeof data.message != "string") {
+    sendNotification(data.fromUserId, "Invalid request");
+    return;
+  }
+
+  // Check messages and respond as required
+  if (data.message.startsWith("GET")) {
+    var query = data.message.slice(0, 3);
+
+    if (query == "spaces") {
+      var results = new Agora.Collections.Spaces();
+      Agora.User.get("spaces").each(function(space) {
+        
+      });
+    }
+  }
+});
 /*** END Social Provider API Hooks ***/
 })();
+
+function sendNotification(to, data) {
+  freedom.emit("agora_notify", {to: to, message: data});
+}
 
 window.Agora = {
 

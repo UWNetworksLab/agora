@@ -123,11 +123,11 @@ Agora.Views.FileList = Backbone.View.extend({
         vent.on('file:read', this.updateFileContents, this);
         vent.on('file:new', this.newFile, this);
         //vent.on('file:delete', this.deleteFile, this);
-        this.collection.on('add', this.addOne, this);
-        this.collection.on('reset', this.reset, this);
+        this.model.get("contents").on('add', this.addOne, this);
+        this.model.get("contents").on('reset', this.reset, this);
     },
 
-    template: Agora.Template.FileList,
+    template: template('file-list-template'),
 
     reset: function() {
         console.log('resetfn');
@@ -135,24 +135,24 @@ Agora.Views.FileList = Backbone.View.extend({
 
     render: function() {
         $("#dropzone").show();
-        console.log(this.collection);
+        console.log(this.model.get("contents"));
         this.$el.html( this.template() );
-        this.collection.each(this.addOne, this);
+        this.model.get("contents").each(this.addOne, this);
         return this;
     },
 
-    // deleteFile: function(file) {
-    //     var modalWindow = $('#deleteFile')
-    //     modalWindow.modal('toggle');
-    //     $('#deleteFile .modal-body').text("")
+    deleteFile: function(file) {
+       var modalWindow = $('#deleteFile')
+       modalWindow.modal('toggle');
+       $('#deleteFile .modal-body').text("")
 
-    //     $('#deleteFile .modal-body').text("Are you sure you want to delete " + file.attributes.name + "?");
-    //     var filesCollection = this.collection;
-    //     $('#deleteFile .btn-primary').bind('click', function() {
-    //         filesCollection.remove(file);
-    //         modalWindow.modal('toggle');
-    //     });
-    // },
+       $('#deleteFile .modal-body').text("Are you sure you want to delete " + file.attributes.name + "?");
+       var filesCollection = this.model.get("contents");
+       $('#deleteFile .btn-primary').bind('click', function() {
+           filesCollection.remove(file);
+           modalWindow.modal('toggle');
+       });
+    },
 
     dropFile: function(file) {
         var fileItem = new Agora.Models.File({
@@ -181,7 +181,7 @@ Agora.Views.FileList = Backbone.View.extend({
     updateFileContents: function(f) {
         f.file.set("contents", f.url);
         f.file.save();
-        this.collection.add(f.file);
+        this.model.get("contents").add(f.file);
     },
 
     addOne: function(file) {
