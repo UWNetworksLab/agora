@@ -9,13 +9,13 @@ Agora.Template.Toolbar = function(obj){
 var __t,__p='',__j=Array.prototype.join,print=function(){__p+=__j.call(arguments,'');};
 with(obj||{}){
 __p+='\n\t<div class="btn-group pull-left">\n\n\t\t';
- if (isSpace) { 
+ if (Agora.currentUser) { 
 __p+='\n\t\t\t<a href="#manageUsers" role="button" class="btn" data-toggle="modal">\n\t\t\t\t<i class="icon-share"></i> Manage Users\n\t\t\t</a>\n\t\t\t<a href="#addFile" role="button" class="btn" data-toggle="modal">\n\t\t\t\t<i class="icon-plus"></i> Add File\n\t\t\t</a>\n\t\t';
  } else { 
 __p+='\n\t\t\t<a href="#newSpace" role="button" class="btn" data-toggle="modal">\n\t\t\t\t<i class="icon-plus"></i> New Space\n\t\t\t</a>\n\t\t';
  }; 
 __p+='\n\n\t</div>\n\t<div class="btn-group pull-right">\n\t\t';
- if (isSpace) { 
+ if (Agora.currentUser) { 
 __p+='\n\t\t\t<button class="btn"><i class="icon-download-alt"></i> Download</button>\n\t\t\t<a href="#deleteFile" role="button" class="btn" data-toggle="modal">\n\t\t\t\t<i class="icon-trash"></i> Delete\n\t\t\t</a>\n\t\t\t<a href="#renameFile" role="button" class="btn" data-toggle="modal">\n\t\t\t\t<i class="icon-pencil"></i> Rename\n\t\t\t</a>\n\t\t\t<a href="#move" role="button" class="btn" data-toggle="modal">\n\t\t\t\t<i class="icon-share-alt"></i> Move\n\t\t\t</a>\n\t\t';
  } else { 
 __p+='\n\t\t\t<a href="#deleteSpace" role="button" class="btn" data-toggle="modal">\n\t\t\t\t<i class="icon-trash"></i> Delete\n\t\t\t</a>\n\t\t\t<a href="#renameSpace" role="button" class="btn" data-toggle="modal">\n\t\t\t\t<i class="icon-pencil"></i> Rename\n\t\t\t</a>\n\t\t';

@@ -122,10 +122,10 @@ freedom.on("backbone_sync_read_callback", function(modelInformation) {
 
 /*** Social Provider API Hooks ***/
 freedom.on("agora_userUpdate", function(userInfo) {
-  var user = Agora.User.get("contacts").get(userInfo.userId);
+  var user = Agora.User.get("contacts").indexOf(userInfo.userId);
 
   // Set up the user object
-  if (user === undefined) {
+  if (user == -1) {
     user = new Agora.Models.User();
     user.set({
       id: userInfo.userId,
@@ -135,9 +135,10 @@ freedom.on("agora_userUpdate", function(userInfo) {
 
   // Add/remove based on status
   if (userInfo.clients[userInfo.userId].status == 2) {
-    Agora.User.get("contacts").add(user);
+    Agora.User.get("contacts").push(user);
   } else {
-    Agora.User.get("contacts").remove(user);
+    var index = Agora.User.get("contacts").indexOf(user);
+    Agora.User.get("contacts").remove(index);
   }
   console.log(JSON.stringify(userInfo));
 });
@@ -186,7 +187,9 @@ freedom.on("agora_onNotify", function(data) {
     if (query == "spaces") {
       var results = new Agora.Collections.Spaces();
       Agora.User.get("spaces").each(function(space) {
-        
+        if (space.get("users").get(data.fromUserId)) {
+          results.add(space);
+        }
       });
     }
   }

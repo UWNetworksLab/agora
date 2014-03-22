@@ -3,7 +3,6 @@
  *
  * @module agora-ui
  */
-var isSpace = false;
 
 /*
  * Quick drag and drop test, needs to be cleaned up and
@@ -74,10 +73,13 @@ $("#dropzone").bind('drop', function(e) {
 // On space add
 $("#createNewSpace").click(function() {
   var newSpaceID = guid();
-  Agora.User.get("spaces").add(new Agora.Models.Space({
+  var space = new Agora.Models.Space({
     id: newSpaceID,
     name: $("#newSpaceName").val()
-  }));
+  });
+  space.get("users").push(Agora.User.id);
+
+  Agora.User.get("spaces").add(space);
   syncModelUI(Agora.User.get("spaces"), "update");
 });
 

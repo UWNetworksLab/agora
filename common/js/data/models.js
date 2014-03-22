@@ -13,7 +13,6 @@
 Agora.Models.User = Backbone.Model.extend({
     initialize: function() {
         this.set({
-          contacts: new Agora.Collections.Users(),
           spaces: new Agora.Collections.Spaces()
         });
     },
@@ -30,10 +29,10 @@ Agora.Models.User = Backbone.Model.extend({
          * The user's contacts as UIDs.
          *
          * @property contacts
-         * @type Collection
+         * @type String[]
          * @default []
          */
-        contacts: null,
+        contacts: [],
         /**
          * Indicates if the current user is online.
          *
@@ -204,10 +203,10 @@ Agora.Models.Space = Backbone.Model.extend({
         * to this space. Not used yet.
         *
         * @property users
-        * @type Agora.Collections.Users
-        * @default null
+        * @type String[]
+        * @default []
         */
-        users: null,
+        users: [],
         /**
         * The name of the space
         *
