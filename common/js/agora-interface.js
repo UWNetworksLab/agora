@@ -138,7 +138,7 @@ freedom.on("agora_userUpdate", function(userInfo) {
     Agora.User.get("contacts").push(user);
   } else {
     var index = Agora.User.get("contacts").indexOf(user);
-    Agora.User.get("contacts").remove(index);
+    Agora.User.get("contacts").splice(index, 1);
   }
   console.log(JSON.stringify(userInfo));
 });
