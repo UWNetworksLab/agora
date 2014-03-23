@@ -5,13 +5,13 @@
     "script": "js/agora-backend.js"
   },
   "dependencies": {
-    "socialprovider": {
-      "url": "js/freedom/providers/social/websocket-server/social.ws.json",
-      "api": "social"
-    },
     "storageprovider": {
       "url": "js/freedom/providers/storage/isolated/storage.isolated.json",
       "api": "storage"
+    },
+    "socialprovider": {
+      "url": "js/freedom/providers/social/websocket-server/social.ws.json",
+      "api": "social"
     }
   }
 }

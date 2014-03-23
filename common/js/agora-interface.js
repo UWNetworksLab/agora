@@ -146,28 +146,36 @@ freedom.on("agora_userUpdate", function(userInfo) {
 freedom.on("agora_userStatusUpdate", function(statusInfo) {
   console.log(JSON.stringify(statusInfo));
   
-  if(Agora.User) {
+  if(Agora.User == null) {
     Agora.User = new Agora.Models.User();
   }
   
-  if(statusInfo.message == "online") {
+  if(statusInfo.status == "ONLINE") {
     Agora.User.set({isOnline: true});
   } else {
     Agora.User.set({isOnline: false});
   }
 
-  if (statusInfo.userId) {
-    Agora.User.set({
-      id: statusInfo.userId,
-      displayName: statusInfo.userId,
-      spaces: new Agora.Collections.Spaces()
-    });
+  Agora.User.set({
+    id: statusInfo.userId,
+    displayName: statusInfo.userId,   // Temporary until user info comes in
+    spaces: new Agora.Collections.Spaces()
+  });
 
-    // Get spaces for this user
-    Agora.User.get("spaces").id = statusInfo.userId;
-    Agora.User.get("spaces").fetch();
+  // Get spaces for this user
+  Agora.User.get("spaces").id = statusInfo.userId;
+  Agora.User.get("spaces").fetch();
+  userUpdateUI();
+});
 
-    // Trigger UI
+freedom.on("agora_userProfileUpdate", function(profile) {
+  if(Agora.User == null) {
+    Agora.User = new Agora.Models.User();
+  }
+
+  // Check if we are updating the current user
+  if (Agora.User.get("id") == profile.userId) {
+    Agora.User.set({displayName: profile.name});
     userUpdateUI();
   }
 });
@@ -201,14 +209,16 @@ function sendNotification(to, data) {
   freedom.emit("agora_notify", {to: to, message: data});
 }
 
+freedom.emit("agora_ready");
+
 window.Agora = {
 
 	Models: {},
 	Collections: {},
 	Views: {},
-	Router: {},
+	Router: null,
   Template: {},
-  User: {},
+  User: null,
 
 	/**
 	* Gets the currently authenticated user and returns it

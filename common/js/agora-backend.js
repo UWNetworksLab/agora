@@ -1,32 +1,15 @@
 var storage = freedom.storageprovider();
 var social = freedom.socialprovider();
-var networks = {};
+var my_state = null;
+var friends = {};
 
 /*** Social Provider API Hooks ***/
-social.on('onStatus', function(message) {
-  // Attempt to connect to the network
-  if (!networks.hasOwnProperty(message.network)) {
-    social.login({
-      network: message.network,
-      agent: 'agora',
-      version: '0.1',
-      url: '',
-      interactive: true
-    });
-  }
-  networks[message.network] = message;
-
-  // Notify Agora of important information
-  /*if(message.status == social.STATUS_NETWORK["ONLINE"]) {
-    freedom.emit("agora_userStatusUpdate", "online");
-  } else {
-    freedom.emit("agora_userStatusUpdate", message.message);
-  }*/
-  freedom.emit("agora_userStatusUpdate", message);
+social.on('onUserProfile', function(message) {
+  freedom.emit('agora_userProfileUpdate', message);
 });
 
-social.on('onChange', function(message) {
-  freedom.emit('agora_userUpdate', message);
+social.on('onClientState', function(message) {
+  freedom.emit('agora_userStateUpdate', message);
 });
 
 social.on('onMessage', function(data) {
@@ -52,7 +35,7 @@ freedom.on("agora_getcurrentuser", function(reqid) {
 // Callback for Agora.getSpaceByName
 freedom.on("agora_getspacebyname", function(reqid, name) {
    var promise = storage.get('space_' + name);
-   promise.done(function(val) {
+   promise.then(function(val) {
       val.reqid = reqid;
       freedom.emit('agora_getspacebyname_response', val);
    });
@@ -63,7 +46,7 @@ freedom.on("agora_getspacebyname", function(reqid, name) {
 // Reads the model and calls back with the model result
 freedom.on("backbone_sync_read", function(modelInformation) {
    var promise = storage.get(modelInformation[1]);
-   promise.done(function(value) {
+   promise.then(function(value) {
       freedom.emit("backbone_sync_read_callback", [modelInformation[0],
         value]);
    });
@@ -73,15 +56,33 @@ freedom.on("backbone_sync_read", function(modelInformation) {
 freedom.on("backbone_sync_update", function(model) {
    var promise = storage.set(model[1],
       JSON.stringify(model[2]));
-   promise.done(function(value) {
-      freedom.emit("backbone_sync_done", model[0]);
+   promise.then(function(value) {
+      freedom.emit("backbone_sync.then", model[0]);
    });
 });
 
 // Deletes the model (TODO: change from set {} to actual delete)
 freedom.on("backbone_sync_delete", function(model) {
    var promise = storage.set(model[1], undefined);
-   promise.done(function(value) {
-      freedom.emit("backbone_sync_done", model[0]);
+   promise.then(function(value) {
+      freedom.emit("backbone_sync.then", model[0]);
    });
+});
+
+freedom.on("agora_ready", function() {
+  console.log("ready received");
+  // Log in
+  social.login({
+    agent: 'agora',
+    version: '0.1',
+    url: '',
+    interactive: true
+  }).then(function(ret) {
+    my_state = ret;
+    // Notify Agora of state change
+    freedom.emit("agora_userStatusUpdate", ret);
+    console.log("logged in");
+  }, function(err) {
+    console.log("failed = " + JSON.stringify(err));
+  });
 });
