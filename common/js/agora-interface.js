@@ -180,6 +180,28 @@ freedom.on("agora_userProfileUpdate", function(profile) {
   }
 });
 
+freedom.on("agora_userClientUpdate", function(message) {
+  if(Agora.User == null) {
+    Agora.User = new Agora.Models.User();
+  }
+
+  var userIndex = Agora.User.get("contacts").indexOf(message.userId);
+
+  if (message.status == "ONLINE" && userIndex == -1) {
+    Agora.User.get("contacts").push(message.userId);
+  } else if (userIndex != -1) {
+    delete Agora.User.get("contacts")[userIndex];
+  }
+
+  // Logging
+  var result = "clients = (";
+  for (var i = 0; i < Agora.User.get("contacts").length; i++) {
+    result += Agora.User.get("contacts")[i] + ", ";
+  }
+  result += ")";
+  console.log(result);
+});
+
 freedom.on("agora_onNotify", function(data) {
   console.log(JSON.stringify(data));
 

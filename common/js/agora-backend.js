@@ -9,7 +9,7 @@ social.on('onUserProfile', function(message) {
 });
 
 social.on('onClientState', function(message) {
-  freedom.emit('agora_userStateUpdate', message);
+  freedom.emit('agora_userClientUpdate', message);
 });
 
 social.on('onMessage', function(data) {
