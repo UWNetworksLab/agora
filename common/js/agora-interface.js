@@ -189,8 +189,8 @@ freedom.on("agora_userClientUpdate", function(message) {
 
   if (message.status == "ONLINE" && userIndex == -1) {
     Agora.User.get("contacts").push(message.userId);
-  } else if (userIndex != -1) {
-    delete Agora.User.get("contacts")[userIndex];
+  } else if (message.status != "ONLINE" && userIndex != -1) {
+    Agora.User.get("contacts").splice(userIndex, 1);
   }
 
   // Logging
@@ -206,22 +206,29 @@ freedom.on("agora_onNotify", function(data) {
   console.log(JSON.stringify(data));
 
   if (typeof data.message != "string") {
-    sendNotification(data.fromUserId, "Invalid request");
+    console.log("Unknown request: " + JSON.stringify(data));
     return;
   }
 
   // Check messages and respond as required
   if (data.message.startsWith("GET")) {
-    var query = data.message.slice(0, 3);
+    var query = data.message.split(" ");
 
-    if (query == "spaces") {
-      var results = new Agora.Collections.Spaces();
+    if (query[1] == "spaces") {
+      var results = [];
       Agora.User.get("spaces").each(function(space) {
-        if (space.get("users").get(data.fromUserId)) {
-          results.add(space);
-        }
+        //if (space.get("users").get(data.from.userId)) {
+          results.push(space.get("name"));
+        //}
       });
+      console.log("Replying with " + JSON.stringify(results));
+      sendNotification(data.from.clientId, "REPLY spaces " +
+        JSON.stringify(results));
+    } else {
+      console.log("Unknown get command \"" + query + "\"");
     }
+  } else {
+    console.log("Unknown request: " + JSON.stringify(data));
   }
 });
 /*** END Social Provider API Hooks ***/
