@@ -81,8 +81,10 @@
         <input type="text" name="renameFile" value="<%= name %>" />
     </script>
     <script type="text/template" id="manage-user-item">
-				<td><button class="btn btn-link"><i class="icon-remove"></i></button></td>
+      <tr>
+        <td><button class="btn btn-link" data-uid="<%= name %>"><i class="icon-remove"></i></button></td>
         <td><%= name %></td>
+      </tr>
     </script>
   </head>
   <body>
@@ -127,7 +129,8 @@
 	</div>
 	<div class="modal-body">
 		<div class="btn-group pull-right">
-			<button class="btn"><i class="icon-plus"></i> Add User</button>
+      <input type="text" id="userToAdd" placeholder="User to add" />
+			<button id="addUser" class="btn"><i class="icon-plus"></i> Add User</button>
 		</div>
 		<table class="table">
 			<thead>

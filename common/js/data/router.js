@@ -23,10 +23,14 @@ Agora.Router = Backbone.Router.extend({
         var toolbar = new Agora.Views.Toolbar({ isSpace: true });
         fileList.render();
         toolbar.render();
+        console.log("Prepping users: " + JSON.stringify(Agora.currentSpace.get("users")));
         $("#space-users").html("");
         for(user in Agora.currentSpace.get("users")) {
+          console.log("adding " + user);
           $("#space-users").append(_.template($("#manage-user-item").html(),
-            {name: user}));
+            {name: Agora.currentSpace.get("users")[user]}));
         }
+        
+        $("#space-users tr td button").click(removeUser);
     }
 });

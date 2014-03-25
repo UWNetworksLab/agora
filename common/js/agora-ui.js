@@ -83,6 +83,24 @@ $("#createNewSpace").click(function() {
   syncModelUI(Agora.User.get("spaces"), "update");
 });
 
+// On user add
+$("#addUser").click(function() {
+  Agora.currentSpace.get("users").push($("#userToAdd").val());
+  $("#space-users").append(_.template($("#manage-user-item").html(),
+    {name: $("#userToAdd").val()}));
+  $("#space-users tr td button").click(removeUser);
+  console.log(JSON.stringify(Agora.currentSpace.get("users")));
+});
+
+function removeUser() {
+  $(this).parent().parent().remove();
+  var index = Agora.currentSpace.get("users").indexOf($(this).data("uid"));
+  if (index != -1) {
+    Agora.currentSpace.get("users").splice(index, 1);
+    console.log(JSON.stringify(Agora.currentSpace.get("users")));
+  }
+}
+
 // Listen to social UI Events
 function userUpdateUI() {
   // If the page hasn't been loaded before, the router has not been initialized.
