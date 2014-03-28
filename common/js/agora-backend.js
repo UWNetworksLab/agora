@@ -57,7 +57,7 @@ freedom.on("backbone_sync_update", function(model) {
    var promise = storage.set(model[1],
       JSON.stringify(model[2]));
    promise.then(function(value) {
-      freedom.emit("backbone_sync.then", model[0]);
+      freedom.emit("backbone_sync_done", model[0]);
    });
 });
 
@@ -65,7 +65,7 @@ freedom.on("backbone_sync_update", function(model) {
 freedom.on("backbone_sync_delete", function(model) {
    var promise = storage.set(model[1], undefined);
    promise.then(function(value) {
-      freedom.emit("backbone_sync.then", model[0]);
+      freedom.emit("backbone_sync_done", model[0]);
    });
 });
 

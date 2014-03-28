@@ -215,13 +215,13 @@ freedom.on("agora_onNotify", function(data) {
     var query = data.message.split(" ");
 
     if (query[1] == "spaces") {
-      var results = [];
+      var results = new Agora.Collections.Spaces();
       Agora.User.get("spaces").each(function(space) {
-        //if (space.get("users").get(data.from.userId)) {
-          results.push(space.get("name"));
-        //}
+        if (space.get("users").indexOf(data.from.userId) != -1) {
+          results.add(space);
+        }
       });
-      console.log("Replying with " + JSON.stringify(results));
+      console.log("Replying with " + JSON.stringify(results.toJSON()));
       sendNotification(data.from.clientId, "REPLY spaces " +
         JSON.stringify(results));
     } else {
