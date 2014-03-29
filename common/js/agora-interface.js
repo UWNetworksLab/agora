@@ -189,6 +189,9 @@ freedom.on("agora_userClientUpdate", function(message) {
 
   if (message.status == "ONLINE" && userIndex == -1) {
     Agora.User.get("contacts").push(message.userId);
+    
+    // Probe for space info
+    sendNotification(message.userId, "GET spaces");
   } else if (message.status != "ONLINE" && userIndex != -1) {
     Agora.User.get("contacts").splice(userIndex, 1);
   }
@@ -212,7 +215,7 @@ freedom.on("agora_onNotify", function(data) {
 
   // Check messages and respond as required
   if (data.message.startsWith("GET")) {
-    var query = data.message.split(" ");
+    var query = data.message.split(" ", 3);
 
     if (query[1] == "spaces") {
       var results = new Agora.Collections.Spaces();
@@ -226,6 +229,21 @@ freedom.on("agora_onNotify", function(data) {
         JSON.stringify(results));
     } else {
       console.log("Unknown get command \"" + query + "\"");
+    }
+  } if (data.message.startsWith("REPLY")) {
+    var query = data.message.split(" ", 3);
+
+    if (query[1] == "spaces") {
+      var results = JSON.parse(data.message.substring(13));
+      console.log("Processing reply " + JSON.stringify(results));
+      
+      // Loop through all the spaces and add ones we haven't seen.
+      for (var i = 0; i < results.length; i++) {
+        if (Agora.User.get("spaces").get(results[i].id) == null) {
+          var space_to_add = Agora.User.get("spaces").get(results[i].id);
+          Agora.User.get("spaces").add(space_to_add);
+        }
+      }
     }
   } else {
     console.log("Unknown request: " + JSON.stringify(data));
