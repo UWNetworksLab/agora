@@ -197,7 +197,7 @@ Agora.Models.Space = Backbone.Model.extend({
         * @type Agora.Models.File
         * @default null
         */
-        fileSystem: new Agora.Models.File,
+        fileSystem: new Agora.Models.File(),
         /**
         * Contains the identities of the users that have access
         * to this space. Not used yet.
