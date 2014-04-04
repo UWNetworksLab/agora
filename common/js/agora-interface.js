@@ -240,7 +240,8 @@ freedom.on("agora_onNotify", function(data) {
       // Loop through all the spaces and add ones we haven't seen.
       for (var i = 0; i < results.length; i++) {
         if (Agora.User.get("spaces").get(results[i].id) == null) {
-          var space_to_add = Agora.User.get("spaces").get(results[i].id);
+          var space_to_add = new Agora.Models.Space();
+          space_to_add.set(processSpacesJSON(JSON.stringify(results[i])));
           Agora.User.get("spaces").add(space_to_add);
         }
       }
@@ -251,6 +252,40 @@ freedom.on("agora_onNotify", function(data) {
 });
 /*** END Social Provider API Hooks ***/
 })();
+
+function processSpacesJSON(space) {
+  var result = JSON.parse(space);
+
+  for (var key in result) {
+    // Array case
+    if (result[key] instanceof Array) {
+      for (var i = 0; i < result[key].length; i++) {
+        result[key][i] = processSpacesJSON(JSON.stringify(result[key][i]));
+      }
+    // Object case
+    } if (typeof result[key] == 'object') {
+      // Model
+      if (result[key].attributes != undefined) {
+        var model = new Backbone.Model();
+        model.set(processSpacesJSON(JSON.stringify(result[key].attributes)));
+        result[key] = model;
+      // Collection
+      } else if (result[key].models != undefined) {
+        // Loop through all the models
+        var collection = new Backbone.Collection();
+        for (var i = 0; i < result[key].length; i++) {
+          var model = new Backbone.Model();
+          model.set(processSpacesJSON(JSON.stringify(result[key][i].attributes)));
+          collection.add(model);
+        }
+        result[key] = collection;
+      }
+      // Other?...ignore
+    }
+  }
+
+  return space;
+}
 
 function sendNotification(to, data) {
   freedom.emit("agora_notify", {to: to, message: data});
