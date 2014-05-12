@@ -240,8 +240,7 @@ freedom.on("agora_onNotify", function(data) {
       // Loop through all the spaces and add ones we haven't seen.
       for (var i = 0; i < results.length; i++) {
         if (Agora.User.get("spaces").get(results[i].id) == null) {
-          var space_to_add = new Agora.Models.Space();
-          space_to_add.set(processSpacesJSON(JSON.stringify(results[i])));
+          var space_to_add = new Agora.Models.Space(processSpacesJSON(JSON.stringify(results[i])));
           Agora.User.get("spaces").add(space_to_add);
         }
       }
@@ -259,11 +258,16 @@ function processSpacesJSON(space) {
   for (var key in result) {
     // Array case
     if (result[key] instanceof Array) {
+      // Loop through all the models
+      var collection = new Backbone.Collection();
       for (var i = 0; i < result[key].length; i++) {
-        result[key][i] = processSpacesJSON(JSON.stringify(result[key][i]));
+        var model = new Backbone.Model();
+        model.set(processSpacesJSON(JSON.stringify(result[key][i])));
+        collection.add(model);
       }
+      result[key] = collection;
     // Object case
-    } if (result[key] != null && typeof result[key] == 'object') {
+    } else if (result[key] != null && typeof result[key] == 'object') {
       // Model.
       if (result[key].attributes != undefined) {
         var model = new Backbone.Model();
@@ -273,6 +277,7 @@ function processSpacesJSON(space) {
       } else if (key == "fileSystem") {
         var model = new Backbone.Model();
         model.set(processSpacesJSON(JSON.stringify(result[key])));
+        result[key] = model;
       // Collection
       } else if (result[key].models != undefined) {
         // Loop through all the models
@@ -287,8 +292,8 @@ function processSpacesJSON(space) {
       // Other?...ignore
     }
   }
-  console.log("\n\n\n" + space);
-  return space;
+  console.log("\n\n\n" + JSON.stringify(result));
+  return result;
 }
 
 function sendNotification(to, data) {
