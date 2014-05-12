@@ -263,12 +263,16 @@ function processSpacesJSON(space) {
         result[key][i] = processSpacesJSON(JSON.stringify(result[key][i]));
       }
     // Object case
-    } if (typeof result[key] == 'object') {
-      // Model
+    } if (result[key] != null && typeof result[key] == 'object') {
+      // Model.
       if (result[key].attributes != undefined) {
         var model = new Backbone.Model();
         model.set(processSpacesJSON(JSON.stringify(result[key].attributes)));
         result[key] = model;
+      // Hack -- can go away upon refactor
+      } else if (key == "fileSystem") {
+        var model = new Backbone.Model();
+        model.set(processSpacesJSON(JSON.stringify(result[key])));
       // Collection
       } else if (result[key].models != undefined) {
         // Loop through all the models
@@ -283,7 +287,7 @@ function processSpacesJSON(space) {
       // Other?...ignore
     }
   }
-
+  console.log("\n\n\n" + space);
   return space;
 }
 
