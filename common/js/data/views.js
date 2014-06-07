@@ -152,6 +152,12 @@ Agora.Views.FileList = Backbone.View.extend({
            filesCollection.remove(file);
            modalWindow.modal('toggle');
        });
+
+       var collection = new Agora.Collections.Spaces();
+        collection.add(Agora.currentSpace);
+        for (user in Agora.currentSpace.get("users")) {
+           sendNotification(Agora.currentSpace.get("users")[user], "REPLY spaces " + JSON.stringify(collection));
+       }
     },
 
     dropFile: function(file) {
@@ -188,6 +194,13 @@ Agora.Views.FileList = Backbone.View.extend({
         console.log("file addOne");
         var fileView = new Agora.Views.File({ model: file });
         $('#file-list').append(fileView.render().el);
+
+        var collection = new Agora.Collections.Spaces();
+        collection.add(Agora.currentSpace);
+        console.log(JSON.stringify(collection));
+        for (user in Agora.currentSpace.get("users")) {
+           sendNotification(Agora.currentSpace.get("users")[user], "REPLY spaces " + JSON.stringify(collection));
+       }
     },
 
     events: {
@@ -201,6 +214,12 @@ Agora.Views.FileList = Backbone.View.extend({
     newFile: function(id) {
         Agora.currentSpace.get('fileSystem').push(id);
         Agora.currentSpace.save();
+        
+        var collection = new Agora.Collections.Spaces();
+        collection.add(Agora.currentSpace);
+        for (user in Agora.currentSpace.get("users")) {
+           sendNotification(Agora.currentSpace.get("users")[user], "REPLY spaces " + JSON.stringify(collection));
+       }
     }
 
 });
